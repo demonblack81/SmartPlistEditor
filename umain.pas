@@ -15,36 +15,34 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
-  MainMenu: TMainMenu;
-  CloseMenuItem: TMenuItem;
-  ClosePlistMenuItem: TMenuItem;
-  EditMenuItem: TMenuItem;
-  AddKeyMenuItem: TMenuItem;
-  MenuItem1: TMenuItem;
-  SaveASMenuItem: TMenuItem;
-  SaveMenuItem: TMenuItem;
-  OpenDialog: TOpenDialog;
-  OpenPlistMenuItem: TMenuItem;
-  MenuItemNewPlist: TMenuItem;
-  MenuItemFile: TMenuItem;
-  PageControl: TPageControl;
-  StatusBar: TStatusBar;
-  SynEdit: TSynEdit;
-  SynHTMLSyn: TSynHTMLSyn;
-  TabSheetTreeView: TTabSheet;
-  TabSheetSynEdit: TTabSheet;
-  ToolBar: TToolBar;
-  TreeView: TTreeView;
-  procedure FormCreate(Sender: TObject);
-  procedure MenuItemNewPlistClick(Sender: TObject);
-  procedure MakeNewFile;
-  procedure SaveMenuItemClick(Sender: TObject);
-   procedure SavePlist;
-   procedure OpenPlist;
+    MainMenu: TMainMenu;
+    CloseMenuItem: TMenuItem;
+    ClosePlistMenuItem: TMenuItem;
+    EditMenuItem: TMenuItem;
+    AddKeyMenuItem: TMenuItem;
+    MenuItem1: TMenuItem;
+    SaveASMenuItem: TMenuItem;
+    SaveMenuItem: TMenuItem;
+    OpenDialog: TOpenDialog;
+    OpenPlistMenuItem: TMenuItem;
+    MenuItemNewPlist: TMenuItem;
+    MenuItemFile: TMenuItem;
+    PageControl: TPageControl;
+    StatusBar: TStatusBar;
+    SynEdit: TSynEdit;
+    SynHTMLSyn: TSynHTMLSyn;
+    TabSheetTreeView: TTabSheet;
+    TabSheetSynEdit: TTabSheet;
+    ToolBar: TToolBar;
+    TreeView: TTreeView;
+    procedure FormCreate(Sender: TObject);
+    procedure MenuItemNewPlistClick(Sender: TObject);
+    procedure MakeNewFile;
+    procedure SaveMenuItemClick(Sender: TObject);
   private
-  { private declarations }
+    { private declarations }
   public
-  { public declarations }
+    { public declarations }
 
   end;
 
@@ -58,28 +56,6 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
-
-procedure TMainForm.OpenPlist;
-Begin
-    
-    // 1.открываеем open dialog
-    //2. Если файл выбран очищаем treeview и synedit
-     // чистим TSrigList'ы и масиа с параметрами
-
-    // Проверяем на валидность файл
-   // Загружаем файл в SynEdit
-  // Разбиваем файл на параметры
-  // Загружаем параметры в дерево
-
-End;
-
-procedure TMainForm.SavePlist;
-begin  
-   If SaveDialog.excute then begin
-       SynEdit.Lines.SaveToFile(SaveDialog.filename);
-   End;
-end;
-
 procedure TMainForm.MakeNewFile;
 //var
 begin
@@ -106,18 +82,18 @@ begin
 
   //6. Если находимся в treeview ставим фокус на корне
   if PageControl.ActivePage = TabSheetTreeView then begin
-  TreeView.SetFocus;
+    TreeView.SetFocus;
   end else begin
-  //7. Если находися в synedit ставим фокус на 4 пустую строку
-  if PageControl.ActivePage = TabSheetSynEdit then begin
-  SynEdit.SetFocus;
-  end;
+    //7. Если находися в synedit ставим фокус на 4 пустую строку
+    if PageControl.ActivePage = TabSheetSynEdit then begin
+      SynEdit.SetFocus;
+    end;
   end;
 end;
 
 procedure TMainForm.SaveMenuItemClick(Sender: TObject);
 begin
-   SavePlist;
+
 end;
 
 procedure TMainForm.MenuItemNewPlistClick(Sender: TObject);
@@ -131,3 +107,4 @@ begin
 end;
 
 end.
+
