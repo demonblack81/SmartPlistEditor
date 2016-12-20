@@ -39,6 +39,9 @@ type
     procedure MenuItemNewPlistClick(Sender: TObject);
     procedure MakeNewFile;
     procedure SaveMenuItemClick(Sender: TObject);
+    procedure SavePlist;
+    procedure OpenPlist;
+    procedure ClearEditView;
   private
     { private declarations }
   public
@@ -48,7 +51,7 @@ type
 
 var
   MainForm: TMainForm;
-  p_PlistParam: ^PlistParametr; // переменная параметра в plist'e
+  p_PlistParam: ^PlistParametr; // переменная-указатель параметра в plist'e
   a_PlistParametr: array of PlistParametr; // массив параметров plist'ов
 
 implementation
@@ -56,15 +59,48 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
+
+procedure ClearEditView;
+begin 
+  TreeView.Items.Clear;
+  SynEdit.Lines.Clear;
+end;
+
+procedure TMainForm.OpenPlist;
+begin
+    // 1.открываеем open dialog
+  if OpenDialog.execute then begin
+    //2. Если файл выбран очищаем treeview и synedit
+     ClearEditView;
+     // чистим TSrigList'ы и масиа с параметрами
+     {  }
+    // Проверяем на валидность файл
+    
+    
+   // Загружаем файл в SynEdit
+  // Разбиваем файл на параметры
+  // Загружаем параметры в дерево
+  end;
+end;
+
+procedure TMainForm.SavePlist;
+begin  
+   // открываем SaveDialog
+   // сохраняем из SynEdit все линии
+
+   {If SaveDialog.excute then begin
+       SynEdit.Lines.SaveToFile(SaveDialog.filename);
+   End;}
+end;
+
 procedure TMainForm.MakeNewFile;
 //var
 begin
   //1.Очищаем treeview и synedit
-  TreeView.Items.Clear;
-  SynEdit.Lines.Clear;
+  ClearEditView;
 
   //2.Проверяем что все мосивы пусты и если мосивы и TStringList's не пусты то очищаем все TSringlist и масивы
-  //
+  {    }
 
   //3. Дисейблим кнопки Save в меню и на тулбаре
   SaveMenuItem.Enabled:= false;
@@ -103,6 +139,7 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  //выделяем память для указателя
   New(p_PlistParam);
 end;
 
