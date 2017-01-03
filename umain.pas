@@ -61,6 +61,7 @@ implementation
 { TMainForm }
 
 procedure ClearEditView;
+// процедура очистки дерева и синедита
 begin 
   TreeView.Items.Clear;
   SynEdit.Lines.Clear;
@@ -129,7 +130,7 @@ end;
 
 procedure TMainForm.SaveMenuItemClick(Sender: TObject);
 begin
-
+   SavePlist;
 end;
 
 procedure TMainForm.MenuItemNewPlistClick(Sender: TObject);
