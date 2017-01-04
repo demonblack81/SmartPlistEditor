@@ -53,7 +53,8 @@ var
   MainForm: TMainForm;
   p_PlistParam: ^PlistParametr; // переменная-указатель параметра в plist'e
   a_PlistParametr: array of PlistParametr; // массив параметров plist'ов
-
+  s_ErrorMessage: string;
+  sl_PlistStrings: TStringList;
 implementation
 
 {$R *.lfm}
@@ -67,20 +68,40 @@ begin
   SynEdit.Lines.Clear;
 end;
 
-procedure TMainForm.OpenPlist;
+procedure TMainForm.OpenPlist; 
+var err : integer; 
 begin
     // 1.открываеем open dialog
   if OpenDialog.execute then begin
     //2. Если файл выбран очищаем treeview и synedit
      ClearEditView;
-     // чистим TSrigList'ы и масиа с параметрами
+     // чистим TSrigList'ы и масивы с параметрами
      {  }
+     if sl_PlistStrings.Count <> 0 then begin
+        sl_PlistStrings.Clear;
+     end; 
+     if a_PlistParametr.Length <> 0 then begin
+        SetLength(a_PlistParametr, 0);
+     end;
+     s_ErrorMessage := '';
+     err := 0;
+     // загружаем файл в стриг лист
+     sl_PlistStrings.LoadFromFile(OpenDialog.FileName);
+
     // Проверяем на валидность файл
-    
-    
-   // Загружаем файл в SynEdit
-  // Разбиваем файл на параметры
-  // Загружаем параметры в дерево
+    err := CheckPlist(sl_PlistStrings; s_ErrorMessage);
+    if err = 0 then begin
+      // Загружаем файл в SynEdit
+      SynEdit.Lines.LoadFromFile(OpenDialog.FileName);
+      // Разбиваем файл на параметры
+      GroupPlistParametrs(sl_PlistStrings,a_PlistParametr);
+      // Загружаем параметры в дерево
+
+    end else begin
+      // выдаем ошибку на экран о проблеме в стринг листе
+      //ShowMessage(s_ErrorMessage);
+    end;
+   
   end;
 end;
 
@@ -142,6 +163,10 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
   //выделяем память для указателя
   New(p_PlistParam);
+  //выделяем память для буферного стринглиста
+  sl_PlistStrings := TStringList.Create;
+  //выделяем память под массив пораметров
+  SetLength(a_PlistParametr, 0);
 end;
 
 end.
