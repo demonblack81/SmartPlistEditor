@@ -80,7 +80,7 @@ begin
      if sl_PlistStrings.Count <> 0 then begin
         sl_PlistStrings.Clear;
      end; 
-     if a_PlistParametr.Length <> 0 then begin
+     if Length(a_PlistParametr) <> 0 then begin
         SetLength(a_PlistParametr, 0);
      end;
      s_ErrorMessage := '';
