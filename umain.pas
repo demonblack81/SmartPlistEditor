@@ -61,7 +61,7 @@ implementation
 
 { TMainForm }
 
-procedure ClearEditView;
+procedure TMainForm.ClearEditView;
 // процедура очистки дерева и синедита
 begin 
   TreeView.Items.Clear;
@@ -89,7 +89,7 @@ begin
      sl_PlistStrings.LoadFromFile(OpenDialog.FileName);
 
     // Проверяем на валидность файл
-    err := CheckPlist(sl_PlistStrings; s_ErrorMessage);
+    err := CheckPlist(sl_PlistStrings, s_ErrorMessage);
     if err = 0 then begin
       // Загружаем файл в SynEdit
       SynEdit.Lines.LoadFromFile(OpenDialog.FileName);
@@ -99,7 +99,7 @@ begin
 
     end else begin
       // выдаем ошибку на экран о проблеме в стринг листе
-      //ShowMessage(s_ErrorMessage);
+      ShowMessage(s_ErrorMessage);
     end;
    
   end;
