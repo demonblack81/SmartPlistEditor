@@ -42,6 +42,8 @@ type
     procedure SavePlist;
     procedure OpenPlist;
     procedure ClearEditView;
+    procedure UpdateTreeView(a_PlistParametr: array of PlistParametr);
+    procedure ClearMassiveAndList;
   private
     { private declarations }
   public
@@ -60,6 +62,51 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
+procedure TMainForm.ClearMassiveAndList;
+begin
+   if sl_PlistStrings.Count <> 0 then begin
+      sl_PlistStrings.Clear;
+   end;
+   if Length(a_PlistParametr) <> 0 then begin
+      SetLength(a_PlistParametr, 0);
+   end;
+end;
+
+procedure  TMainForm.UpdateTreeView(a_PlistParametr: array of PlistParametr);
+var i: integer;
+    Node, childNode, tempNode: TTreeNode;
+begin
+   TreeView.Items.BeginUpdate;
+   Node:=TreeView.Items.Add(nil,'plist');
+   childNode := Node;
+   for i:=0 to (Length(a_PlistParametr)-1) do begin
+      New(p_PlistParam);
+      p_PlistParam^ := a_PlistParametr[i];
+      if (a_PlistParametr[i].type_parm = dict) or
+         (a_PlistParametr[i].type_parm = aray) then begin
+          if (a_PlistParametr[i].Name = 'end array') or
+              (a_PlistParametr[i].Name = 'end dict')  then begin
+              TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+              //childNode.Data:= a_PlistParametr[i];
+              childNode := childNode.Parent;
+          end else begin
+            if  a_PlistParametr[i].value <> '' then  begin
+              childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
+            end else begin
+              childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+            end;
+          end;
+          tempNode := childNode;
+      end else if a_PlistParametr[i].value <> '' then begin
+          childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+          TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
+          childNode := tempNode;
+      end else begin
+          TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+      end;
+   end;
+   TreeView.Items.EndUpdate;
+end;
 
 procedure TMainForm.ClearEditView;
 // процедура очистки дерева и синедита
@@ -76,13 +123,8 @@ begin
     //2. Если файл выбран очищаем treeview и synedit
      ClearEditView;
      // чистим TSrigList'ы и масивы с параметрами
-     {  }
-     if sl_PlistStrings.Count <> 0 then begin
-        sl_PlistStrings.Clear;
-     end; 
-     if Length(a_PlistParametr) <> 0 then begin
-        SetLength(a_PlistParametr, 0);
-     end;
+     ClearMassiveAndList;
+
      s_ErrorMessage := '';
      err := 0;
      // загружаем файл в стриг лист
@@ -96,7 +138,7 @@ begin
       // Разбиваем файл на параметры
       GroupPlistParametrs(sl_PlistStrings,a_PlistParametr);
       // Загружаем параметры в дерево
-
+      UpdateTreeView(a_PlistParametr);
     end else begin
       // выдаем ошибку на экран о проблеме в стринг листе
       ShowMessage(s_ErrorMessage);
