@@ -164,7 +164,7 @@ begin
   ClearEditView;
 
   //2.Проверяем что все мосивы пусты и если мосивы и TStringList's не пусты то очищаем все TSringlist и масивы
-  {    }
+  ClearEditView;
 
   //3. Дисейблим кнопки Save в меню и на тулбаре
   SaveMenuItem.Enabled:= false;
