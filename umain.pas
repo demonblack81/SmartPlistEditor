@@ -55,14 +55,15 @@ var
   MainForm: TMainForm;
   p_PlistParam: ^PlistParametr; // переменная-указатель параметра в plist'e
   a_PlistParametr: array of PlistParametr; // массив параметров plist'ов
-  s_ErrorMessage: string;
-  sl_PlistStrings: TStringList;
+  s_ErrorMessage: string; // строка ошибки
+  sl_PlistStrings: TStringList; // массив строк plist'а
 implementation
 
 {$R *.lfm}
 
 { TMainForm }
 procedure TMainForm.ClearMassiveAndList;
+// процедура очистки масива параметров и массива строк 
 begin
    if sl_PlistStrings.Count <> 0 then begin
       sl_PlistStrings.Clear;
@@ -73,6 +74,7 @@ begin
 end;
 
 procedure  TMainForm.UpdateTreeView(a_PlistParametr: array of PlistParametr);
+// процедура обновления дерева 
 var i: integer;
     Node, childNode, tempNode: TTreeNode;
 begin
