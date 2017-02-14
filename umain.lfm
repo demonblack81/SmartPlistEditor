@@ -566,6 +566,7 @@ object MainForm: TMainForm
       object OpenPlistMenuItem: TMenuItem
         Caption = 'Open plist'
         ShortCut = 16463
+        OnClick = OpenPlistMenuItemClick
       end
       object SaveMenuItem: TMenuItem
         Caption = 'Save plist'

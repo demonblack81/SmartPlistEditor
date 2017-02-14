@@ -38,6 +38,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure MenuItemNewPlistClick(Sender: TObject);
     procedure MakeNewFile;
+    procedure OpenPlistMenuItemClick(Sender: TObject);
     procedure SaveMenuItemClick(Sender: TObject);
     procedure SavePlist;
     procedure OpenPlist;
@@ -137,6 +138,8 @@ begin
     if err = 0 then begin
       // Загружаем файл в SynEdit
       SynEdit.Lines.LoadFromFile(OpenDialog.FileName);
+      //Задаем размер масиву a_PlistParametr
+      setLength(a_PlistParametr, sl_PlistStrings.Count -4);
       // Разбиваем файл на параметры
       GroupPlistParametrs(sl_PlistStrings,a_PlistParametr);
       // Загружаем параметры в дерево
@@ -191,6 +194,11 @@ begin
       SynEdit.SetFocus;
     end;
   end;
+end;
+
+procedure TMainForm.OpenPlistMenuItemClick(Sender: TObject);
+begin
+  OpenPlist;
 end;
 
 procedure TMainForm.SaveMenuItemClick(Sender: TObject);

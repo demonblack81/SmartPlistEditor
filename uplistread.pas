@@ -5,7 +5,7 @@ unit uPlistRead;
 interface
 
 uses
-  Classes, SysUtils, ComCtrls;
+  Classes, SysUtils;
 
 const c_HEADER1 = '<?xml version="1.0" encoding="UTF-8"?>';
       c_HEADER2 = '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">';
