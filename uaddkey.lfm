@@ -1,0 +1,65 @@
+object AddKeyForm: TAddKeyForm
+  Left = 449
+  Height = 138
+  Top = 142
+  Width = 487
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Add Parametr'
+  ClientHeight = 138
+  ClientWidth = 487
+  FormStyle = fsStayOnTop
+  Position = poMainFormCenter
+  LCLVersion = '1.6.0.4'
+  object KeyEdit: TLabeledEdit
+    Left = 10
+    Height = 23
+    Top = 25
+    Width = 460
+    EditLabel.AnchorSideLeft.Control = KeyEdit
+    EditLabel.AnchorSideRight.Control = KeyEdit
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = KeyEdit
+    EditLabel.Left = 10
+    EditLabel.Height = 15
+    EditLabel.Top = 7
+    EditLabel.Width = 460
+    EditLabel.Caption = 'Parametr Name'
+    EditLabel.ParentColor = False
+    TabOrder = 0
+  end
+  object ValueEdit: TLabeledEdit
+    Left = 10
+    Height = 23
+    Top = 70
+    Width = 460
+    EditLabel.AnchorSideLeft.Control = ValueEdit
+    EditLabel.AnchorSideRight.Control = ValueEdit
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = ValueEdit
+    EditLabel.Left = 10
+    EditLabel.Height = 15
+    EditLabel.Top = 52
+    EditLabel.Width = 460
+    EditLabel.Caption = 'Parametr Value'
+    EditLabel.ParentColor = False
+    TabOrder = 1
+    TextHint = 'This value of parametr'
+  end
+  object AddBtn: TButton
+    Left = 272
+    Height = 25
+    Top = 104
+    Width = 75
+    Caption = 'Add'
+    TabOrder = 2
+  end
+  object CancelBtn: TButton
+    Left = 376
+    Height = 25
+    Top = 104
+    Width = 75
+    Caption = 'Cancel'
+    TabOrder = 3
+  end
+end

@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="SmartPlistEditor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="38"/>
       </Unit0>
       <Unit1>
         <Filename Value="umain.pas"/>
@@ -21,20 +21,18 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="121"/>
-        <CursorPos Y="137"/>
-        <UsageCount Value="30"/>
+        <TopLine Value="39"/>
+        <CursorPos X="41" Y="14"/>
+        <UsageCount Value="38"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="uplistread.pas"/>
         <UnitName Value="uPlistRead"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="150"/>
+        <EditorIndex Value="2"/>
         <CursorPos Y="168"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -42,7 +40,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2038"/>
         <CursorPos Y="2068"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit3>
       <Unit4>
         <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
@@ -50,7 +48,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="4344"/>
         <CursorPos Y="4363"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit4>
       <Unit5>
         <Filename Value="D:\Soft\lazarus\components\synedit\syneditlines.pas"/>
@@ -58,130 +56,140 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="379"/>
         <CursorPos Y="397"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="uaddkey.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AddKeyForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uAddKey"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="66" Y="19"/>
+        <UsageCount Value="28"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit6>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="130" TopLine="100"/>
+        <Caret Line="134" TopLine="105"/>
       </Position1>
       <Position2>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="134" TopLine="105"/>
+        <Caret Line="152" TopLine="134"/>
       </Position2>
       <Position3>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="152" TopLine="134"/>
+        <Caret Line="153" TopLine="134"/>
       </Position3>
       <Position4>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="153" TopLine="134"/>
+        <Caret Line="154" TopLine="134"/>
       </Position4>
       <Position5>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="154" TopLine="134"/>
+        <Caret Line="155" TopLine="134"/>
       </Position5>
       <Position6>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="155" TopLine="134"/>
+        <Caret Line="156" TopLine="134"/>
       </Position6>
       <Position7>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="156" TopLine="134"/>
+        <Caret Line="157" TopLine="134"/>
       </Position7>
       <Position8>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="157" TopLine="134"/>
+        <Caret Line="158" TopLine="134"/>
       </Position8>
       <Position9>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="158" TopLine="134"/>
+        <Caret Line="159" TopLine="134"/>
       </Position9>
       <Position10>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="159" TopLine="134"/>
+        <Caret Line="160" TopLine="134"/>
       </Position10>
       <Position11>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="160" TopLine="134"/>
+        <Caret Line="161" TopLine="134"/>
       </Position11>
       <Position12>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="161" TopLine="134"/>
+        <Caret Line="162" TopLine="134"/>
       </Position12>
       <Position13>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="162" TopLine="134"/>
+        <Caret Line="163" TopLine="134"/>
       </Position13>
       <Position14>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="163" TopLine="134"/>
+        <Caret Line="164" TopLine="135"/>
       </Position14>
       <Position15>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="164" TopLine="135"/>
+        <Caret Line="152" TopLine="135"/>
       </Position15>
       <Position16>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="152" TopLine="135"/>
+        <Caret Line="153" TopLine="135"/>
       </Position16>
       <Position17>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="153" TopLine="135"/>
+        <Caret Line="154" TopLine="135"/>
       </Position17>
       <Position18>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="154" TopLine="135"/>
+        <Caret Line="155" TopLine="135"/>
       </Position18>
       <Position19>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="155" TopLine="135"/>
+        <Caret Line="168" TopLine="135"/>
       </Position19>
       <Position20>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="168" TopLine="135"/>
+        <Caret Line="157" TopLine="135"/>
       </Position20>
       <Position21>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="157" TopLine="135"/>
+        <Caret Line="168" TopLine="139"/>
       </Position21>
       <Position22>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="168" TopLine="139"/>
+        <Caret Line="169" TopLine="140"/>
       </Position22>
       <Position23>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="169" TopLine="140"/>
+        <Caret Line="181" TopLine="163"/>
       </Position23>
       <Position24>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="181" TopLine="163"/>
+        <Caret Line="182" TopLine="163"/>
       </Position24>
       <Position25>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="182" TopLine="163"/>
+        <Caret Line="183" TopLine="163"/>
       </Position25>
       <Position26>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="183" TopLine="163"/>
+        <Caret Line="184" TopLine="163"/>
       </Position26>
       <Position27>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="184" TopLine="163"/>
+        <Caret Line="110" TopLine="91"/>
       </Position27>
       <Position28>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="110" TopLine="91"/>
+        <Caret Line="194" TopLine="177"/>
       </Position28>
       <Position29>
-        <Filename Value="uplistread.pas"/>
-        <Caret Line="194" TopLine="177"/>
-      </Position29>
-      <Position30>
         <Filename Value="umain.pas"/>
         <Caret Line="137" TopLine="121"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

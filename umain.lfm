@@ -1,47 +1,48 @@
 object MainForm: TMainForm
-  Left = 352
-  Height = 636
-  Top = 155
-  Width = 1142
+  Left = 62
+  Height = 720
+  Top = 0
+  Width = 1150
   Caption = 'Smart Plist Editor'
-  ClientHeight = 616
-  ClientWidth = 1142
+  ClientHeight = 700
+  ClientWidth = 1150
   Menu = MainMenu
   OnCreate = FormCreate
+  Position = poScreenCenter
   LCLVersion = '1.6.0.4'
   object ToolBar: TToolBar
     Left = 0
     Height = 26
     Top = 0
-    Width = 1142
+    Width = 1150
     Caption = 'ToolBar'
     TabOrder = 0
   end
   object StatusBar: TStatusBar
     Left = 0
     Height = 23
-    Top = 593
-    Width = 1142
+    Top = 677
+    Width = 1150
     Panels = <>
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 567
+    Height = 651
     Top = 26
-    Width = 1142
+    Width = 1150
     ActivePage = TabSheetTreeView
     Align = alClient
     TabIndex = 0
     TabOrder = 2
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 539
-      ClientWidth = 1134
+      ClientHeight = 623
+      ClientWidth = 1142
       object TreeView: TTreeView
         Left = 0
-        Height = 539
+        Height = 623
         Top = 0
-        Width = 1134
+        Width = 1142
         Align = alClient
         DefaultItemHeight = 18
         TabOrder = 0

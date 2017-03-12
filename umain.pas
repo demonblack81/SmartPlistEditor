@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterHTML,
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
 
-  uPlistRead;
+  uAddKey, uPlistRead;
 
 type
 
@@ -213,6 +213,16 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+   if Screen.Height < TMainForm.Height then begin
+      TMainForm.Height := Screen.Height;
+   end else begin
+      TMainForm.Height := 720;
+   end;
+   if Screen.Width < TMainForm.Width then begin
+      TMainForm.Width := Screen.Width;
+   end else begin
+      TMainForm.Width := 1150;
+   end;
   //выделяем память для указателя
   New(p_PlistParam);
   //выделяем память для буферного стринглиста
