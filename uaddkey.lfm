@@ -1,7 +1,7 @@
 object AddKeyForm: TAddKeyForm
-  Left = 449
+  Left = 453
   Height = 138
-  Top = 142
+  Top = 144
   Width = 487
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog

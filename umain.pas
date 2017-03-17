@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterHTML,
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
 
-  uAddKey, uPlistRead;
+  uPlistRead;
 
 type
 
@@ -21,6 +21,7 @@ type
     EditMenuItem: TMenuItem;
     AddKeyMenuItem: TMenuItem;
     MenuItem1: TMenuItem;
+    AddIntKeyMenuItem: TMenuItem;
     SaveASMenuItem: TMenuItem;
     SaveMenuItem: TMenuItem;
     OpenDialog: TOpenDialog;
@@ -35,6 +36,7 @@ type
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
     TreeView: TTreeView;
+    procedure AddIntKeyMenuItemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure MenuItemNewPlistClick(Sender: TObject);
     procedure MakeNewFile;
@@ -45,6 +47,9 @@ type
     procedure ClearEditView;
     procedure UpdateTreeView(a_PlistParametr: array of PlistParametr);
     procedure ClearMassiveAndList;
+    procedure AddParametrKeyName(out KeyName: string);
+    procedure AddParametrKeyValue(out ParametrValue:string);
+    procedure AddParametrInteger;
   private
     { private declarations }
   public
@@ -63,6 +68,23 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
+
+procedure TMainForm.AddParametrInteger;
+begin
+
+end;
+
+procedure TMainForm.AddParametrKeyValue(out ParametrValue:string);
+begin
+   if not InputQuery('Parametr Value', 'Enter Value of Parametr', ParametrValue) then exit;
+end;
+
+procedure TMainForm.AddParametrKeyName(out KeyName: string);
+begin
+  if not InputQuery('Key Name', 'Enter name of key', KeyName) then exit;
+  //ShowMessage('Entered key: '  +  KeyName);
+end;
+
 procedure TMainForm.ClearMassiveAndList;
 // процедура очистки масива параметров и массива строк 
 begin
@@ -213,15 +235,15 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-   if Screen.Height < TMainForm.Height then begin
-      TMainForm.Height := Screen.Height;
+   if Screen.Height < MainForm.Height then begin
+      MainForm.Height := Screen.Height;
    end else begin
-      TMainForm.Height := 720;
+      MainForm.Height := 720;
    end;
-   if Screen.Width < TMainForm.Width then begin
-      TMainForm.Width := Screen.Width;
+   if Screen.Width < MainForm.Width then begin
+      MainForm.Width := Screen.Width;
    end else begin
-      TMainForm.Width := 1150;
+      MainForm.Width := 1150;
    end;
   //выделяем память для указателя
   New(p_PlistParam);
@@ -230,6 +252,21 @@ begin
   //выделяем память под массив пораметров
   SetLength(a_PlistParametr, 0);
 end;
+
+procedure TMainForm.AddIntKeyMenuItemClick(Sender: TObject);
+var s_KeyName, s_ParametrValue: string;
+
+begin
+  s_KeyName := '';
+  AddParametrKeyName(s_KeyName);
+  if s_KeyName <> '' then begin
+    s_ParametrValue := '';
+    AddParametrKeyValue(s_ParametrValue);
+
+  end;
+
+end;
+
 
 end.
 

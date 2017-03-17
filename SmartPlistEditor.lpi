@@ -50,11 +50,11 @@
         <UnitName Value="uMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="uaddkey.pas"/>
+        <Filename Value="uAddKey.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="AddKeyForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uAddKey"/>
       </Unit2>
     </Units>
   </ProjectOptions>
