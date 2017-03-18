@@ -1,11 +1,11 @@
-object AddKeyForm: TAddKeyForm
+object EditKeyForm: TEditKeyForm
   Left = 453
   Height = 138
   Top = 144
   Width = 487
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
-  Caption = 'Add Parametr'
+  Caption = 'Edit Parametr'
   ClientHeight = 138
   ClientWidth = 487
   FormStyle = fsStayOnTop

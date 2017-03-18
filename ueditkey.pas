@@ -1,4 +1,4 @@
-unit uAddKey;
+unit uEditKey;
 
 {$mode objfpc}{$H+}
 
@@ -10,9 +10,9 @@ uses
 
 type
 
-  { TAddKeyForm }
+  { TEditKeyForm }
 
-  TAddKeyForm = class(TForm)
+  TEditKeyForm = class(TForm)
     AddBtn: TButton;
     CancelBtn: TButton;
     KeyEdit: TLabeledEdit;
@@ -24,7 +24,7 @@ type
   end;
 
 var
-  AddKeyForm: TAddKeyForm;
+  EditKeyForm: TEditKeyForm;
 
 implementation
 
