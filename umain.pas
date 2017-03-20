@@ -49,7 +49,7 @@ type
     procedure ClearMassiveAndList;
     procedure AddParametrKeyName(out KeyName: string);
     procedure AddParametrKeyValue(out ParametrValue:string);
-    procedure AddParametrInteger;
+    procedure AddParametrIntegerOrString;
   private
     { private declarations }
   public
@@ -69,8 +69,8 @@ implementation
 
 { TMainForm }
 
-procedure TMainForm.AddParametrInteger;
-//процедура добавления параметра с значением integer
+procedure TMainForm.AddParametrIntegerOrString;
+//процедура добавления параметра с значением integer или string
 begin
    { 0. Проверяем на какой мы закладке 
      0.1. Если мы на закладке synedit проверяем что фокус на edit'e иначе выходим
