@@ -373,6 +373,8 @@ begin
       SynEdit.SetFocus;
     end;
   end;
+  // устанавливаем переменную что добавляться будет первый параметр
+  b_FirstParametr := true;
 end;
 
 procedure TMainForm.OpenPlistMenuItemClick(Sender: TObject);
