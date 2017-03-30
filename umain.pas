@@ -48,8 +48,8 @@ type
     procedure UpdateTreeView(a_PlistParametr: array of PlistParametr);
     procedure ClearMassiveAndList;
     procedure AddParametrKeyName(out KeyName: string);
-    procedure AddParametrKeyValue(out ParametrValue:string);
-    procedure AddParametrIntegerOrString;
+    procedure AddParametrKeyValue(b_isInt:boolean; out ParametrValue:string);
+    procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
   private
     { private declarations }
   public
@@ -63,27 +63,156 @@ var
   a_PlistParametr: array of PlistParametr; // массив параметров plist'ов
   s_ErrorMessage: string; // строка ошибки
   sl_PlistStrings: TStringList; // массив строк plist'а
+  b_FirstParametr: boolean; // первый ли параметр
 implementation
 
 {$R *.lfm}
 
 { TMainForm }
 
-procedure TMainForm.AddParametrIntegerOrString;
-//процедура добавления параметра с значением integer или string
+procedure TMainForm.AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
+//процедура добавления параметра с значением integer или string в TreeView
+var s_ElementSelected, s_KeyName, s_ParametrValue: string;
+    b_isTreeElementSelected: boolean;
+    Node, ParentNode, ChildNode: TTreeNode;
+    CurentPlistParametr, TempPlistParametr : PlistParametr;
+    i: integer;
 begin
-   { 0. Проверяем на какой мы закладке 
-     0.1. Если мы на закладке synedit проверяем что фокус на edit'e иначе выходим
-     0.2. Если мы на закладке дерева проверяем что выбран ли элемент иначе выходим
-     0.3. Ввыводим сообщение что фокус должен быть на одном из элементов
-     0.4. Вызываем окно ввода названия параметра
-     0.5. Если не введено название выходим и выводим сообщение что не введено название файла
-     0.6. Если название введено то вызываем окно для ввода значения параметра
-     0.7. Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра
-     0.8. Выделяем памать для массива записей
+    s_KeyName := '';
+    s_ParametrValue := '';
+    s_ElementSelected := '';
+    // Проверяем если идет добавление первого параметра то фокуса на дереве может и не быть
+    if b_FirstParametr then begin
+      // Выделяем памать для массива записей
+       try
+         ParentNode := TreeView.Selected;
+         b_isTreeElementSelected := true;
+         SetLength(a_PlistParametr, 1);
+       finally
+         ShowMessage('Не выбран елемент куда добавлять параметр');
+         b_isTreeElementSelected := false;
+       end;
+       if not b_isTreeElementSelected then exit;
+    end else begin
+     try
+        s_ElementSelected := TreeView.Selected.Text;
+        b_isTreeElementSelected := true;
+      finally
+         ShowMessage('Не выбран елемент куда добавлять параметр');
+         b_isTreeElementSelected := false;
+      end;
+      if not b_isTreeElementSelected then exit;
+    end;
+    // Вызываем окно ввода названия параметра
+    AddParametrKeyName(s_KeyName);
+    if s_KeyName = '' then begin
+       //Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра
+       ShowMessage('Значение параметра не введено');
+       exit;
+    end;
+    AddParametrKeyValue(b_isInt, s_ParametrValue);
+    //Если название введено то вызываем окно для ввода значения параметра
+    if s_ParametrValue = '' then begin
+       //Если не введено название выходим и выводим сообщение что не введено название файла
+       ShowMessage('Имя параметра не введено');
+       exit;
+    end;
+    if b_FirstParametr then begin
+      // Добавляем новую запись параметров в массив
+      with a_PlistParametr[0] do begin
+         Name := s_KeyName;
+         if b_isInt then begin
+           type_parm:= int;
+         end else  begin
+           type_parm:= str;
+         end;
+         level := 0;
+         position:= 3;
+         value:= s_ParametrValue;
+      end;
+      //Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру
+      p_PlistParam^ := a_PlistParametr[0];
+      ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+      ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+      b_FirstParametr := false;
+    end else begin
+      // запоминаем выбранный узел считаем его за радительский
+     ParentNode:= TreeView.Selected;
+     //считываем record из выбраной ячейки
+     TempPlistParametr:= PlistParametr(ParentNode.Data^);
+     // заполняем данными новую record
+     CurentPlistParametr.Name:= s_KeyName;
+     if b_isInt then begin
+       CurentPlistParametr.type_parm:= int;
+     end else begin
+       CurentPlistParametr.type_parm:= str;
+     end;
+     CurentPlistParametr.value:= s_ParametrValue;
+     CurentPlistParametr.level:= TempPlistParametr.level;
+     CurentPlistParametr.position:= TempPlistParametr.position + 1;
+     p_PlistParam^ := CurentPlistParametr;
+     //
+     if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
+        ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+        ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+        if s_ElementSelected = 'plist' then begin
+            CurentPlistParametr.position :=  3;
+        end else begin
+            CurentPlistParametr.position := TempPlistParametr.position + 1;
+        end;
+     end else begin
+        ParentNode := TreeView.Items.InsertObject(TreeView.Selected, s_KeyName, p_PlistParam);
+        ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+        CurentPlistParametr.position:= TempPlistParametr.position;
+     end;
+     setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+     for i:= 0 to (Length(a_PlistParametr)-1) do begin
+          if CurentPlistParametr.position = a_PlistParametr[i].position then begin
+            TempPlistParametr:= a_PlistParametr[i];
+            a_PlistParametr[i]:= CurentPlistParametr;
+            CurentPlistParametr:= TempPlistParametr;
+            CurentPlistParametr.position:= CurentPlistParametr.position + 1;
+          end;
+     end;
+     Dispose(p_PlistParam);
+     TreeView.Items.Clear;
+     UpdateTreeView(a_PlistParametr);
+    { TreeView.Items.BeginUpdate;
+     Node := TreeView.Items.Add(nil,'plist');
+     childNode := Node;
 
-     1. Добавление параметра когда он первый в плисте
-     1.1. Добавляем новую запись параметров в массив
+     for i:=0 to (Length(a_PlistParametr)-1) do begin
+      New(p_PlistParam);
+      p_PlistParam^ := a_PlistParametr[i];
+      if (a_PlistParametr[i].type_parm = dict) or
+         (a_PlistParametr[i].type_parm = aray) then begin
+          if (a_PlistParametr[i].Name = 'end array') or
+              (a_PlistParametr[i].Name = 'end dict')  then begin
+              TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+              //childNode.Data:= a_PlistParametr[i];
+              childNode := childNode.Parent;
+          end else begin
+            if  a_PlistParametr[i].value <> '' then  begin
+              childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
+            end else begin
+              childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+            end;
+          end;
+          Node := childNode;
+      end else if a_PlistParametr[i].value <> '' then begin
+          childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+          TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
+          childNode := Node;
+      end else begin
+          TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
+      end;
+
+     end;
+    TreeView.Items.EndUpdate;  }
+    Node := TreeView.Items.FindNodeWithText(s_KeyName);
+    Node.ExpandParents;
+    end;
+    {
      1.2. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру
      1.3. Если выбран таб строковой то добавляем две строки и вставляем туда данные по параметру 
      2. Добавление параметра когда он добавляется после парамтра
@@ -95,18 +224,21 @@ begin
      3.2. Если выбрана закладка synedit то добавляем две строки с данными после выбранного 
 параметра
      4. Если добавляется второй и последующие параметры, то в цикле ищем выбранные в дереве или synedit'e параметр и добавляем в массив запись нового параметра после выбраного
-
     }
 end;
 
-procedure TMainForm.AddParametrKeyValue(out ParametrValue:string);
+procedure TMainForm.AddParametrKeyValue(b_isInt:boolean;out ParametrValue:string);
 begin
-   if not InputQuery('Parametr Value', 'Enter Value of Parametr', ParametrValue) then exit;
+   if b_isInt then begin
+      if not InputQuery('Числовое название', 'Введите числовое значение параметра', ParametrValue) then exit;
+   end else begin
+      if not InputQuery('Parametr Value', 'Enter Value of Parametr', ParametrValue) then exit;
+   end;
 end;
 
 procedure TMainForm.AddParametrKeyName(out KeyName: string);
 begin
-  if not InputQuery('Key Name', 'Enter name of key', KeyName) then exit;
+  if not InputQuery('Название параметра:', 'Введите название параметра', KeyName) then exit;
   //ShowMessage('Entered key: '  +  KeyName);
 end;
 
@@ -263,7 +395,7 @@ begin
    if Screen.Height < MainForm.Height then begin
       MainForm.Height := Screen.Height;
    end else begin
-      MainForm.Height := 720;
+      MainForm.Height := 710;
    end;
    if Screen.Width < MainForm.Width then begin
       MainForm.Width := Screen.Width;
@@ -280,17 +412,27 @@ end;
 
 procedure TMainForm.AddIntKeyMenuItemClick(Sender: TObject);
 // Процедура нажатия на кнопку добавления числового параметра в меню
-// var s_KeyName, s_ParametrValue: string;
 begin
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+      // 0.1. Если мы на закладке synedit проверяем что фокус на edit'e иначе выходим
+      if Synedit.Focused then begin
+        // вызываем процедуру добавления числового параметра
+      end else begin
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        //вызываем процедуру добавления числового параметра в дерево
+      end else begin
+           ShowMessage('Выберете место куда вставлять новый параметр.');
+           exit;
+      end;
+   end;
   {Вызваем процедуру добавления числового параметра}
 
-  {s_KeyName := '';
-  AddParametrKeyName(s_KeyName);
-  if s_KeyName <> '' then begin
-    s_ParametrValue := '';
-    AddParametrKeyValue(s_ParametrValue);
 
-  end; }
 
 end;
 

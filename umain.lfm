@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 62
-  Height = 720
-  Top = 0
-  Width = 1150
+  Left = 0
+  Height = 629
+  Top = 36
+  Width = 784
   Caption = 'Smart Plist Editor'
-  ClientHeight = 700
-  ClientWidth = 1150
+  ClientHeight = 609
+  ClientWidth = 784
   Menu = MainMenu
   OnCreate = FormCreate
   Position = poScreenCenter
@@ -14,35 +14,35 @@ object MainForm: TMainForm
     Left = 0
     Height = 26
     Top = 0
-    Width = 1150
+    Width = 784
     Caption = 'ToolBar'
     TabOrder = 0
   end
   object StatusBar: TStatusBar
     Left = 0
     Height = 23
-    Top = 677
-    Width = 1150
+    Top = 586
+    Width = 784
     Panels = <>
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 651
+    Height = 560
     Top = 26
-    Width = 1150
+    Width = 784
     ActivePage = TabSheetTreeView
     Align = alClient
     TabIndex = 0
     TabOrder = 2
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 623
-      ClientWidth = 1142
+      ClientHeight = 532
+      ClientWidth = 776
       object TreeView: TTreeView
         Left = 0
-        Height = 623
+        Height = 532
         Top = 0
-        Width = 1142
+        Width = 776
         Align = alClient
         DefaultItemHeight = 18
         TabOrder = 0
