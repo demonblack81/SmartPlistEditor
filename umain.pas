@@ -333,6 +333,7 @@ end;
 
 procedure TMainForm.SavePlist;
 begin  
+   // Если мы на табе с деревеом, то конвертируем в stringlist параметры и их сохраняем
    // открываем SaveDialog
    // сохраняем из SynEdit все линии
 
