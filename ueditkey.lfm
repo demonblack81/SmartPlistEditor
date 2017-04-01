@@ -1,7 +1,7 @@
 object EditKeyForm: TEditKeyForm
-  Left = 453
+  Left = 474
   Height = 138
-  Top = 144
+  Top = 157
   Width = 487
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog

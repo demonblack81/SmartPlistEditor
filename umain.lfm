@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 0
-  Height = 629
-  Top = 36
-  Width = 784
+  Left = 28
+  Height = 700
+  Top = 52
+  Width = 1150
   Caption = 'Smart Plist Editor'
-  ClientHeight = 609
-  ClientWidth = 784
+  ClientHeight = 680
+  ClientWidth = 1150
   Menu = MainMenu
   OnCreate = FormCreate
   Position = poScreenCenter
@@ -14,35 +14,35 @@ object MainForm: TMainForm
     Left = 0
     Height = 26
     Top = 0
-    Width = 784
+    Width = 1150
     Caption = 'ToolBar'
     TabOrder = 0
   end
   object StatusBar: TStatusBar
     Left = 0
     Height = 23
-    Top = 586
-    Width = 784
+    Top = 657
+    Width = 1150
     Panels = <>
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 560
+    Height = 631
     Top = 26
-    Width = 784
+    Width = 1150
     ActivePage = TabSheetTreeView
     Align = alClient
     TabIndex = 0
     TabOrder = 2
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 532
-      ClientWidth = 776
+      ClientHeight = 603
+      ClientWidth = 1142
       object TreeView: TTreeView
         Left = 0
-        Height = 532
+        Height = 603
         Top = 0
-        Width = 776
+        Width = 1142
         Align = alClient
         DefaultItemHeight = 18
         TabOrder = 0
@@ -607,5 +607,10 @@ object MainForm: TMainForm
     Filter = 'Plist Files|*.plist|Xml Files|*.xml|All Files|*.*'
     left = 1016
     top = 8
+  end
+  object SaveDialog: TSaveDialog
+    Filter = 'plist файл|*.plist|все файлы|*.*'
+    left = 944
+    top = 16
   end
 end
