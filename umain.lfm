@@ -595,6 +595,10 @@ object MainForm: TMainForm
     end
     object AddKeyMenuItem: TMenuItem
       Caption = 'Add Key'
+      object AddIntKeyMenuItem: TMenuItem
+        Caption = 'add key int'
+        OnClick = AddIntKeyMenuItemClick
+      end
     end
   end
   object SynHTMLSyn: TSynHTMLSyn

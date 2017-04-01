@@ -22,6 +22,7 @@ type
     AddKeyMenuItem: TMenuItem;
     MenuItem1: TMenuItem;
     AddIntKeyMenuItem: TMenuItem;
+    AddIntKeyMenuItem: TMenuItem;
     SaveASMenuItem: TMenuItem;
     SaveDialog: TSaveDialog;
     SaveMenuItem: TMenuItem;
@@ -335,16 +336,16 @@ end;
 procedure TMainForm.SavePlist;
 begin  
    // Если мы на табе с деревеом, то конвертируем в stringlist параметры и их сохраняем
-   // открываем SaveDialog
-   // сохраняем из SynEdit все линии
    if PageControl.ActivePage = TabSheetTreeView then begin
      sl_PlistStrings.Clear;
      ConvertRecordToStringlist(a_PlistParametr, sl_PlistStrings);
      SynEdit.Lines.Clear;
      SynEdit.Lines.AddStrings(sl_PlistStrings);
    end;
+   // открываем SaveDialog
    if SaveDialog.Execute then begin
-       SynEdit.Lines.SaveToFile(SaveDialog.filename);
+     // сохраняем из SynEdit все линии
+     SynEdit.Lines.SaveToFile(SaveDialog.filename);
    End;
 end;
 
@@ -440,9 +441,6 @@ begin
       end;
    end;
   {Вызваем процедуру добавления числового параметра}
-
-
-
 end;
 
 
