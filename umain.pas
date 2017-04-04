@@ -326,6 +326,8 @@ begin
       GroupPlistParametrs(sl_PlistStrings,a_PlistParametr);
       // Загружаем параметры в дерево
       UpdateTreeView(a_PlistParametr);
+      // так как параметры уже есть устанавливаем правильно переменную b_FirstParametr
+      b_FirstParametr := false;
     end else begin
       // выдаем ошибку на экран о проблеме в стринг листе
       ShowMessage(s_ErrorMessage);
