@@ -22,7 +22,7 @@ type
     AddKeyMenuItem: TMenuItem;
     MenuItem1: TMenuItem;
     AddIntKeyMenuItem: TMenuItem;
-    AddIntKeyMenuItem: TMenuItem;
+    AddKeyStringMenuItem: TMenuItem;
     SaveASMenuItem: TMenuItem;
     SaveDialog: TSaveDialog;
     SaveMenuItem: TMenuItem;
@@ -39,6 +39,7 @@ type
     ToolBar: TToolBar;
     TreeView: TTreeView;
     procedure AddIntKeyMenuItemClick(Sender: TObject);
+    procedure AddKeyStringMenuItemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure MenuItemNewPlistClick(Sender: TObject);
     procedure MakeNewFile;
@@ -425,22 +426,46 @@ procedure TMainForm.AddIntKeyMenuItemClick(Sender: TObject);
 begin
    //0. Проверяем на какой мы закладке
    if PageControl.ActivePage = TabSheetSynEdit then begin
+     // 0.1. Если мы на закладке synedit проверяем что фокус на edit'e иначе выходим
+     if Synedit.Focused then begin
+       // вызываем процедуру добавления числового параметра
+       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+     end else begin
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+   end else begin
+     if PageControl.ActivePage = TabSheetTreeView then begin
+       //вызываем процедуру добавления числового параметра в дерево
+       AddParametrIntegerOrStringInTreeView(true);
+     end else begin
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+   end;
+end;
+
+procedure TMainForm.AddKeyStringMenuItemClick(Sender: TObject);
+begin
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
       // 0.1. Если мы на закладке synedit проверяем что фокус на edit'e иначе выходим
       if Synedit.Focused then begin
-        // вызываем процедуру добавления числового параметра
+        // вызываем процедуру добавления строкового параметра
+        Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
       end else begin
         ShowMessage('Выберете место куда вставлять новый параметр.');
         exit;
       end;
    end else begin
       if PageControl.ActivePage = TabSheetTreeView then begin
-        //вызываем процедуру добавления числового параметра в дерево
+        //вызываем процедуру добавления строкового параметра в дерево
+        AddParametrIntegerOrStringInTreeView(false);
       end else begin
-           ShowMessage('Выберете место куда вставлять новый параметр.');
-           exit;
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
       end;
    end;
-  {Вызваем процедуру добавления числового параметра}
 end;
 
 

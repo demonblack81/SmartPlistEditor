@@ -596,8 +596,12 @@ object MainForm: TMainForm
     object AddKeyMenuItem: TMenuItem
       Caption = 'Add Key'
       object AddIntKeyMenuItem: TMenuItem
-        Caption = 'add key int'
+        Caption = 'Add Key Integer'
         OnClick = AddIntKeyMenuItemClick
+      end
+      object AddKeyStringMenuItem: TMenuItem
+        Caption = 'Add Key String'
+        OnClick = AddKeyStringMenuItemClick
       end
     end
   end
