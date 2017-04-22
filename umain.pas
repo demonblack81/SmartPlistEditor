@@ -44,6 +44,7 @@ type
     procedure MenuItemNewPlistClick(Sender: TObject);
     procedure MakeNewFile;
     procedure OpenPlistMenuItemClick(Sender: TObject);
+    procedure PageControlChange(Sender: TObject);
     procedure SaveMenuItemClick(Sender: TObject);
     procedure SavePlist;
     procedure OpenPlist;
@@ -332,7 +333,6 @@ begin
       // выдаем ошибку на экран о проблеме в стринг листе
       ShowMessage(s_ErrorMessage);
     end;
-   
   end;
 end;
 
@@ -391,6 +391,18 @@ end;
 procedure TMainForm.OpenPlistMenuItemClick(Sender: TObject);
 begin
   OpenPlist;
+end;
+
+procedure TMainForm.PageControlChange(Sender: TObject);
+begin
+  if PageControl.ActivePage = TabSheetSynEdit then begin
+    UpdateTreeView(a_PlistParametr);
+  end else begin
+    if ConvertRecordToStringlist(a_PlistParametr, sl_PlistStrings) = 0 then begin
+      SynEdit.Clear;
+      SynEdit.Lines.AddStrings(sl_PlistStrings);
+    end;
+  end;
 end;
 
 procedure TMainForm.SaveMenuItemClick(Sender: TObject);
