@@ -7,6 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterHTML,
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
+  LCLType,
 
   uPlistRead;
 
@@ -40,6 +41,8 @@ type
     TreeView: TTreeView;
     procedure AddIntKeyMenuItemClick(Sender: TObject);
     procedure AddKeyStringMenuItemClick(Sender: TObject);
+    procedure CloseMenuItemClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure MenuItemNewPlistClick(Sender: TObject);
     procedure MakeNewFile;
@@ -482,6 +485,28 @@ begin
    end;
 end;
 
+procedure TMainForm.CloseMenuItemClick(Sender: TObject);
+begin
+  MainForm.Close;
+end;
+
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+ if Application.MessageBox('Вы уверены что хотите выйти?',
+                           'Внимание!', MB_YESNO) = id_Yes then begin
+    if sl_PlistStrings <> Nil then begin
+      sl_PlistStrings.Free;
+    end;
+   { if LogString <> Nil then begin
+    LogString.Add(DateTimeToStr(Now) +': Закрытие Программы.');
+    LogString.SaveToFile(StartPath + 'CalculateKitchen.log');
+    LogString.Free;
+   end; }
+     CloseAction := caFree;
+   end else begin
+     CloseAction := caNone;
+   end;
+end;
 
 end.
 

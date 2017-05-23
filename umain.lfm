@@ -1,12 +1,13 @@
 object MainForm: TMainForm
-  Left = 28
+  Left = 147
   Height = 700
-  Top = 52
+  Top = 61
   Width = 1150
   Caption = 'Smart Plist Editor'
   ClientHeight = 680
   ClientWidth = 1150
   Menu = MainMenu
+  OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '1.6.0.4'
@@ -585,6 +586,7 @@ object MainForm: TMainForm
       object CloseMenuItem: TMenuItem
         Caption = 'Close'
         ShortCut = 32883
+        OnClick = CloseMenuItemClick
       end
     end
     object EditMenuItem: TMenuItem
