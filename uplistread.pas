@@ -9,6 +9,7 @@ uses
 
 const c_HEADER1 = '<?xml version="1.0" encoding="UTF-8"?>';
       c_HEADER2 = '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">';
+      c_HEADER2_1 = '<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">';
       c_BEGINPLIST = '<plist version="1.0">';
       c_ENDPLIST = '</plist>';
       c_BEGINDICT = '<dict>';
@@ -122,8 +123,14 @@ begin
      result := -1;
   end else begin
        //Проверить что вторая строка <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-       if plist.IndexOf(c_HEADER2) <> 1 then begin
+       if (plist.IndexOf(c_HEADER2) <> 1)  then begin
+         if  plist.IndexOf(c_HEADER2_1) <> 1 then begin
           result := -2;
+         end else begin
+           //Проверка что третья строка <plist version="1.0"> и последняя </plist>
+           if plist.IndexOf(c_BEGINPLIST) <> 2 then result := -3;
+           if plist.IndexOf(c_ENDPLIST) <> (plist.Count-1) then result := -4;
+         end;
        end else begin
          //Проверка что третья строка <plist version="1.0"> и последняя </plist>
          if plist.IndexOf(c_BEGINPLIST) <> 2 then result := -3;
@@ -132,8 +139,8 @@ begin
    end;
   //Если один из верхних пунктов неверный то завершаем проверку и выводим в чем ошибка
   if result < 0 then begin
-      if result = -1 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER1 + ' а не: ' + plist.Strings[0] + '.';
-      if result = -2 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER1 + ' а не: ' + plist.Strings[1] + '.';
+      if result = -1 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER1 + ' а не: ' + plist.Strings[0] + ' .';
+      if result = -2 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER2 + ' или ' + c_HEADER2_1 + ' а не: ' + plist.Strings[1] + '.';
       if result = -3 then s_Problem := 'Не правильное начало plist параметров должено быть: ' + c_BEGINPLIST + ' а не: ' + plist.Strings[2] + '.';
       if result = -4 then begin
          s_Problem := '';
@@ -186,8 +193,6 @@ begin
   //Разбиваем параметры на группы (если несколько новостей то делим их на части в каждой отдельная новость)
 
   //Проверить что нет дубликатов значений(параметров) в <key> (в новостях может быть дублирование в зависимости сколько новостей)
-
-
 
   end;
 
