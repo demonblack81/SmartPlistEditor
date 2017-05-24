@@ -95,20 +95,21 @@ begin
          ParentNode := TreeView.Selected;
          b_isTreeElementSelected := true;
          SetLength(a_PlistParametr, 1);
-       finally
-         ShowMessage('Не выбран елемент куда добавлять параметр');
+       except
+         ShowMessage('Не выбран элемент куда добавлять параметр');
          b_isTreeElementSelected := false;
        end;
        if not b_isTreeElementSelected then exit;
     end else begin
      try
-        s_ElementSelected := TreeView.Selected.Text;
-        b_isTreeElementSelected := true;
-      finally
-         ShowMessage('Не выбран елемент куда добавлять параметр');
-         b_isTreeElementSelected := false;
-      end;
-      if not b_isTreeElementSelected then exit;
+       s_ElementSelected := TreeView.Selected.Text;
+       b_isTreeElementSelected := true;
+     except
+
+       ShowMessage('Не выбран элемент куда добавлять параметр');
+       b_isTreeElementSelected := false;
+     end;
+     if not b_isTreeElementSelected then exit;
     end;
     // Вызываем окно ввода названия параметра
     AddParametrKeyName(s_KeyName);
@@ -362,7 +363,7 @@ begin
   ClearEditView;
 
   //2.Проверяем что все мосивы пусты и если мосивы и TStringList's не пусты то очищаем все TSringlist и масивы
-  ClearEditView;
+  ClearMassiveAndList;
 
   //3. Дисейблим кнопки Save в меню и на тулбаре
   SaveMenuItem.Enabled:= false;
@@ -398,11 +399,12 @@ end;
 
 procedure TMainForm.PageControlChange(Sender: TObject);
 begin
-  if PageControl.ActivePage = TabSheetSynEdit then begin
+  if PageControl.ActivePage = TabSheetTreeView then begin
+    TreeView.Items.Clear;
     UpdateTreeView(a_PlistParametr);
   end else begin
     if ConvertRecordToStringlist(a_PlistParametr, sl_PlistStrings) = 0 then begin
-      SynEdit.Clear;
+      SynEdit.Lines.Clear;
       SynEdit.Lines.AddStrings(sl_PlistStrings);
     end;
   end;
