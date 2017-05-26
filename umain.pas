@@ -185,40 +185,8 @@ begin
      Dispose(p_PlistParam);
      TreeView.Items.Clear;
      UpdateTreeView(a_PlistParametr);
-    { TreeView.Items.BeginUpdate;
-     Node := TreeView.Items.Add(nil,'plist');
-     childNode := Node;
-
-     for i:=0 to (Length(a_PlistParametr)-1) do begin
-      New(p_PlistParam);
-      p_PlistParam^ := a_PlistParametr[i];
-      if (a_PlistParametr[i].type_parm = dict) or
-         (a_PlistParametr[i].type_parm = aray) then begin
-          if (a_PlistParametr[i].Name = 'end array') or
-              (a_PlistParametr[i].Name = 'end dict')  then begin
-              TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
-              //childNode.Data:= a_PlistParametr[i];
-              childNode := childNode.Parent;
-          end else begin
-            if  a_PlistParametr[i].value <> '' then  begin
-              childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
-            end else begin
-              childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
-            end;
-          end;
-          Node := childNode;
-      end else if a_PlistParametr[i].value <> '' then begin
-          childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
-          TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
-          childNode := Node;
-      end else begin
-          TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
-      end;
-
-     end;
-    TreeView.Items.EndUpdate;  }
-    Node := TreeView.Items.FindNodeWithText(s_KeyName);
-    Node.ExpandParents;
+     Node := TreeView.Items.FindNodeWithText(s_KeyName);
+     Node.ExpandParents;
     end;
     {
      1.2. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру
@@ -400,11 +368,11 @@ end;
 procedure TMainForm.PageControlChange(Sender: TObject);
 begin
   if PageControl.ActivePage = TabSheetTreeView then begin
-    TreeView.Items.Clear;
+    ClearEditView;
     UpdateTreeView(a_PlistParametr);
   end else begin
     if ConvertRecordToStringlist(a_PlistParametr, sl_PlistStrings) = 0 then begin
-      SynEdit.Lines.Clear;
+      ClearEditView;
       SynEdit.Lines.AddStrings(sl_PlistStrings);
     end;
   end;
