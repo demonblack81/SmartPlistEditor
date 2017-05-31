@@ -24,6 +24,13 @@ type
     MenuItem1: TMenuItem;
     AddIntKeyMenuItem: TMenuItem;
     AddKeyStringMenuItem: TMenuItem;
+    AddKeyBoolMenuItem: TMenuItem;
+    AddKeyDateMenuItem: TMenuItem;
+    AddKeyDictMenuItem: TMenuItem;
+    AddKeyArrayMenuItem: TMenuItem;
+    AddKeyDataMenuItem: TMenuItem;
+    AddDictMenuItem: TMenuItem;
+    AddArrayMenuItem: TMenuItem;
     SaveASMenuItem: TMenuItem;
     SaveDialog: TSaveDialog;
     SaveMenuItem: TMenuItem;
@@ -71,6 +78,7 @@ var
   s_ErrorMessage: string; // строка ошибки
   sl_PlistStrings: TStringList; // массив строк plist'а
   b_FirstParametr: boolean; // первый ли параметр
+  //LogString: TStringList;
 implementation
 
 {$R *.lfm}
@@ -371,8 +379,11 @@ begin
     ClearEditView;
     UpdateTreeView(a_PlistParametr);
   end else begin
+    ClearEditView;
+    if sl_PlistStrings.Count > 0 then begin
+      sl_PlistStrings.Clear;
+    end;
     if ConvertRecordToStringlist(a_PlistParametr, sl_PlistStrings) = 0 then begin
-      ClearEditView;
       SynEdit.Lines.AddStrings(sl_PlistStrings);
     end;
   end;
@@ -393,7 +404,7 @@ begin
    if Screen.Height < MainForm.Height then begin
       MainForm.Height := Screen.Height;
    end else begin
-      MainForm.Height := 710;
+      MainForm.Height := 700;
    end;
    if Screen.Width < MainForm.Width then begin
       MainForm.Width := Screen.Width;

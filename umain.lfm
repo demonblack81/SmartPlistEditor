@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 740
+  Left = 630
   Height = 700
-  Top = 58
+  Top = 103
   Width = 1150
   Caption = 'Smart Plist Editor'
   ClientHeight = 680
@@ -606,6 +606,28 @@ object MainForm: TMainForm
         Caption = 'Add Key String'
         OnClick = AddKeyStringMenuItemClick
       end
+      object AddKeyBoolMenuItem: TMenuItem
+        Caption = 'Add Key Boolean'
+      end
+      object AddKeyDateMenuItem: TMenuItem
+        Caption = 'Add Key Date'
+      end
+      object AddKeyDictMenuItem: TMenuItem
+        Caption = 'Add Key Dict'
+      end
+      object AddKeyArrayMenuItem: TMenuItem
+        Caption = 'Add Key Array'
+      end
+      object AddKeyDataMenuItem: TMenuItem
+        Caption = 'Add Key Data'
+        Enabled = False
+      end
+      object AddDictMenuItem: TMenuItem
+        Caption = 'Add Dict'
+      end
+      object AddArrayMenuItem: TMenuItem
+        Caption = 'Add Array'
+      end
     end
   end
   object SynHTMLSyn: TSynHTMLSyn
@@ -621,7 +643,7 @@ object MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog
     Filter = 'plist файл|*.plist|все файлы|*.*'
-    left = 944
-    top = 16
+    left = 960
+    top = 8
   end
 end
