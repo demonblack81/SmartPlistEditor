@@ -240,7 +240,7 @@ procedure TMainForm.ClearMassiveAndList;
 begin
    LogString.Add(DateTimeToStr(Now) +': ClearMassiveAndList. Проверяем заполнен ли sl_PlistStrings.');
    if sl_PlistStrings.Count <> 0 then begin
-     LogString.Add(DateTimeToStr(Now) +': ClearMassiveAndList. Очищаем sl_PlistStrings.);
+     LogString.Add(DateTimeToStr(Now) +': ClearMassiveAndList. Очищаем sl_PlistStrings.');
      sl_PlistStrings.Clear;
    end;
    LogString.Add(DateTimeToStr(Now) +': ClearMassiveAndList. Проверяем что масив a_PlistParamter не пуст.');
@@ -278,7 +278,7 @@ begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Присваиваем childNode радительское node.');
         childNode := childNode.Parent;
       end else begin
-        LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если имя параметра не dict end или array end, то проверяем заполнена ли value.);
+        LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если имя параметра не dict end или array end, то проверяем заполнена ли value.');
         if  a_PlistParametr[i].value <> '' then  begin
           LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: .' + a_PlistParametr[i].value);
           childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
