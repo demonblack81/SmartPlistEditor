@@ -51,53 +51,57 @@ function GroupPlistParametrs(plist:TStringList; out a_PlistParametr: array of Pl
 implementation
 
 function ConvertRecordToStringlist(a_PlistParametr: array of PlistParametr; out plist:TStringList):integer;
-var i : integer;
-    param: string;
+var i, j : integer;
+    param, level: string;
 begin
-    result := 0;
-    // добавления загаловка и начала plist'a
-    plist.Add(c_HEADER1);
-    plist.Add(c_HEADER2);
-    plist.Add(c_BEGINPLIST);
-
-    // цикл преобразования record'ов в строки
-    for i := 0 to (length(a_PlistParametr)-1) do begin
-      param := '';
-      if (a_PlistParametr[i].type_parm = dict) or
-         (a_PlistParametr[i].type_parm = aray) then begin
-        if  a_PlistParametr[i].value <> '' then param := '<' +  a_PlistParametr[i].value + '>'
-        else  param :=  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+  result := 0;
+  // добавления загаловка и начала plist'a
+  plist.Add(c_HEADER1);
+  plist.Add(c_HEADER2);
+  plist.Add(c_BEGINPLIST);
+  // цикл преобразования record'ов в строки
+  for i := 0 to (length(a_PlistParametr)-1) do begin
+    param := '';
+    level := '';
+    if a_PlistParametr[i].level > 1 then begin
+      for j:= 2 to a_PlistParametr[i].level do begin
+        level := level + '  ';
       end;
-      if a_PlistParametr[i].type_parm = bool then begin
-         param :=  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-         plist.Add(param);
-         param := '<' +  a_PlistParametr[i].value + '/>';
-      end;
-      if a_PlistParametr[i].type_parm = date then begin
-         param :=  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-         plist.Add(param);
-         param := c_BEGINDATE +  a_PlistParametr[i].value + c_ENDDATE;
-      end;
-      if a_PlistParametr[i].type_parm = int then begin
-         param :=  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-         plist.Add(param);
-         param := c_BEGININTEGER +  a_PlistParametr[i].value + c_ENDINTEGER;
-      end;
-      if a_PlistParametr[i].type_parm = str then begin
-         param :=  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-         plist.Add(param);
-         param := c_BEGINSTRING +  a_PlistParametr[i].value + c_ENDSTRING;
-      end;
-      if a_PlistParametr[i].type_parm = data then begin
-         param :=  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-         plist.Add(param);
-         param := c_BEGINDATA +  a_PlistParametr[i].value + c_ENDDATA;
-      end;
-      if param <> '' then plist.Add(param);
     end;
-
-    //добовление завершения plist'a
-    plist.Add(c_ENDPLIST);
+    if (a_PlistParametr[i].type_parm = dict) or
+       (a_PlistParametr[i].type_parm = aray) then begin
+      if a_PlistParametr[i].value <> '' then param := level + '<' +  a_PlistParametr[i].value + '>'
+      else param := level +  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+    end;
+    if a_PlistParametr[i].type_parm = bool then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+      plist.Add(param);
+      param := level + '<' +  a_PlistParametr[i].value + '/>';
+    end;
+    if a_PlistParametr[i].type_parm = date then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+      plist.Add(param);
+      param := level + c_BEGINDATE +  a_PlistParametr[i].value + c_ENDDATE;
+    end;
+    if a_PlistParametr[i].type_parm = int then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+      plist.Add(param);
+      param := level + c_BEGININTEGER +  a_PlistParametr[i].value + c_ENDINTEGER;
+    end;
+    if a_PlistParametr[i].type_parm = str then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+      plist.Add(param);
+      param := level + c_BEGINSTRING +  a_PlistParametr[i].value + c_ENDSTRING;
+    end;
+    if a_PlistParametr[i].type_parm = data then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+      plist.Add(param);
+      param := level + c_BEGINDATA +  a_PlistParametr[i].value + c_ENDDATA;
+    end;
+    if param <> '' then plist.Add(param);
+  end;
+  //добовление завершения plist'a
+  plist.Add(c_ENDPLIST);
 end;
 
 function CheckPlist(plist: TStringList; out s_Problem: string): integer;
@@ -117,9 +121,9 @@ begin
   string_beg:=0; string_end:=0;
   int_beg:=0; int_end:=0;
   date_beg:=0; date_end := 0;
-  p := Pos(c_HEADER1, plist.Strings[i]);
+  p := Pos(c_HEADER1, Trim(plist.Strings[0]));
   //Проверить что первая строка <?xml version="1.0" encoding="UTF-8" ?>
-  if p <> 0 then begin
+  if p = 0 then begin
      result := -1;
   end else begin
        //Проверить что вторая строка <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -139,7 +143,7 @@ begin
    end;
   //Если один из верхних пунктов неверный то завершаем проверку и выводим в чем ошибка
   if result < 0 then begin
-      if result = -1 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER1 + ' а не: ' + plist.Strings[0] + ' .';
+      if result = -1 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER1 + ' а не: ' + plist.Strings[0] + ' . p=' + IntToStr(p);
       if result = -2 then s_Problem := 'Не правильный заголовок plist файла должен быть: ' + c_HEADER2 + ' или ' + c_HEADER2_1 + ' а не: ' + plist.Strings[1] + '.';
       if result = -3 then s_Problem := 'Не правильное начало plist параметров должено быть: ' + c_BEGINPLIST + ' а не: ' + plist.Strings[2] + '.';
       if result = -4 then begin
