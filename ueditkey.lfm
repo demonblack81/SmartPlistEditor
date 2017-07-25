@@ -62,4 +62,27 @@ object EditKeyForm: TEditKeyForm
     Caption = 'Cancel'
     TabOrder = 3
   end
+  object DateTimePicker: TDateTimePicker
+    Left = 10
+    Height = 23
+    Top = 70
+    Width = 133
+    CenturyFrom = 1941
+    MaxDate = 2958465
+    MinDate = -53780
+    TabOrder = 4
+    TrailingSeparator = False
+    TextForNullDate = 'NULL'
+    LeadingZeros = True
+    Visible = False
+    Kind = dtkDateTime
+    TimeFormat = tf24
+    TimeDisplay = tdHMS
+    DateMode = dmComboBox
+    Date = 42941
+    Time = 0.60614710648224
+    UseDefaultSeparators = True
+    HideDateTimeParts = []
+    MonthNames = 'Long'
+  end
 end

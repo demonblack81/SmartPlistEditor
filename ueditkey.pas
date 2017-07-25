@@ -5,8 +5,8 @@ unit uEditKey;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls;
+  Classes, SysUtils, FileUtil, DateTimePicker, Forms, Controls, Graphics,
+  Dialogs, ExtCtrls, Buttons, StdCtrls;
 
 type
 
@@ -15,6 +15,7 @@ type
   TEditKeyForm = class(TForm)
     AddBtn: TButton;
     CancelBtn: TButton;
+    DateTimePicker: TDateTimePicker;
     KeyEdit: TLabeledEdit;
     ValueEdit: TLabeledEdit;
   private
