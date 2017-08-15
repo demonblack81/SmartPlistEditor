@@ -85,4 +85,21 @@ object EditKeyForm: TEditKeyForm
     HideDateTimeParts = []
     MonthNames = 'Long'
   end
+  object EditLabel: TLabel
+    Left = 10
+    Height = 15
+    Top = 52
+    Width = 27
+    Caption = 'Date:'
+    ParentColor = False
+  end
+  object KeyBooleanCheckBox: TCheckBox
+    Left = 10
+    Height = 19
+    Top = 74
+    Width = 44
+    Caption = 'True'
+    TabOrder = 5
+    Visible = False
+  end
 end

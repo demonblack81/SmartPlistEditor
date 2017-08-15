@@ -9,7 +9,7 @@ uses
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
   LCLType,
 
-  uPlistRead;
+  uPlistRead, uEditKey;
 
 type
 
@@ -64,6 +64,7 @@ type
     procedure AddParametrKeyName(out KeyName: string);
     procedure AddParametrKeyValue(b_isInt:boolean; out ParametrValue:string);
     procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
+    procedure AddParametrDateInTreeView;
   private
     { private declarations }
   public
@@ -85,6 +86,12 @@ implementation
 {$R *.lfm}
 
 { TMainForm }
+
+procedure TMainForm.AddParametrDateInTreeView;
+begin
+  LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Процедура добавления параметра с значением date в TreeView.');
+
+end;
 
 procedure TMainForm.AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
 //процедура добавления параметра с значением integer или string в TreeView

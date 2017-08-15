@@ -15,13 +15,16 @@ type
   TEditKeyForm = class(TForm)
     AddBtn: TButton;
     CancelBtn: TButton;
+    KeyBooleanCheckBox: TCheckBox;
     DateTimePicker: TDateTimePicker;
     KeyEdit: TLabeledEdit;
+    EditLabel: TLabel;
     ValueEdit: TLabeledEdit;
   private
     { private declarations }
   public
     { public declarations }
+    b_isEditMode: Byte;
   end;
 
 var
