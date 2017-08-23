@@ -93,7 +93,8 @@ begin
   LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Процедура добавления параметра с значением date в TreeView.');
 //1. Проверяем первый ли это элемент в plist'e 
 //2. Проверяем выбрано ли место куда вставлять
-//3. Выставлям ключ b_EditMode в
+//3. Выставлям ключ b_EditMode в режим добавления date
+
 end;
 
 procedure TMainForm.AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
