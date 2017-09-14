@@ -79,7 +79,7 @@ var
   s_ErrorMessage: string; // строка ошибки
   sl_PlistStrings: TStringList; // массив строк plist'а
   b_FirstParametr: boolean; // первый ли параметр
-  LogString: TStringList;
+  LogString: TStringList; // массив строк логирования программы
   StartPath: string; //Строка пути к программе
 implementation
 
@@ -89,9 +89,34 @@ implementation
 
 procedure TMainForm.AddParametrDateInTreeView;
 //процедура добавления параметра с значением date в TreeView
+var s_ElementSelected, s_KeyName, s_ParametrValue: string;
+    b_isTreeElementSelected: boolean;
+    Node, ParentNode, ChildNode: TTreeNode;
+    CurentPlistParametr, TempPlistParametr : PlistParametr;
+    i: integer;
 begin
-  LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Процедура добавления параметра с значением date в TreeView.');
-//1. Проверяем первый ли это элемент в plist'e 
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Процедура добавления параметра с значением date в TreeView.');
+  s_KeyName := '';
+  s_ParametrValue := '';
+  s_ElementSelected := '';
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Проверяем первый ли это элемент в pliste');
+  if b_FirstParametr then begin
+    try
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
+      ParentNode := TreeView.Selected;
+      b_isTreeElementSelected := true;
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Увеличеваем размер массива записей на один.');
+      SetLength(a_PlistParametr, 1);
+    except
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      ShowMessage('Не выбран элемент куда добавлять параметр');
+      b_isTreeElementSelected := false;
+    end;
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    if not b_isTreeElementSelected then exit;
+  end else begin
+
+  end;
 //2. Проверяем выбрано ли место куда вставлять
 //3. Выставлям ключ b_EditMode в режим добавления date
 //4. Изменяем форму Editkey для добавления ключа с датой
@@ -100,6 +125,7 @@ begin
 //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
 //8. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр
 //9. Добавляем параметр в дерево
+  end;
 
 end;
 
@@ -115,7 +141,7 @@ begin
   s_KeyName := '';
   s_ParametrValue := '';
   s_ElementSelected := '';
-  LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Проверяем если идет добавление первого параметра то фокуса на дереве может и не быть.');
+  LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Проверяем если идет добавление первого параметра, то фокуса на дереве может и не быть.');
   if b_FirstParametr then begin
     try
       LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
