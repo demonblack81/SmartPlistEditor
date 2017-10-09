@@ -611,6 +611,7 @@ object MainForm: TMainForm
       end
       object AddKeyDateMenuItem: TMenuItem
         Caption = 'Add Key Date'
+        OnClick = AddKeyDateMenuItemClick
       end
       object AddKeyDictMenuItem: TMenuItem
         Caption = 'Add Key Dict'

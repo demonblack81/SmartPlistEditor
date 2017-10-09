@@ -47,6 +47,7 @@ type
     ToolBar: TToolBar;
     TreeView: TTreeView;
     procedure AddIntKeyMenuItemClick(Sender: TObject);
+    procedure AddKeyDateMenuItemClick(Sender: TObject);
     procedure AddKeyStringMenuItemClick(Sender: TObject);
     procedure CloseMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -130,10 +131,10 @@ begin
 
   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Выставлям ключ b_EditMode в режим добавления date.');
 
-  TEditKeyForm.b_isEditMode := 1;
+   b_isEditMode := 1;
 
 //4. Изменяем форму Editkey для добавления ключа с датой
-
+    EditKeyForm.Show;
 //5. Показваем форму Editkey
 //6. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey
 //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
@@ -551,6 +552,11 @@ begin
        exit;
      end;
   end;
+end;
+
+procedure TMainForm.AddKeyDateMenuItemClick(Sender: TObject);
+begin
+  AddParametrDateInTreeView;
 end;
 
 procedure TMainForm.AddKeyStringMenuItemClick(Sender: TObject);

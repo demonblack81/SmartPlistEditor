@@ -9,6 +9,7 @@ object EditKeyForm: TEditKeyForm
   ClientHeight = 138
   ClientWidth = 487
   FormStyle = fsStayOnTop
+  OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '1.6.0.4'
   object KeyEdit: TLabeledEdit
@@ -31,7 +32,7 @@ object EditKeyForm: TEditKeyForm
   object ValueEdit: TLabeledEdit
     Left = 10
     Height = 23
-    Top = 70
+    Top = 69
     Width = 460
     EditLabel.AnchorSideLeft.Control = ValueEdit
     EditLabel.AnchorSideRight.Control = ValueEdit
@@ -39,7 +40,7 @@ object EditKeyForm: TEditKeyForm
     EditLabel.AnchorSideBottom.Control = ValueEdit
     EditLabel.Left = 10
     EditLabel.Height = 15
-    EditLabel.Top = 52
+    EditLabel.Top = 51
     EditLabel.Width = 460
     EditLabel.Caption = 'Parametr Value'
     EditLabel.ParentColor = False

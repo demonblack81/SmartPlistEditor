@@ -20,25 +20,49 @@ type
     KeyEdit: TLabeledEdit;
     EditLabel: TLabel;
     ValueEdit: TLabeledEdit;
+    procedure FormShow(Sender: TObject);
   private
     { private declarations }
   public
     { public declarations }
-    b_isEditMode: Byte;
+
+  end;
+
+var
+  EditKeyForm: TEditKeyForm;
+  b_isEditMode: Byte;
     // 0 - не выбран не один из режимов
     // 1 - Режим добавления параметра date
     // 2 - Режим добавления параметра boolean
     // 3 - Режим редактирования параметра string, integer
     // 4 - Режим редактирования параметра date
     // 5 - Режим редактирования параметра boolean
-  end;
-
-var
-  EditKeyForm: TEditKeyForm;
 
 implementation
 
 {$R *.lfm}
+
+{ TEditKeyForm }
+
+procedure TEditKeyForm.FormShow(Sender: TObject);
+begin
+  case b_isEditMode of
+    1: begin
+      ValueEdit.Visible:= false;
+      DateTimePicker.Visible:= true;
+      EditLabel.Caption:= 'Дата';
+      EditLabel.Visible:= true;
+    end;
+
+    else begin
+      ValueEdit.Visible:= true;
+      DateTimePicker.Visible:= false;
+      EditLabel.Visible:= false;
+      KeyBooleanCheckBox.Visible:= false;
+    end;
+  end;
+
+end;
 
 end.
 
