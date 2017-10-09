@@ -115,17 +115,30 @@ begin
   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
     if not b_isTreeElementSelected then exit;
   end else begin
-
+    try
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Присваеваем переменной s_ElementSelected строку из выбраного в дереве элемента.');
+      s_ElementSelected := TreeView.Selected.Text;
+      b_isTreeElementSelected := true;
+    except
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      ShowMessage('Не выбран элемент куда добавлять параметр');
+      b_isTreeElementSelected := false;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    if not b_isTreeElementSelected then exit;
   end;
-//2. Проверяем выбрано ли место куда вставлять
-//3. Выставлям ключ b_EditMode в режим добавления date
+
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Выставлям ключ b_EditMode в режим добавления date.');
+
+  TEditKeyForm.b_isEditMode := 1;
+
 //4. Изменяем форму Editkey для добавления ключа с датой
+
 //5. Показваем форму Editkey
 //6. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey
 //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
 //8. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр
 //9. Добавляем параметр в дерево
-  end;
 
 end;
 
