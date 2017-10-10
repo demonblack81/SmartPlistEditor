@@ -13,14 +13,14 @@ type
   { TEditKeyForm }
 
   TEditKeyForm = class(TForm)
-    AddBtn: TButton;
-    CancelBtn: TButton;
+    CancelBitBtn: TBitBtn;
+    OKBitBtn: TBitBtn;
     KeyBooleanCheckBox: TCheckBox;
     DateTimePicker: TDateTimePicker;
     KeyEdit: TLabeledEdit;
     EditLabel: TLabel;
     ValueEdit: TLabeledEdit;
-    procedure FormShow(Sender: TObject);
+    procedure OnFormShow(Sender: TObject);
   private
     { private declarations }
   public
@@ -44,12 +44,14 @@ implementation
 
 { TEditKeyForm }
 
-procedure TEditKeyForm.FormShow(Sender: TObject);
+procedure TEditKeyForm.OnFormShow(Sender: TObject);
 begin
   case b_isEditMode of
     1: begin
+      KeyEdit.Text:= '';
       ValueEdit.Visible:= false;
       DateTimePicker.Visible:= true;
+      DateTimePicker.Date:= Now;
       EditLabel.Caption:= 'Дата';
       EditLabel.Visible:= true;
     end;

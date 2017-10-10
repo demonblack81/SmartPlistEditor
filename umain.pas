@@ -130,12 +130,21 @@ begin
   end;
 
   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Выставлям ключ b_EditMode в режим добавления date.');
-
-   b_isEditMode := 1;
+  b_isEditMode := 1;
 
 //4. Изменяем форму Editkey для добавления ключа с датой
-    EditKeyForm.Show;
 //5. Показваем форму Editkey
+  if EditKeyForm.ShowModal = mrOK then begin
+     if EditKeyForm.KeyEdit.Text = '' then begin
+       ShowMessage('Значение параметра не введено. Заполните поле: Имя параметра.');
+       exit;
+     end;
+  end else begin
+    ShowMessage('Отмена ввода.');
+    exit;
+  end;
+
+
 //6. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey
 //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
 //8. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр
