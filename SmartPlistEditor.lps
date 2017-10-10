@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="184"/>
+        <UsageCount Value="190"/>
       </Unit0>
       <Unit1>
         <Filename Value="umain.pas"/>
@@ -21,10 +21,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="120"/>
-        <CursorPos X="33" Y="138"/>
-        <UsageCount Value="184"/>
+        <TopLine Value="133"/>
+        <CursorPos X="46" Y="150"/>
+        <UsageCount Value="190"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -35,10 +34,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uEditKey"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="34"/>
-        <CursorPos X="14" Y="50"/>
-        <UsageCount Value="174"/>
+        <CursorPos X="37" Y="53"/>
+        <UsageCount Value="180"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit2>
@@ -48,7 +48,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="394"/>
         <CursorPos X="55" Y="25"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="94"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -57,7 +57,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="4344"/>
         <CursorPos X="9" Y="4359"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit4>
       <Unit5>
         <Filename Value="D:\Soft\lazarus\components\synedit\syneditlines.pas"/>
@@ -65,136 +65,136 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="352"/>
         <CursorPos Y="371"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit5>
       <Unit6>
         <Filename Value="D:\Soft\lazarus\lcl\include\customnotebook.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="301"/>
         <CursorPos X="32" Y="313"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit6>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="umain.pas"/>
-        <Caret Line="377" Column="28" TopLine="342"/>
+        <Filename Value="ueditkey.pas"/>
+        <Caret Line="25" Column="24"/>
       </Position1>
       <Position2>
-        <Filename Value="umain.pas"/>
-        <Caret Line="378" Column="28" TopLine="343"/>
+        <Filename Value="ueditkey.pas"/>
+        <Caret Line="26" Column="24"/>
       </Position2>
       <Position3>
         <Filename Value="umain.pas"/>
-        <Caret Line="379" Column="28" TopLine="344"/>
+        <Caret Line="67" Column="8" TopLine="65"/>
       </Position3>
       <Position4>
         <Filename Value="umain.pas"/>
-        <Caret Line="380" Column="28" TopLine="345"/>
+        <Caret Line="93" Column="3" TopLine="81"/>
       </Position4>
       <Position5>
         <Filename Value="umain.pas"/>
-        <Caret Line="381" Column="28" TopLine="346"/>
+        <Caret Line="133" Column="16" TopLine="115"/>
       </Position5>
       <Position6>
         <Filename Value="umain.pas"/>
-        <Caret Line="382" Column="28" TopLine="347"/>
+        <Caret Line="140" Column="170" TopLine="115"/>
       </Position6>
       <Position7>
-        <Filename Value="umain.pas"/>
-        <Caret Line="383" Column="28" TopLine="348"/>
+        <Filename Value="ueditkey.pas"/>
+        <Caret Line="39" Column="79" TopLine="3"/>
       </Position7>
       <Position8>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="19" Column="105"/>
+        <Caret Line="49" Column="4" TopLine="18"/>
       </Position8>
       <Position9>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="25" Column="24"/>
+        <Caret Line="44" Column="33" TopLine="18"/>
       </Position9>
       <Position10>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="26" Column="24"/>
+        <Caret Line="49" Column="7" TopLine="18"/>
       </Position10>
       <Position11>
         <Filename Value="umain.pas"/>
-        <Caret Line="67" Column="8" TopLine="65"/>
+        <Caret Line="136" Column="5" TopLine="118"/>
       </Position11>
       <Position12>
         <Filename Value="umain.pas"/>
-        <Caret Line="93" Column="3" TopLine="81"/>
+        <Caret Line="96" Column="5" TopLine="78"/>
       </Position12>
       <Position13>
         <Filename Value="umain.pas"/>
-        <Caret Line="133" Column="16" TopLine="115"/>
+        <Caret Line="89" Column="35" TopLine="78"/>
       </Position13>
       <Position14>
-        <Filename Value="umain.pas"/>
-        <Caret Line="140" Column="170" TopLine="115"/>
+        <Filename Value="ueditkey.pas"/>
+        <Caret Line="46" Column="48" TopLine="28"/>
       </Position14>
       <Position15>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="39" Column="79" TopLine="3"/>
+        <Caret Line="45" Column="48" TopLine="27"/>
       </Position15>
       <Position16>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="49" Column="4" TopLine="18"/>
+        <Caret Line="44" Column="48" TopLine="26"/>
       </Position16>
       <Position17>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="44" Column="33" TopLine="18"/>
+        <Caret Line="45" Column="48" TopLine="27"/>
       </Position17>
       <Position18>
         <Filename Value="ueditkey.pas"/>
-        <Caret Line="49" Column="7" TopLine="18"/>
+        <Caret Line="47" Column="34" TopLine="22"/>
       </Position18>
       <Position19>
         <Filename Value="umain.pas"/>
-        <Caret Line="136" Column="5" TopLine="118"/>
+        <Caret Line="135" Column="94" TopLine="114"/>
       </Position19>
       <Position20>
         <Filename Value="umain.pas"/>
-        <Caret Line="96" Column="5" TopLine="78"/>
+        <Caret Line="138" Column="31" TopLine="120"/>
       </Position20>
       <Position21>
         <Filename Value="umain.pas"/>
-        <Caret Line="89" Column="35" TopLine="78"/>
+        <Caret Line="143" Column="16" TopLine="120"/>
       </Position21>
       <Position22>
-        <Filename Value="ueditkey.pas"/>
-        <Caret Line="46" Column="48" TopLine="28"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="138" Column="29" TopLine="120"/>
       </Position22>
       <Position23>
-        <Filename Value="ueditkey.pas"/>
-        <Caret Line="45" Column="48" TopLine="27"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="150" Column="106" TopLine="129"/>
       </Position23>
       <Position24>
-        <Filename Value="ueditkey.pas"/>
-        <Caret Line="44" Column="48" TopLine="26"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="99" Column="168" TopLine="88"/>
       </Position24>
       <Position25>
-        <Filename Value="ueditkey.pas"/>
-        <Caret Line="45" Column="48" TopLine="27"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="149" Column="49" TopLine="131"/>
       </Position25>
       <Position26>
-        <Filename Value="ueditkey.pas"/>
-        <Caret Line="47" Column="34" TopLine="22"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="159" Column="46" TopLine="152"/>
       </Position26>
       <Position27>
         <Filename Value="umain.pas"/>
-        <Caret Line="135" Column="94" TopLine="114"/>
+        <Caret Line="149" Column="36" TopLine="131"/>
       </Position27>
       <Position28>
         <Filename Value="umain.pas"/>
-        <Caret Line="138" Column="31" TopLine="120"/>
+        <Caret Line="161" Column="73" TopLine="143"/>
       </Position28>
       <Position29>
         <Filename Value="umain.pas"/>
-        <Caret Line="143" Column="16" TopLine="120"/>
+        <Caret Line="154" Column="24" TopLine="135"/>
       </Position29>
       <Position30>
         <Filename Value="umain.pas"/>
-        <Caret Line="138" Column="29" TopLine="120"/>
+        <Caret Line="149" Column="14" TopLine="122"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

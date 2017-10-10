@@ -51,7 +51,7 @@ begin
       KeyEdit.Text:= '';
       ValueEdit.Visible:= false;
       DateTimePicker.Visible:= true;
-      DateTimePicker.Date:= Now;
+      DateTimePicker.DateTime:=Now;
       EditLabel.Caption:= 'Дата';
       EditLabel.Visible:= true;
     end;

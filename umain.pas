@@ -97,7 +97,6 @@ var s_ElementSelected, s_KeyName, s_ParametrValue: string;
     i: integer;
 begin
   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Процедура добавления параметра с значением date в TreeView.');
-  s_KeyName := '';
   s_ParametrValue := '';
   s_ElementSelected := '';
   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Проверяем первый ли это элемент в pliste');
@@ -135,19 +134,75 @@ begin
 //4. Изменяем форму Editkey для добавления ключа с датой
 //5. Показваем форму Editkey
   if EditKeyForm.ShowModal = mrOK then begin
+     //6. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey
      if EditKeyForm.KeyEdit.Text = '' then begin
+     //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
        ShowMessage('Значение параметра не введено. Заполните поле: Имя параметра.');
        exit;
      end;
   end else begin
+    //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
     ShowMessage('Отмена ввода.');
     exit;
   end;
-
-
-//6. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey
-//7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
-//8. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр
+//8. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр 2012-01-01T00:00:01Z
+  s_KeyName := EditKeyForm.KeyEdit.Text;
+  s_ParametrValue := FormatdateTime('yyyy-mm-dd"T"hh:mm:ss"Z"', EditKeyForm.DateTimePicker.DateTime);
+  if b_FirstParametr then begin
+    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Добавляем новую запись параметров в массив.');
+    with a_PlistParametr[0] do begin
+      Name := s_KeyName;
+      type_parm:= date;
+      level := 0;
+      position:= 3;
+      value:= s_ParametrValue;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
+    p_PlistParam^ := a_PlistParametr[0];
+    ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+    b_FirstParametr := false;
+  end else begin
+    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Запоминаем выбранный узел считаем его за радительский.');
+    ParentNode:= TreeView.Selected;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Считываем record из выбраной ячейки.');
+    TempPlistParametr:= PlistParametr(ParentNode.Data^);
+    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Заполняем данными новую record.');
+    CurentPlistParametr.Name:= s_KeyName;
+    CurentPlistParametr.type_parm:= date;
+    CurentPlistParametr.value:= s_ParametrValue;
+    CurentPlistParametr.level:= TempPlistParametr.level;
+    CurentPlistParametr.position:= TempPlistParametr.position + 1;
+    p_PlistParam^ := CurentPlistParametr;
+    //
+    if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
+      ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+      ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+      if s_ElementSelected = 'plist' then begin
+        CurentPlistParametr.position :=  3;
+      end else begin
+        CurentPlistParametr.position := TempPlistParametr.position + 1;
+      end;
+    end else begin
+       ParentNode := TreeView.Items.InsertObject(TreeView.Selected, s_KeyName, p_PlistParam);
+       ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+       CurentPlistParametr.position:= TempPlistParametr.position;
+    end;
+    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+    for i:= 0 to (Length(a_PlistParametr)-1) do begin
+      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
+        TempPlistParametr:= a_PlistParametr[i];
+        a_PlistParametr[i]:= CurentPlistParametr;
+        CurentPlistParametr:= TempPlistParametr;
+        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
+      end;
+    end;
+    Dispose(p_PlistParam);
+    TreeView.Items.Clear;
+    UpdateTreeView(a_PlistParametr);
+    Node := TreeView.Items.FindNodeWithText(s_KeyName);
+    Node.ExpandParents;
+  end;
 //9. Добавляем параметр в дерево
 
 end;
