@@ -131,25 +131,25 @@ begin
   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Выставлям ключ b_EditMode в режим добавления date.');
   b_isEditMode := 1;
 
-//4. Изменяем форму Editkey для добавления ключа с датой
-//5. Показваем форму Editkey
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Изменяем форму Editkey для добавления ключа с датой’);
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Показваем форму Editkey’);
   if EditKeyForm.ShowModal = mrOK then begin
-     //6. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey
+     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey’);
      if EditKeyForm.KeyEdit.Text = '' then begin
-     //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
+       LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5 ‘);
        ShowMessage('Значение параметра не введено. Заполните поле: Имя параметра.');
        exit;
      end;
   end else begin
-    //7. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5’);
     ShowMessage('Отмена ввода.');
     exit;
   end;
-//8. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр 2012-01-01T00:00:01Z
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр ‘); 
   s_KeyName := EditKeyForm.KeyEdit.Text;
   s_ParametrValue := FormatdateTime('yyyy-mm-dd"T"hh:mm:ss"Z"', EditKeyForm.DateTimePicker.DateTime);
   if b_FirstParametr then begin
-    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Добавляем новую запись параметров в массив.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Добавляем новую запись параметров в массив.');
     with a_PlistParametr[0] do begin
       Name := s_KeyName;
       type_parm:= date;
@@ -157,17 +157,17 @@ begin
       position:= 3;
       value:= s_ParametrValue;
     end;
-    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
     p_PlistParam^ := a_PlistParametr[0];
     ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
     ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
     b_FirstParametr := false;
   end else begin
-    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Запоминаем выбранный узел считаем его за радительский.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Запоминаем выбранный узел считаем его за радительский.');
     ParentNode:= TreeView.Selected;
-    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Считываем record из выбраной ячейки.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Считываем record из выбраной ячейки.');
     TempPlistParametr:= PlistParametr(ParentNode.Data^);
-    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInTreeView. Заполняем данными новую record.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView . Заполняем данными новую record.');
     CurentPlistParametr.Name:= s_KeyName;
     CurentPlistParametr.type_parm:= date;
     CurentPlistParametr.value:= s_ParametrValue;
