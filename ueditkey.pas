@@ -50,12 +50,23 @@ begin
     1: begin
       KeyEdit.Text:= '';
       ValueEdit.Visible:= false;
+      KeyBooleanCheckBox.Visible:= false;
       DateTimePicker.Visible:= true;
       DateTimePicker.DateTime:=Now;
       EditLabel.Caption:= 'Дата';
       EditLabel.Visible:= true;
+      KeyEdit.SetFocus;
     end;
-
+    2: begin
+      KeyEdit.Text:= '';
+      KeyBooleanCheckBox.Checked:= false;
+      ValueEdit.Visible:= false;
+      DateTimePicker.Visible:= false;
+      KeyBooleanCheckBox.Visible:= false;
+      EditLabel.Caption:= 'Вкл/Выкл';
+      EditLabel.Visible:= true;
+      KeyEdit.SetFocus;
+    end;
     else begin
       ValueEdit.Visible:= true;
       DateTimePicker.Visible:= false;
