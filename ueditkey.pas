@@ -20,6 +20,7 @@ type
     KeyEdit: TLabeledEdit;
     EditLabel: TLabel;
     ValueEdit: TLabeledEdit;
+    procedure KeyBooleanCheckBoxChange(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
   private
     { private declarations }
@@ -60,9 +61,9 @@ begin
     2: begin
       KeyEdit.Text:= '';
       KeyBooleanCheckBox.Checked:= false;
+      KeyBooleanCheckBox.Visible:= true;
       ValueEdit.Visible:= false;
       DateTimePicker.Visible:= false;
-      KeyBooleanCheckBox.Visible:= false;
       EditLabel.Caption:= 'Вкл/Выкл';
       EditLabel.Visible:= true;
       KeyEdit.SetFocus;
@@ -75,6 +76,12 @@ begin
     end;
   end;
 
+end;
+
+procedure TEditKeyForm.KeyBooleanCheckBoxChange(Sender: TObject);
+begin
+  if KeyBooleanCheckBox.Checked then  KeyBooleanCheckBox.Caption:= 'True'
+  else KeyBooleanCheckBox.Caption:= 'False';
 end;
 
 end.

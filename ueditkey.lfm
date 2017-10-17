@@ -83,8 +83,9 @@ object EditKeyForm: TEditKeyForm
     Left = 10
     Height = 19
     Top = 73
-    Width = 44
-    Caption = 'True'
+    Width = 46
+    Caption = 'False'
+    OnChange = KeyBooleanCheckBoxChange
     TabOrder = 3
     Visible = False
   end

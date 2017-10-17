@@ -47,6 +47,7 @@ type
     ToolBar: TToolBar;
     TreeView: TTreeView;
     procedure AddIntKeyMenuItemClick(Sender: TObject);
+    procedure AddKeyBoolMenuItemClick(Sender: TObject);
     procedure AddKeyDateMenuItemClick(Sender: TObject);
     procedure AddKeyStringMenuItemClick(Sender: TObject);
     procedure CloseMenuItemClick(Sender: TObject);
@@ -90,7 +91,7 @@ implementation
 { TMainForm }
 
 procedure TMainForm.AddParametrBooleanInTreeView;
-//процедура добавления параметра с значением date в TreeView
+//процедура добавления параметра с значением Boolean в TreeView
 var s_ElementSelected, s_KeyName, s_ParametrValue: string;
     b_isTreeElementSelected: boolean;
     Node, ParentNode, ChildNode: TTreeNode;
@@ -735,6 +736,11 @@ begin
        exit;
      end;
   end;
+end;
+
+procedure TMainForm.AddKeyBoolMenuItemClick(Sender: TObject);
+begin
+  AddParametrBooleanInTreeView;
 end;
 
 procedure TMainForm.AddKeyDateMenuItemClick(Sender: TObject);
