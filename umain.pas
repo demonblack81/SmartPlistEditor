@@ -318,22 +318,27 @@ begin
     CurentPlistParametr.type_parm:= dict;
     CurentPlistParametr.value:= 'dict';
     CurentPlistParametr.level := CurentPlistParametr.level +1;
+    CurentPlistParametr.position := CurentPlistParametr.position +1;
     p_PlistParam^ := CurentPlistParametr;
     ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
     CurentPlistParametr.Name:= 'end dict';
     CurentPlistParametr.type_parm:= dict;
     CurentPlistParametr.value:= '/dict';
     CurentPlistParametr.level := CurentPlistParametr.level - 1;
+    CurentPlistParametr.position := CurentPlistParametr.position +1;
     p_PlistParam^ := CurentPlistParametr;
     ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
     setLength(a_PlistParametr, (Length(a_PlistParametr)+3));
     Node := TreeView.Items.GetFirstNode;
     if Node.Text = 'plist' then Node := Node.GetNext;
-    i := 0;
+    i:= 0;
     while Node <> nil do begin
-      TempPlistParametr:= PlistParametr(Node.Data^);
-      a_PlistParametr[i]:= TempPlistParametr;
-      i:= i+1;
+      if Node.Data <> nil then begin
+        TempPlistParametr:= PlistParametr(Node.Data^);
+        a_PlistParametr[i]:= TempPlistParametr;
+        i:= i+1;
+        if i = (Length(a_PlistParametr)-1) then setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+      end;
       Node := Node.GetNext;
     end;
     for i:= 0 to (Length(a_PlistParametr)-1) do begin
@@ -655,7 +660,7 @@ begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Добовлем в дерево обьект: .' + a_PlistParametr[i].Name);
         TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Присваиваем childNode радительское node.');
-        childNode := childNode.Parent;
+        if  childNode.Parent <> Node then childNode := childNode.Parent;
       end else begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если имя параметра не dict end или array end, то проверяем заполнена ли value.');
         if  a_PlistParametr[i].value <> '' then  begin
