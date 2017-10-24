@@ -208,17 +208,18 @@ var i, numarray, begpos, endpos, lev, newpos: integer;
     m_PlistParametr: array of PlistParametr;
 begin
      result:=0;
-     numarray := plist.Count-4;
-     setLength(m_PlistParametr, numarray);
+     //numarray := plist.Count-4;
+     setLength(m_PlistParametr, 1);
      numarray := 0;
      newpos:= 3;
      lev := 1;
      i := 3;
      while i <=  (plist.Count-1) do begin
          if Pos(c_BEGINDICT, plist.strings[i])<> 0  then begin
-           lev := lev +1;
+           lev := lev + 1;
            if  (Pos(c_BIGINKEY, plist.Strings[i-1]) <> 0) or
                (Pos(c_BIGINKEY, plist.Strings[i-2]) <> 0) then begin
+               if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
                with  m_PlistParametr[numarray] do begin
                   Name := 'dictkey';
                   type_parm:= dict;
@@ -230,7 +231,8 @@ begin
                numarray := numarray + 1;
                newpos:= newpos + 1;
            end else begin
-               with  m_PlistParametr[numarray] do begin
+              if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
+              with  m_PlistParametr[numarray] do begin
                      Name := 'dict';
                      type_parm:= dict;
                      level := lev;
@@ -243,6 +245,7 @@ begin
          end;
          if Pos(c_ENDDICT, plist.strings[i])<> 0  then begin
             lev := lev - 1;
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with  m_PlistParametr[numarray] do begin
                    Name := 'end dict';
                    type_parm:= dict;
@@ -257,6 +260,7 @@ begin
            lev := lev +1;
            if  (Pos(c_BIGINKEY, plist.Strings[i-1]) <> 0) or
                (Pos(c_BIGINKEY, plist.Strings[i-2]) <> 0) then begin
+               if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
                with  m_PlistParametr[numarray] do begin
                   Name := 'arraykey';
                    type_parm:= aray;
@@ -268,6 +272,7 @@ begin
                numarray := numarray + 1;
                newpos:= newpos + 1;
            end else begin
+               if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
                with  m_PlistParametr[numarray] do begin
                   Name := 'array';
                    type_parm:= aray;
@@ -281,6 +286,7 @@ begin
          end;
          if Pos(c_ENDARRAY, plist.strings[i])<> 0  then begin
             lev := lev - 1;
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with m_PlistParametr[numarray] do begin
                  Name := 'end array';
                  type_parm:= aray;
@@ -295,6 +301,7 @@ begin
             begpos :=  Pos(c_BEGININTEGER, plist.Strings[i]);
             endpos :=  Pos('</', plist.Strings[i]);
             s := copy(plist.Strings[i], begpos+9, endpos-(begpos+9));
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with  m_PlistParametr[numarray] do begin
                   Name := s;
                   type_parm:= int;
@@ -309,6 +316,7 @@ begin
             begpos :=  Pos(c_BEGINSTRING, plist.Strings[i]);
             endpos :=  Pos('</', plist.Strings[i]);
             s := copy(plist.Strings[i], begpos+8, endpos-(begpos+8));
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with  m_PlistParametr[numarray] do begin
                   Name := s;
                   type_parm:= str;
@@ -323,6 +331,7 @@ begin
             begpos :=  Pos(c_BEGINDATE, plist.Strings[i]);
             endpos :=  Pos('</', plist.Strings[i]);
             s := copy(plist.Strings[i], begpos+6, endpos-(begpos+6));
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with  m_PlistParametr[numarray] do begin
                   Name := s;
                   type_parm:= date;
@@ -337,6 +346,7 @@ begin
             begpos :=  Pos(c_BEGINDATA, plist.Strings[i]);
             endpos :=  Pos('</', plist.Strings[i]);
             s := copy(plist.Strings[i], begpos+6, endpos-(begpos+6));
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with  m_PlistParametr[numarray] do begin
                   Name := s;
                   type_parm:= data;
@@ -351,6 +361,7 @@ begin
             begpos :=  Pos(c_BIGINKEY, plist.Strings[i]);
             endpos :=  Pos('</', plist.Strings[i]);
             s := copy(plist.Strings[i], begpos+5, endpos-(begpos+5));
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with   m_PlistParametr[numarray] do begin
                   Name := s;
                   position := newpos;
@@ -413,10 +424,12 @@ begin
          i := i + 1;
      end;
     { setLength(a_PlistParametr, numarray);
-     setLength(m_PlistParametr, numarray);     }
-     for i := 0 to numarray do begin
+     setLength(m_PlistParametr, numarray);}
+     //setLength(a_PlistParametr, Length(m_PlistParametr));
+     for i := 0 to (Length(m_PlistParametr) - 1) do begin
         a_PlistParametr[i] := m_PlistParametr[i];
      end;
+     numarray := Length(m_PlistParametr);
      result := numarray;
      //a_PlistParametr := m_PlistParametr;//Copy(m_PlistParametr, 0, numarray);
 end;

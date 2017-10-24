@@ -49,6 +49,7 @@ type
     procedure AddIntKeyMenuItemClick(Sender: TObject);
     procedure AddKeyBoolMenuItemClick(Sender: TObject);
     procedure AddKeyDateMenuItemClick(Sender: TObject);
+    procedure AddKeyDictMenuItemClick(Sender: TObject);
     procedure AddKeyStringMenuItemClick(Sender: TObject);
     procedure CloseMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -289,13 +290,14 @@ begin
     ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[2].Name, p_PlistParam);
     b_FirstParametr := false;
   end else begin
-    {LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
+
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
     ParentNode:= TreeView.Selected;
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Считываем record из выбраной ячейки.');
     TempPlistParametr:= PlistParametr(ParentNode.Data^);
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView . Заполняем данными новую record.');
     CurentPlistParametr.Name:= s_KeyName;
-    CurentPlistParametr.type_parm:= date;
+    CurentPlistParametr.type_parm:= key;
     CurentPlistParametr.value:= s_ParametrValue;
     CurentPlistParametr.level:= TempPlistParametr.level;
     CurentPlistParametr.position:= TempPlistParametr.position + 1;
@@ -303,7 +305,6 @@ begin
     //
     if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
       ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
-      ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
       if s_ElementSelected = 'plist' then begin
         CurentPlistParametr.position :=  3;
       end else begin
@@ -311,25 +312,39 @@ begin
       end;
     end else begin
        ParentNode := TreeView.Items.InsertObject(TreeView.Selected, s_KeyName, p_PlistParam);
-       ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
        CurentPlistParametr.position:= TempPlistParametr.position;
     end;
-    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+    CurentPlistParametr.Name:= 'dictkey';
+    CurentPlistParametr.type_parm:= dict;
+    CurentPlistParametr.value:= 'dict';
+    CurentPlistParametr.level := CurentPlistParametr.level +1;
+    p_PlistParam^ := CurentPlistParametr;
+    ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
+    CurentPlistParametr.Name:= 'end dict';
+    CurentPlistParametr.type_parm:= dict;
+    CurentPlistParametr.value:= '/dict';
+    CurentPlistParametr.level := CurentPlistParametr.level - 1;
+    p_PlistParam^ := CurentPlistParametr;
+    ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
+    setLength(a_PlistParametr, (Length(a_PlistParametr)+3));
+    Node := TreeView.Items.GetFirstNode;
+    if Node.Text = 'plist' then Node := Node.GetNext;
+    i := 0;
+    while Node <> nil do begin
+      TempPlistParametr:= PlistParametr(Node.Data^);
+      a_PlistParametr[i]:= TempPlistParametr;
+      i:= i+1;
+      Node := Node.GetNext;
+    end;
     for i:= 0 to (Length(a_PlistParametr)-1) do begin
-      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
-        TempPlistParametr:= a_PlistParametr[i];
-        a_PlistParametr[i]:= CurentPlistParametr;
-        CurentPlistParametr:= TempPlistParametr;
-        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
-      end;
+      if a_PlistParametr[i].position = a_PlistParametr[i-1].position then a_PlistParametr[i].position := a_PlistParametr[i].position +1;
     end;
     Dispose(p_PlistParam);
     TreeView.Items.Clear;
     UpdateTreeView(a_PlistParametr);
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
-    Node.ExpandParents;}
+    Node.ExpandParents;
   end;
-
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
@@ -697,7 +712,8 @@ begin
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Задаем размер масиву a_PlistParametr.');
       setLength(a_PlistParametr, sl_PlistStrings.Count -4);
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Разбиваем файл на параметры.');
-      GroupPlistParametrs(sl_PlistStrings,a_PlistParametr);
+      err := GroupPlistParametrs(sl_PlistStrings,a_PlistParametr);
+      setLength(a_PlistParametr, err);
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Загружаем параметры в дерево.');
       UpdateTreeView(a_PlistParametr);
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Так как параметры уже есть устанавливаем правильно переменную b_FirstParametr.');
@@ -869,6 +885,11 @@ end;
 procedure TMainForm.AddKeyDateMenuItemClick(Sender: TObject);
 begin
   AddParametrDateInTreeView;
+end;
+
+procedure TMainForm.AddKeyDictMenuItemClick(Sender: TObject);
+begin
+  AddParametrDictInTreeView;
 end;
 
 procedure TMainForm.AddKeyStringMenuItemClick(Sender: TObject);
