@@ -215,13 +215,12 @@ var s_ElementSelected, s_KeyName, s_ParametrValue: string;
     b_isTreeElementSelected: boolean;
     Node, ParentNode, ChildNode: TTreeNode;
     CurentPlistParametr, TempPlistParametr : PlistParametr;
-    i, len1, lenbefore: integer;
+    i: integer;
 begin
   LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Процедура добавления параметра с значением date в TreeView.');
   s_ParametrValue := '';
   s_ElementSelected := '';
   LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Проверяем первый ли это элемент в pliste');
-  lenbefore := Length(a_PlistParametr)-1;
   if b_FirstParametr then begin
     try
       LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
@@ -303,16 +302,16 @@ begin
     CurentPlistParametr.level:= TempPlistParametr.level;
     CurentPlistParametr.position:= TempPlistParametr.position + 1;
     p_PlistParam^ := CurentPlistParametr;
-    //
+    TreeView.BeginUpdate;
     if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
-      Node := TreeView.Items.AddChildObjectFirst(Node, s_KeyName, p_PlistParam);
+      ParentNode := TreeView.Items.AddChildObjectFirst(Node, s_KeyName, p_PlistParam);
       if s_ElementSelected = 'plist' then begin
         CurentPlistParametr.position :=  3;
       end else begin
         CurentPlistParametr.position := TempPlistParametr.position + 1;
       end;
     end else begin
-       Node := TreeView.Items.InsertObject(TreeView.Selected, s_KeyName, p_PlistParam);
+       ParentNode := TreeView.Items.InsertObject(Node, s_KeyName, p_PlistParam);
        CurentPlistParametr.position:= TempPlistParametr.position;
     end;
     CurentPlistParametr.Name:= 'dictkey';
@@ -321,19 +320,19 @@ begin
     CurentPlistParametr.level := CurentPlistParametr.level +1;
     CurentPlistParametr.position := CurentPlistParametr.position +1;
     p_PlistParam^ := CurentPlistParametr;
-    Node := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
+    ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
     CurentPlistParametr.Name:= 'end dict';
     CurentPlistParametr.type_parm:= dict;
     CurentPlistParametr.value:= '/dict';
     CurentPlistParametr.level := CurentPlistParametr.level - 1;
     CurentPlistParametr.position := CurentPlistParametr.position +1;
     p_PlistParam^ := CurentPlistParametr;
-    Node := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.Name, p_PlistParam);
+    ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.Name, p_PlistParam);
+    TreeView.EndUpdate;
     setLength(a_PlistParametr, (Length(a_PlistParametr)+3));
     Node := TreeView.Items.GetFirstNode;
     if Node.Text = 'plist' then Node := Node.GetNext;
     i:= 0;
-    len1 := Length(a_PlistParametr)-1;
     with CurentPlistParametr do begin
       Name := '';
       type_parm:= dict;
