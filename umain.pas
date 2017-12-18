@@ -215,7 +215,9 @@ var s_ElementSelected, s_KeyName, s_ParametrValue: string;
     b_isTreeElementSelected: boolean;
     Node, ParentNode, ChildNode: TTreeNode;
     CurentPlistParametr, TempPlistParametr : PlistParametr;
-    i: integer;
+    i, i_TempPosition, i_TempLevel: integer;
+
+    //i_CountTreeItem, tmp_CountTreeItem: integer;
 begin
   LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Процедура добавления параметра с значением date в TreeView.');
   s_ParametrValue := '';
@@ -248,6 +250,8 @@ begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
     if not b_isTreeElementSelected then exit;
   end;
+
+  //i_CountTreeItem := TreeView.Items.Count;
 
   LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Вызываем окно ввода названия параметра.');
   AddParametrKeyName(s_KeyName);
@@ -290,7 +294,6 @@ begin
     ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[2].Name, p_PlistParam);
     b_FirstParametr := false;
   end else begin
-
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
     Node:= TreeView.Selected;
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Считываем record из выбраной ячейки.');
@@ -314,64 +317,64 @@ begin
        ParentNode := TreeView.Items.InsertObject(Node, s_KeyName, p_PlistParam);
        CurentPlistParametr.position:= TempPlistParametr.position;
     end;
+    i_TempPosition := CurentPlistParametr.position;
+    i_TempLevel := CurentPlistParametr.level;
+
+    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+    for i:= 0 to (Length(a_PlistParametr)-1) do begin
+      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
+        TempPlistParametr:= a_PlistParametr[i];
+        a_PlistParametr[i]:= CurentPlistParametr;
+        CurentPlistParametr:= TempPlistParametr;
+        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
+      end;
+    end;
+
     CurentPlistParametr.Name:= 'dictkey';
     CurentPlistParametr.type_parm:= dict;
     CurentPlistParametr.value:= 'dict';
-    CurentPlistParametr.level := CurentPlistParametr.level +1;
-    CurentPlistParametr.position := CurentPlistParametr.position +1;
+    CurentPlistParametr.level := i_TempLevel + 1;
+    CurentPlistParametr.position := i_TempPosition + 1;
     p_PlistParam^ := CurentPlistParametr;
     ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
+
+    i_TempPosition := CurentPlistParametr.position;
+    i_TempLevel := i_TempLevel + 1;
+    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+    for i:= 0 to (Length(a_PlistParametr)-1) do begin
+      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
+        TempPlistParametr:= a_PlistParametr[i];
+        a_PlistParametr[i]:= CurentPlistParametr;
+        CurentPlistParametr:= TempPlistParametr;
+        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
+      end;
+    end;
+
     CurentPlistParametr.Name:= 'end dict';
     CurentPlistParametr.type_parm:= dict;
     CurentPlistParametr.value:= '/dict';
-    CurentPlistParametr.level := CurentPlistParametr.level - 1;
-    CurentPlistParametr.position := CurentPlistParametr.position +1;
+    CurentPlistParametr.level := i_TempPosition - 1;
+    CurentPlistParametr.position := i_TempPosition + 1;
     p_PlistParam^ := CurentPlistParametr;
     ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.Name, p_PlistParam);
     TreeView.EndUpdate;
-    setLength(a_PlistParametr, (Length(a_PlistParametr)+3));
-    Node := TreeView.Items.GetFirstNode;
-    if Node.Text = 'plist' then Node := Node.GetNext;
-    i:= 0;
-    with CurentPlistParametr do begin
-      Name := '';
-      type_parm:= dict;
-      level := 0;
-      position:= 0;
-      value:= '';
-    end;
-    with TempPlistParametr do begin
-      Name := '01~12';
-      type_parm:= dict;
-      level := 0;
-      position:= 0;
-      value:= '';
-    end;
-    while Node <> nil do begin
-      if Node.Data <> nil then begin
-        CurentPlistParametr:= PlistParametr(Node.Data^);
-        if ( i = (Length(a_PlistParametr)-2) )then begin
-          setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
-        end;
-        if (CurentPlistParametr.Name <> TempPlistParametr.Name) or (CurentPlistParametr.level <> TempPlistParametr.level) then begin
-          a_PlistParametr[i]:= CurentPlistParametr;
-          TempPlistParametr := CurentPlistParametr;
-          i:= i+1;
-        end;
-      end;
-      Node := Node.GetNext;
-    end;
-    for i:= 1 to (Length(a_PlistParametr)-1) do begin
-      if a_PlistParametr[i].position = a_PlistParametr[i-1].position then begin
-        a_PlistParametr[i].position := a_PlistParametr[i].position +1;
-      end;
-    end;
-    Dispose(p_PlistParam);
 
+    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+    for i:= 0 to (Length(a_PlistParametr)-1) do begin
+      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
+        TempPlistParametr:= a_PlistParametr[i];
+        a_PlistParametr[i]:= CurentPlistParametr;
+        CurentPlistParametr:= TempPlistParametr;
+        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
+      end;
+    end;
+
+    Dispose(p_PlistParam);
     TreeView.Items.Clear;
     UpdateTreeView(a_PlistParametr);
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
-    Node.ExpandParents;
+    if Node = nil then TreeView.FullExpand
+    else Node.ExpandParents;
   end;
 end;
 
@@ -708,6 +711,8 @@ begin
       TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
     end;
   end;
+  LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Открываем все дерево');
+  TreeView.FullExpand;
   LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Завершаем обновление дерева параметров.');
   TreeView.Items.EndUpdate;
 end;
