@@ -280,7 +280,7 @@ begin
     with a_PlistParametr[2] do begin
       Name := 'end dict';
       type_parm:= dict;
-      level := 3;
+      level := 1;
       position:= 3;
       value:= '/dict';
     end;

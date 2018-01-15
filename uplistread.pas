@@ -73,6 +73,9 @@ begin
       if a_PlistParametr[i].value <> '' then param := level + '<' +  a_PlistParametr[i].value + '>'
       else param := level +  c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
     end;
+    if a_PlistParametr[i].type_parm = key then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+    end;
     if a_PlistParametr[i].type_parm = bool then begin
       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
       plist.Add(param);
