@@ -21,7 +21,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <TopLine Value="727"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="734"/>
         <CursorPos X="43" Y="747"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -44,10 +45,9 @@
       <Unit3>
         <Filename Value="uplistread.pas"/>
         <UnitName Value="uPlistRead"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="77"/>
-        <CursorPos X="10" Y="78"/>
+        <TopLine Value="22"/>
+        <CursorPos X="42" Y="97"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit3>

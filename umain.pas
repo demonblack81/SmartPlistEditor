@@ -70,6 +70,8 @@ type
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictInTreeView;
+    procedure AddDictInTreeView;
+
   private
     { private declarations }
   public
@@ -376,6 +378,14 @@ begin
     if Node = nil then TreeView.FullExpand
     else Node.ExpandParents;
   end;
+end;
+
+procedure TMainForm.AddDictInTreeView;
+// Процедура добавления тега <dict></dict> в TreeView
+begin
+   // 0. Проверяем выбран ли елемент за котрым будем добавлять тег dict
+   //1.Проверяем первый ли параметр в plist'e
+   // 2.Если первый то добавляем новы
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
@@ -783,7 +793,7 @@ begin
   ClearMassiveAndList;
 
   LogString.Add(DateTimeToStr(Now) +': MakeNewFile. Дисейблим кнопки Save в меню и на тулбаре');
-  SaveMenuItem.Enabled:= false;
+  //SaveMenuItem.Enabled:= false;
 
   LogString.Add(DateTimeToStr(Now) +': MakeNewFile. В treeview добовляем корень plist');
   TreeView.Items.Add(nil,'plist');
