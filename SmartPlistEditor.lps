@@ -4,14 +4,12 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="SmartPlistEditor.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <CursorPos X="45" Y="6"/>
         <UsageCount Value="200"/>
       </Unit0>
       <Unit1>
@@ -21,12 +19,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="734"/>
-        <CursorPos X="43" Y="747"/>
+        <TopLine Value="381"/>
+        <CursorPos X="22" Y="390"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="ueditkey.pas"/>
@@ -35,12 +31,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uEditKey"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="40"/>
         <CursorPos X="30" Y="27"/>
         <UsageCount Value="235"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="uplistread.pas"/>
@@ -51,6 +45,16 @@
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="logapp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="LogApp"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="5" Y="11"/>
+        <UsageCount Value="279"/>
+        <Loaded Value="True"/>
+      </Unit4>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>

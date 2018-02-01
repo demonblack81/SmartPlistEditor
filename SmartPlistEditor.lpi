@@ -39,7 +39,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="SmartPlistEditor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -60,6 +60,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uEditKey"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="logapp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="LogApp"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
