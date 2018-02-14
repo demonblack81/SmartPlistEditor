@@ -237,7 +237,7 @@ begin
       ShowMessage('Не выбран элемент куда добавлять параметр');
       b_isTreeElementSelected := false;
     end;
-  LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
     if not b_isTreeElementSelected then exit;
   end else begin
     try
@@ -380,14 +380,35 @@ begin
   end;
 end;
 
-procedure TMainForm.AddDictInTreeView;
+procedure TMainForm.AddDictInTreeView(ParentNode: TTreeNode);
 // Процедура добавления тега <dict></dict> в TreeView
+var s_ElementSelected:string;
+    b_isTreeElementSelected: boolean;
+    Node, ParentNode, ChildNode: TTreeNode;
+    CurentPlistParametr, TempPlistParametr : PlistParametr;
+    i: integer;
 begin
-   //0. Проверяем выбран ли елемент за котрым будем добавлять тег dict
-   //1. Проверяем первый ли параметр в plist'e
-   //2. Если первый то добавляем новый dict сразу
-   //3. Присваеваем переменной ParentNode выбранный в дереве элемент.
-   //4. Увеличеваем размер массива записей на один.
+  LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Процедура добавления тега <dict></dict> в TreeView.');
+  if b_FirstParametr then begin
+  try
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
+     if ParentNode = nil then ParentNode := TreeView.Selected;
+     b_isTreeElementSelected := true;
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Увеличеваем размер массива записей на один.');
+     SetLength(a_PlistParametr, 1);
+  except
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+     ShowMessage('Не выбран элемент куда добавлять параметр');
+     b_isTreeElementSelected := false;
+  end;
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+  if not b_isTreeElementSelected then exit;
+
+   // Проверяем выбран ли елемент за котрым будем добавлять тег dict если ParentNode не равен null
+   // Проверяем первый ли параметр в plist'e
+   // Если первый то добавляем новый dict сразу
+   // Присваеваем переменной ParentNode выбранный в дереве элемент.
+   // увеличеваем размер массива записей на один.
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;

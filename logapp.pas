@@ -7,8 +7,9 @@ interface
 uses
   Classes, SysUtils;
 
-type
-  LogContener: TStringList;
+
+var
+  SL_LogStrings: TStringList;
 
 
 implementation
