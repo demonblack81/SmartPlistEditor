@@ -70,7 +70,7 @@ type
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictInTreeView;
-    procedure AddDictInTreeView;
+    procedure AddDictInTreeView(ParentNode: TTreeNode);
 
   private
     { private declarations }
@@ -384,26 +384,28 @@ procedure TMainForm.AddDictInTreeView(ParentNode: TTreeNode);
 // Процедура добавления тега <dict></dict> в TreeView
 var s_ElementSelected:string;
     b_isTreeElementSelected: boolean;
-    Node, ParentNode, ChildNode: TTreeNode;
+    Node, ChildNode: TTreeNode;
     CurentPlistParametr, TempPlistParametr : PlistParametr;
     i: integer;
 begin
   LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Процедура добавления тега <dict></dict> в TreeView.');
   if b_FirstParametr then begin
-  try
+   try
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
      if ParentNode = nil then ParentNode := TreeView.Selected;
      b_isTreeElementSelected := true;
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Увеличеваем размер массива записей на один.');
      SetLength(a_PlistParametr, 1);
-  except
+   except
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
      ShowMessage('Не выбран элемент куда добавлять параметр');
      b_isTreeElementSelected := false;
-  end;
-  LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
-  if not b_isTreeElementSelected then exit;
+   end;
+   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+   if not b_isTreeElementSelected then exit;
+  end else begin
 
+  end;
    // Проверяем выбран ли елемент за котрым будем добавлять тег dict если ParentNode не равен null
    // Проверяем первый ли параметр в plist'e
    // Если первый то добавляем новый dict сразу
