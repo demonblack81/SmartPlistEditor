@@ -9,13 +9,14 @@ uses
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
   LCLType,
 
-  uPlistRead, uEditKey;
+  uPlistRead, uEditKey, eventlog;
 
 type
 
   { TMainForm }
 
   TMainForm = class(TForm)
+    EventLog: TEventLog;
     MainMenu: TMainMenu;
     CloseMenuItem: TMenuItem;
     ClosePlistMenuItem: TMenuItem;
@@ -70,7 +71,7 @@ type
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictInTreeView;
-    procedure AddDictInTreeView(ParentNode: TTreeNode);
+    procedure AddDictInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean);
 
   private
     { private declarations }
@@ -332,7 +333,85 @@ begin
       end;
     end;
 
-    CurentPlistParametr.Name:= 'dictkey';
+    // Должен быть вызов функции добавления dict в TreeView
+    AddDictInTreeView(ParentNode, true);
+    Node := TreeView.Items.FindNodeWithText(s_KeyName);
+    if Node = nil then TreeView.FullExpand
+    else Node.ExpandParents;
+  end;
+end;
+
+procedure TMainForm.AddDictInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean);
+// Процедура добавления тега <dict></dict> в TreeView
+var s_ElementSelected:string;
+    b_isTreeElementSelected: boolean;
+    Node, ChildNode: TTreeNode;
+    CurentPlistParametr, TempPlistParametr : PlistParametr;
+    i, i_TempPosition, i_TempLevel: integer;
+begin
+  LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Процедура добавления тега <dict></dict> в TreeView.');
+  if b_FirstParametr then begin
+    // Проверяем первый ли параметр в plist'e
+   try
+     // Проверяем выбран ли елемент за котрым будем добавлять тег dict если ParentNode не равен null
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент, если ParentNode не передан.');
+     if ParentNode = nil then ParentNode := TreeView.Selected;
+     b_isTreeElementSelected := true;
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Увеличеваем размер массива записей на один.');
+     SetLength(a_PlistParametr, 1);
+   except
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+     ShowMessage('Не выбран элемент куда добавлять параметр');
+     b_isTreeElementSelected := false;
+   end;
+   LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+   if not b_isTreeElementSelected then exit;
+  end else begin
+   try
+     // Присваеваем переменной ParentNode выбранный в дереве элемент.
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Присваеваем переменной s_ElementSelected строку из выбраного в дереве элемента.');
+     if ParentNode = nil then ParentNode := TreeView.Selected;
+     s_ElementSelected := TreeView.Selected.Text;
+     b_isTreeElementSelected := true;
+   except
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+     ShowMessage('Не выбран элемент куда добавлять параметр');
+     b_isTreeElementSelected := false;
+   end;
+   LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+   if not b_isTreeElementSelected then exit;
+  end;
+
+  if b_FirstParametr then begin
+   // Если первый то добавляем новый dict сразу
+
+    LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Добавляем новую запись параметров в массив.');
+    with a_PlistParametr[0] do begin
+      Name := 'dict';
+      type_parm:= dict;
+      level := 1;
+      position:= 4;
+      value:= 'dict';
+    end;
+    with a_PlistParametr[1] do begin
+      Name := 'end dict';
+      type_parm:= dict;
+      level := 1;
+      position:= 3;
+      value:= '/dict';
+    end;
+
+    LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
+    p_PlistParam^ := a_PlistParametr[0];
+    ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, a_PlistParametr[0].value, p_PlistParam);
+    p_PlistParam^ := a_PlistParametr[1];
+    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[1].value, p_PlistParam);
+    b_FirstParametr := false;
+   end else begin
+    i_TempPosition := CurentPlistParametr.position;
+    i_TempLevel := CurentPlistParametr.level;
+    if b_isKeyDict then CurentPlistParametr.Name:= 'dictkey'
+    else CurentPlistParametr.Name:= 'dict';
     CurentPlistParametr.type_parm:= dict;
     CurentPlistParametr.value:= 'dict';
     CurentPlistParametr.level := i_TempLevel + 1;
@@ -374,43 +453,7 @@ begin
     Dispose(p_PlistParam);
     TreeView.Items.Clear;
     UpdateTreeView(a_PlistParametr);
-    Node := TreeView.Items.FindNodeWithText(s_KeyName);
-    if Node = nil then TreeView.FullExpand
-    else Node.ExpandParents;
-  end;
-end;
-
-procedure TMainForm.AddDictInTreeView(ParentNode: TTreeNode);
-// Процедура добавления тега <dict></dict> в TreeView
-var s_ElementSelected:string;
-    b_isTreeElementSelected: boolean;
-    Node, ChildNode: TTreeNode;
-    CurentPlistParametr, TempPlistParametr : PlistParametr;
-    i: integer;
-begin
-  LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Процедура добавления тега <dict></dict> в TreeView.');
-  if b_FirstParametr then begin
-   try
-     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
-     if ParentNode = nil then ParentNode := TreeView.Selected;
-     b_isTreeElementSelected := true;
-     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Увеличеваем размер массива записей на один.');
-     SetLength(a_PlistParametr, 1);
-   except
-     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
-     ShowMessage('Не выбран элемент куда добавлять параметр');
-     b_isTreeElementSelected := false;
    end;
-   LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
-   if not b_isTreeElementSelected then exit;
-  end else begin
-
-  end;
-   // Проверяем выбран ли елемент за котрым будем добавлять тег dict если ParentNode не равен null
-   // Проверяем первый ли параметр в plist'e
-   // Если первый то добавляем новый dict сразу
-   // Присваеваем переменной ParentNode выбранный в дереве элемент.
-   // увеличеваем размер массива записей на один.
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;

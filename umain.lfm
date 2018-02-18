@@ -648,4 +648,17 @@ object MainForm: TMainForm
     left = 960
     top = 8
   end
+  object EventLog: TEventLog
+    AppendContent = False
+    LogType = ltFile
+    Active = False
+    RaiseExceptionOnError = False
+    DefaultEventType = etCustom
+    FileName = 'SmartPlistEditor.log'
+    CustomLogType = 0
+    EventIDOffset = 0
+    Paused = False
+    left = 904
+    top = 8
+  end
 end
