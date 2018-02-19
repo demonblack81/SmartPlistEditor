@@ -403,7 +403,7 @@ begin
 
     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
     p_PlistParam^ := a_PlistParametr[0];
-    ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, a_PlistParametr[0].value, p_PlistParam);
+    ParentNode := TreeView.Items.AddChildObjectFirst(ParentNode, a_PlistParametr[0].value, p_PlistParam);
     p_PlistParam^ := a_PlistParametr[1];
     ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[1].value, p_PlistParam);
     b_FirstParametr := false;
