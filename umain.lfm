@@ -626,6 +626,7 @@ object MainForm: TMainForm
       end
       object AddDictMenuItem: TMenuItem
         Caption = 'Add Dict'
+        OnClick = AddDictMenuItemClick
       end
       object AddArrayMenuItem: TMenuItem
         Caption = 'Add Array'

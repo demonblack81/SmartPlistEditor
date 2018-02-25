@@ -47,6 +47,7 @@ type
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
     TreeView: TTreeView;
+    procedure AddDictMenuItemClick(Sender: TObject);
     procedure AddIntKeyMenuItemClick(Sender: TObject);
     procedure AddKeyBoolMenuItemClick(Sender: TObject);
     procedure AddKeyDateMenuItemClick(Sender: TObject);
@@ -72,6 +73,7 @@ type
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictInTreeView;
     procedure AddDictInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean);
+    procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
 
   private
     { private declarations }
@@ -232,7 +234,7 @@ begin
       ParentNode := TreeView.Selected;
       b_isTreeElementSelected := true;
       LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Увеличеваем размер массива записей на один.');
-      SetLength(a_PlistParametr, 3);
+      SetLength(a_PlistParametr, 1);
     except
       LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
       ShowMessage('Не выбран элемент куда добавлять параметр');
@@ -273,28 +275,11 @@ begin
       position:= 3;
       value:= s_ParametrValue;
     end;
-    with a_PlistParametr[1] do begin
-      Name := 'dictkey';
-      type_parm:= dict;
-      level := 1;
-      position:= 4;
-      value:= 'dict';
-    end;
-    with a_PlistParametr[2] do begin
-      Name := 'end dict';
-      type_parm:= dict;
-      level := 1;
-      position:= 3;
-      value:= '/dict';
-    end;
 
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
     p_PlistParam^ := a_PlistParametr[0];
     ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
-    p_PlistParam^ := a_PlistParametr[1];
-    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[1].value, p_PlistParam);
-    p_PlistParam^ := a_PlistParametr[2];
-    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[2].Name, p_PlistParam);
+    AddDictInTreeView(ParentNode, true);
     b_FirstParametr := false;
   end else begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
@@ -332,7 +317,7 @@ begin
         CurentPlistParametr.position:= CurentPlistParametr.position + 1;
       end;
     end;
-
+    TreeView.EndUpdate;
     // Должен быть вызов функции добавления dict в TreeView
     AddDictInTreeView(ParentNode, true);
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
@@ -358,7 +343,7 @@ begin
      if ParentNode = nil then ParentNode := TreeView.Selected;
      b_isTreeElementSelected := true;
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Увеличеваем размер массива записей на один.');
-     SetLength(a_PlistParametr, 1);
+     SetLength(a_PlistParametr, 2);
    except
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
      ShowMessage('Не выбран элемент куда добавлять параметр');
@@ -405,11 +390,17 @@ begin
     p_PlistParam^ := a_PlistParametr[0];
     ParentNode := TreeView.Items.AddChildObjectFirst(ParentNode, a_PlistParametr[0].value, p_PlistParam);
     p_PlistParam^ := a_PlistParametr[1];
-    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[1].value, p_PlistParam);
+    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, a_PlistParametr[1].Name, p_PlistParam);
     b_FirstParametr := false;
    end else begin
-    i_TempPosition := CurentPlistParametr.position;
-    i_TempLevel := CurentPlistParametr.level;
+
+    LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
+    Node:= ParentNode;
+    LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Считываем record из выбраной ячейки.');
+    TempPlistParametr:= PlistParametr(Node.Data^);
+    i_TempPosition := TempPlistParametr.position;
+    i_TempLevel := TempPlistParametr.level;
+    LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView . Заполняем данными новую record.');
     if b_isKeyDict then CurentPlistParametr.Name:= 'dictkey'
     else CurentPlistParametr.Name:= 'dict';
     CurentPlistParametr.type_parm:= dict;
@@ -417,19 +408,14 @@ begin
     CurentPlistParametr.level := i_TempLevel + 1;
     CurentPlistParametr.position := i_TempPosition + 1;
     p_PlistParam^ := CurentPlistParametr;
-    ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.value, p_PlistParam);
+
+    TreeView.BeginUpdate;
+    ChildNode := TreeView.Items.AddChildObjectFirst(Node, CurentPlistParametr.value, p_PlistParam);
+
+    AddOneParametrInArray(CurentPlistParametr);
 
     i_TempPosition := CurentPlistParametr.position;
     i_TempLevel := i_TempLevel + 1;
-    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
-    for i:= 0 to (Length(a_PlistParametr)-1) do begin
-      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
-        TempPlistParametr:= a_PlistParametr[i];
-        a_PlistParametr[i]:= CurentPlistParametr;
-        CurentPlistParametr:= TempPlistParametr;
-        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
-      end;
-    end;
 
     CurentPlistParametr.Name:= 'end dict';
     CurentPlistParametr.type_parm:= dict;
@@ -437,23 +423,30 @@ begin
     CurentPlistParametr.level := i_TempPosition - 1;
     CurentPlistParametr.position := i_TempPosition + 1;
     p_PlistParam^ := CurentPlistParametr;
-    ChildNode := TreeView.Items.AddChildObject(ParentNode, CurentPlistParametr.Name, p_PlistParam);
+    Node := TreeView.Items.AddChildObject(ChildNode, CurentPlistParametr.Name, p_PlistParam);
     TreeView.EndUpdate;
 
-    setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
-    for i:= 0 to (Length(a_PlistParametr)-1) do begin
-      if CurentPlistParametr.position = a_PlistParametr[i].position then begin
-        TempPlistParametr:= a_PlistParametr[i];
-        a_PlistParametr[i]:= CurentPlistParametr;
-        CurentPlistParametr:= TempPlistParametr;
-        CurentPlistParametr.position:= CurentPlistParametr.position + 1;
-      end;
-    end;
+    AddOneParametrInArray(CurentPlistParametr);
 
     Dispose(p_PlistParam);
     TreeView.Items.Clear;
     UpdateTreeView(a_PlistParametr);
    end;
+end;
+
+procedure TMainForm.AddOneParametrInArray(CurentPlistParametr: PlistParametr);
+var TempPlistParametr:PlistParametr;
+    i: integer;
+begin
+  setLength(a_PlistParametr, (Length(a_PlistParametr)+1));
+  for i:= 0 to (Length(a_PlistParametr)-1) do begin
+    if CurentPlistParametr.position = a_PlistParametr[i].position then begin
+      TempPlistParametr:= a_PlistParametr[i];
+      a_PlistParametr[i]:= CurentPlistParametr;
+      CurentPlistParametr:= TempPlistParametr;
+      CurentPlistParametr.position:= CurentPlistParametr.position + 1;
+    end;
+  end;
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
@@ -544,7 +537,7 @@ begin
     p_PlistParam^ := CurentPlistParametr;
     //
     if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
-      ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+      ParentNode := TreeView.Items.AddChildObjectFirst(ParentNode, s_KeyName, p_PlistParam);
       ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
       if s_ElementSelected = 'plist' then begin
         CurentPlistParametr.position :=  3;
@@ -761,17 +754,17 @@ begin
       LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Проверяем что параметр завершения dict или array.');
       if (a_PlistParametr[i].Name = 'end array') or
          (a_PlistParametr[i].Name = 'end dict')  then begin
-        LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Добовлем в дерево обьект: .' + a_PlistParametr[i].Name);
+        LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
         TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Присваиваем childNode радительское node.');
         if  childNode.Parent <> Node then childNode := childNode.Parent;
       end else begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если имя параметра не dict end или array end, то проверяем заполнена ли value.');
         if  a_PlistParametr[i].value <> '' then  begin
-          LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: .' + a_PlistParametr[i].value);
+          LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].value + ' .');
           childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
         end else begin
-          LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value пустое, то добовлем в дерево обьект: .' + a_PlistParametr[i].Name);
+          LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
           childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
         end;
       end;
@@ -779,13 +772,13 @@ begin
       tempNode := childNode;
       LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если тип параметра не dict или array, то проверяем заполнена ли value.');
     end else if a_PlistParametr[i].value <> '' then begin
-      LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: .' + a_PlistParametr[i].Name);
+      LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
       childNode := TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
-      LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: .' + a_PlistParametr[i].value);
+      LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].value + ' .');
       TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
       childNode := tempNode;
     end else begin
-      LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value пустое, то добовлем в дерево обьект: .' + a_PlistParametr[i].Name);
+      LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].Name+ ' .');
       TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].Name, p_PlistParam);
     end;
   end;
@@ -982,6 +975,32 @@ begin
        AddParametrIntegerOrStringInTreeView(true);
      end else begin
        LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+  end;
+end;
+
+procedure TMainForm.AddDictMenuItemClick(Sender: TObject);
+begin
+   LogString.Add(DateTimeToStr(Now) + ': AddDictMenuItemClick. Нажатие на кнопку AddDict в меню.');
+  //0. Проверяем на какой мы закладке
+  if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) + ' AddDictMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
+     if Synedit.Focused then begin
+       LogString.Add(DateTimeToStr(Now) + ' AddDictMenuItemClick. Вызываем процедуру добавления числового параметра');
+       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+     end else begin
+       LogString.Add(DateTimeToStr(Now) +': AddDictMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+  end else begin
+     if PageControl.ActivePage = TabSheetTreeView then begin
+       LogString.Add(DateTimeToStr(Now) +': AddDictMenuItemClick. Вызов процедуры AddDictInTreeView()');
+       AddDictInTreeView(nil, false);
+     end else begin
+       LogString.Add(DateTimeToStr(Now) +': AddDictMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
        exit;
      end;
