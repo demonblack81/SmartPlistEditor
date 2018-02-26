@@ -343,7 +343,7 @@ begin
      if ParentNode = nil then ParentNode := TreeView.Selected;
      b_isTreeElementSelected := true;
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Увеличеваем размер массива записей на один.');
-     SetLength(a_PlistParametr, 2);
+     SetLength(a_PlistParametr,  (Length(a_PlistParametr)+ 2));
    except
      LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
      ShowMessage('Не выбран элемент куда добавлять параметр');
