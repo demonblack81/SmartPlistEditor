@@ -21,8 +21,8 @@
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="428"/>
-        <CursorPos X="40" Y="438"/>
+        <TopLine Value="344"/>
+        <CursorPos X="3" Y="432"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -87,152 +87,136 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="umain.pas"/>
-        <Caret Line="328" Column="36" TopLine="318"/>
+        <Caret Line="400" TopLine="377"/>
       </Position1>
       <Position2>
         <Filename Value="umain.pas"/>
-        <Caret Line="50" Column="25" TopLine="42"/>
+        <Caret Line="401" TopLine="377"/>
       </Position2>
       <Position3>
         <Filename Value="umain.pas"/>
-        <Caret Line="1000" Column="19" TopLine="983"/>
+        <Caret Line="403" TopLine="377"/>
       </Position3>
       <Position4>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="15" TopLine="57"/>
+        <Caret Line="384" TopLine="377"/>
       </Position4>
       <Position5>
         <Filename Value="umain.pas"/>
-        <Caret Line="106" Column="26" TopLine="85"/>
+        <Caret Line="385" TopLine="377"/>
       </Position5>
       <Position6>
         <Filename Value="umain.pas"/>
-        <Caret Line="86" Column="15" TopLine="79"/>
+        <Caret Line="386" TopLine="377"/>
       </Position6>
       <Position7>
         <Filename Value="umain.pas"/>
-        <Caret Line="169" Column="17" TopLine="138"/>
+        <Caret Line="387" TopLine="377"/>
       </Position7>
       <Position8>
         <Filename Value="umain.pas"/>
-        <Caret Line="170" Column="96" TopLine="139"/>
+        <Caret Line="388" TopLine="377"/>
       </Position8>
       <Position9>
         <Filename Value="umain.pas"/>
-        <Caret Line="171" Column="90" TopLine="140"/>
+        <Caret Line="389" TopLine="377"/>
       </Position9>
       <Position10>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="24" TopLine="63"/>
+        <Caret Line="390" TopLine="377"/>
       </Position10>
       <Position11>
-        <Filename Value="uplistread.pas"/>
-        <Caret Line="47" Column="18" TopLine="14"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="391" TopLine="377"/>
       </Position11>
       <Position12>
         <Filename Value="umain.pas"/>
-        <Caret Line="447" Column="12" TopLine="416"/>
+        <Caret Line="392" TopLine="377"/>
       </Position12>
       <Position13>
         <Filename Value="umain.pas"/>
-        <Caret Line="67" Column="15" TopLine="49"/>
+        <Caret Line="393" TopLine="377"/>
       </Position13>
       <Position14>
         <Filename Value="umain.pas"/>
-        <Caret Line="569" Column="38" TopLine="541"/>
+        <Caret Line="394" TopLine="377"/>
       </Position14>
       <Position15>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="23" TopLine="53"/>
+        <Caret Line="395" TopLine="377"/>
       </Position15>
       <Position16>
         <Filename Value="umain.pas"/>
-        <Caret Line="409" Column="10" TopLine="386"/>
+        <Caret Line="396" TopLine="377"/>
       </Position16>
       <Position17>
         <Filename Value="umain.pas"/>
-        <Caret Line="447" Column="14" TopLine="416"/>
+        <Caret Line="397" TopLine="377"/>
       </Position17>
       <Position18>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="15" TopLine="57"/>
+        <Caret Line="398" TopLine="377"/>
       </Position18>
       <Position19>
         <Filename Value="umain.pas"/>
-        <Caret Line="447" Column="19" TopLine="413"/>
+        <Caret Line="400" TopLine="377"/>
       </Position19>
       <Position20>
         <Filename Value="umain.pas"/>
-        <Caret Line="67" Column="21" TopLine="57"/>
+        <Caret Line="401" TopLine="377"/>
       </Position20>
       <Position21>
         <Filename Value="umain.pas"/>
-        <Caret Line="699" Column="35" TopLine="679"/>
+        <Caret Line="418" TopLine="392"/>
       </Position21>
       <Position22>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="28" TopLine="52"/>
+        <Caret Line="417" TopLine="392"/>
       </Position22>
       <Position23>
         <Filename Value="umain.pas"/>
-        <Caret Line="328" Column="34" TopLine="307"/>
+        <Caret Line="419" TopLine="392"/>
       </Position23>
       <Position24>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="19" TopLine="57"/>
+        <Caret Line="417" TopLine="392"/>
       </Position24>
       <Position25>
         <Filename Value="umain.pas"/>
-        <Caret Line="416" Column="29" TopLine="395"/>
+        <Caret Line="419" TopLine="392"/>
       </Position25>
       <Position26>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="26" TopLine="57"/>
+        <Caret Line="420" TopLine="392"/>
       </Position26>
       <Position27>
         <Filename Value="umain.pas"/>
-        <Caret Line="76" Column="29" TopLine="63"/>
+        <Caret Line="422" TopLine="392"/>
       </Position27>
       <Position28>
         <Filename Value="umain.pas"/>
-        <Caret Line="453" Column="37" TopLine="438"/>
+        <Caret Line="417" TopLine="392"/>
       </Position28>
       <Position29>
         <Filename Value="umain.pas"/>
-        <Caret Line="75" Column="26" TopLine="58"/>
+        <Caret Line="419" Column="20" TopLine="392"/>
       </Position29>
       <Position30>
         <Filename Value="umain.pas"/>
-        <Caret Line="416" Column="20" TopLine="390"/>
+        <Caret Line="76" Column="15" TopLine="58"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="2">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="umain.pas"/>
-        <Line Value="413"/>
-      </Item1>
-      <Item2>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="umain.pas"/>
-        <Line Value="749"/>
-      </Item2>
-    </BreakPoints>
     <Watches Count="3">
       <Item1>
         <Expression Value="ParentNode"/>
       </Item1>
       <Item2>
-        <Expression Value="a_PlistParametr[i]"/>
+        <Expression Value="p_PlistParam"/>
       </Item2>
       <Item3>
-        <Expression Value="p_PlistParam"/>
+        <Expression Value="CurentPlistParametr"/>
       </Item3>
     </Watches>
   </Debugging>
