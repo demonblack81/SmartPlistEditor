@@ -398,7 +398,16 @@ begin
     p_PlistParam^ := CurentPlistParametr;
 
     TreeView.BeginUpdate;
-    ChildNode := TreeView.Items.AddChildObjectFirst(Node, CurentPlistParametr.value, p_PlistParam);
+    if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
+      ChildNode := TreeView.Items.InsertObject(Node, CurentPlistParametr.value, p_PlistParam);
+      if s_ElementSelected = 'plist' then begin
+        CurentPlistParametr.position :=  3;
+      end else begin
+        CurentPlistParametr.position := TempPlistParametr.position + 1;
+      end;
+    end else begin
+      ChildNode := TreeView.Items.AddChildObjectFirst(Node, CurentPlistParametr.value, p_PlistParam);
+    end;
 
     AddOneParametrInArray(CurentPlistParametr);
 
