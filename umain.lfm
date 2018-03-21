@@ -581,6 +581,7 @@ object MainForm: TMainForm
       end
       object ClosePlistMenuItem: TMenuItem
         Caption = 'Close Plist'
+        Enabled = False
         ShortCut = 32856
       end
       object CloseMenuItem: TMenuItem
@@ -630,6 +631,7 @@ object MainForm: TMainForm
       end
       object AddArrayMenuItem: TMenuItem
         Caption = 'Add Array'
+        OnClick = AddArrayMenuItemClick
       end
     end
   end

@@ -47,6 +47,7 @@ type
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
     TreeView: TTreeView;
+    procedure AddArrayMenuItemClick(Sender: TObject);
     procedure AddDictMenuItemClick(Sender: TObject);
     procedure AddIntKeyMenuItemClick(Sender: TObject);
     procedure AddKeyBoolMenuItemClick(Sender: TObject);
@@ -72,7 +73,7 @@ type
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictInTreeView;
-    procedure AddDictInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean);
+    procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean; b_isDict:boolean);
     procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
 
   private
@@ -273,7 +274,7 @@ begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
     p_PlistParam^ := a_PlistParametr[0];
     ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
-    AddDictInTreeView(ParentNode, true);
+    AddDictOrArrayInTreeView(ParentNode, true, true);
     b_FirstParametr := false;
   end else begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
@@ -306,14 +307,14 @@ begin
 
     TreeView.EndUpdate;
     // Должен быть вызов функции добавления dict в TreeView
-    AddDictInTreeView(ParentNode, true);
+    AddDictOrArrayInTreeView(ParentNode, true, true);
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
     if Node = nil then TreeView.FullExpand
     else Node.ExpandParents;
   end;
 end;
 
-procedure TMainForm.AddDictInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean);
+procedure TMainForm.AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean; b_isDict:boolean);
 // Процедура добавления тега <dict></dict> в TreeView
 var s_ElementSelected:string;
     b_isTreeElementSelected: boolean;
@@ -356,21 +357,37 @@ begin
 
   if b_FirstParametr then begin
    // Если первый то добавляем новый dict сразу
-
-    LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Добавляем новую запись параметров в массив.');
-    with a_PlistParametr[0] do begin
+    if b_isDict then begin
+     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Добавляем новую запись параметров в массив.');
+     with a_PlistParametr[0] do begin
       Name := 'dict';
       type_parm:= dict;
       level := 1;
       position:= 4;
       value:= 'dict';
-    end;
-    with a_PlistParametr[1] do begin
+      end;
+      with a_PlistParametr[1] do begin
       Name := 'end dict';
       type_parm:= dict;
       level := 1;
       position:= 3;
       value:= '/dict';
+      end;
+    end else begin
+      with a_PlistParametr[0] do begin
+      Name := 'array';
+      type_parm:= aray;
+      level := 1;
+      position:= 4;
+      value:= 'array';
+      end;
+      with a_PlistParametr[1] do begin
+      Name := 'end array';
+      type_parm:= aray;
+      level := 1;
+      position:= 3;
+      value:= '/array';
+      end;
     end;
 
     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
@@ -389,14 +406,24 @@ begin
     i_TempPosition := TempPlistParametr.position;
     i_TempLevel := TempPlistParametr.level;
     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView . Заполняем данными новую record.');
-    if b_isKeyDict then CurentPlistParametr.Name:= 'dictkey'
-    else CurentPlistParametr.Name:= 'dict';
-    CurentPlistParametr.type_parm:= dict;
-    CurentPlistParametr.value:= 'dict';
-    CurentPlistParametr.level := i_TempLevel + 1;
-    CurentPlistParametr.position := i_TempPosition + 1;
-    p_PlistParam^ := CurentPlistParametr;
 
+    if b_isDict then begin
+      if b_isKeyDict then CurentPlistParametr.Name:= 'dictkey'
+      else CurentPlistParametr.Name:= 'dict';
+      CurentPlistParametr.type_parm:= dict;
+      CurentPlistParametr.value:= 'dict';
+      CurentPlistParametr.level := i_TempLevel + 1;
+      CurentPlistParametr.position := i_TempPosition + 1;
+      p_PlistParam^ := CurentPlistParametr;
+    end else begin
+      if b_isKeyDict then CurentPlistParametr.Name:= 'arraykey'
+      else CurentPlistParametr.Name:= 'array';
+      CurentPlistParametr.type_parm:= aray;
+      CurentPlistParametr.value:= 'array';
+      CurentPlistParametr.level := i_TempLevel + 1;
+      CurentPlistParametr.position := i_TempPosition + 1;
+      p_PlistParam^ := CurentPlistParametr;
+    end;
     TreeView.BeginUpdate;
     if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
       ChildNode := TreeView.Items.InsertObject(Node, CurentPlistParametr.value, p_PlistParam);
@@ -417,14 +444,23 @@ begin
     i_TempPosition := CurentPlistParametr.position;
     i_TempLevel := i_TempLevel + 1;
 
-    CurentPlistParametr.Name:= 'end dict';
-    CurentPlistParametr.type_parm:= dict;
-    CurentPlistParametr.value:= '/dict';
-    CurentPlistParametr.level := i_TempPosition - 1;
-    CurentPlistParametr.position := i_TempPosition + 1;
-    p_PlistParam^ := CurentPlistParametr;
-    Node := TreeView.Items.AddChildObject(ChildNode, CurentPlistParametr.Name, p_PlistParam);
+    if b_isDict then begin
+      CurentPlistParametr.Name:= 'end dict';
+      CurentPlistParametr.type_parm:= dict;
+      CurentPlistParametr.value:= '/dict';
+      CurentPlistParametr.level := i_TempPosition - 1;
+      CurentPlistParametr.position := i_TempPosition + 1;
+      p_PlistParam^ := CurentPlistParametr;
+    end else begin
+      CurentPlistParametr.Name:= 'end array';
+      CurentPlistParametr.type_parm:= aray;
+      CurentPlistParametr.value:= '/array';
+      CurentPlistParametr.level := i_TempPosition - 1;
+      CurentPlistParametr.position := i_TempPosition + 1;
+      p_PlistParam^ := CurentPlistParametr;
+    end;
 
+    Node := TreeView.Items.AddChildObject(ChildNode, CurentPlistParametr.Name, p_PlistParam);
     AddOneParametrInArray(CurentPlistParametr);
     TreeView.EndUpdate;
 
@@ -984,9 +1020,35 @@ begin
   end else begin
      if PageControl.ActivePage = TabSheetTreeView then begin
        LogString.Add(DateTimeToStr(Now) +': AddDictMenuItemClick. Вызов процедуры AddDictInTreeView()');
-       AddDictInTreeView(nil, false);
+       AddDictOrArrayInTreeView(nil, false, true);
      end else begin
        LogString.Add(DateTimeToStr(Now) +': AddDictMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+  end;
+end;
+
+procedure TMainForm.AddArrayMenuItemClick(Sender: TObject);
+begin
+  LogString.Add(DateTimeToStr(Now) + ': AddArrayMenuItemClick. Нажатие на кнопку AddDict в меню.');
+  //0. Проверяем на какой мы закладке
+  if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) + ' AddArrayMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
+     if Synedit.Focused then begin
+       LogString.Add(DateTimeToStr(Now) + ' AddArrayMenuItemClick. Вызываем процедуру добавления числового параметра');
+       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+     end else begin
+       LogString.Add(DateTimeToStr(Now) +': AddArrayMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+  end else begin
+     if PageControl.ActivePage = TabSheetTreeView then begin
+       LogString.Add(DateTimeToStr(Now) +': AddArrayMenuItemClick. Вызов процедуры AddDictInTreeView()');
+       AddDictOrArrayInTreeView(nil, false, false);
+     end else begin
+       LogString.Add(DateTimeToStr(Now) +': AddArrayMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
        exit;
      end;
