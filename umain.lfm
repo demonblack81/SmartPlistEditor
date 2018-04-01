@@ -620,6 +620,7 @@ object MainForm: TMainForm
       end
       object AddKeyArrayMenuItem: TMenuItem
         Caption = 'Add Key Array'
+        OnClick = AddKeyArrayMenuItemClick
       end
       object AddKeyDataMenuItem: TMenuItem
         Caption = 'Add Key Data'

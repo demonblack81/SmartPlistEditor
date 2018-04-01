@@ -50,6 +50,7 @@ type
     procedure AddArrayMenuItemClick(Sender: TObject);
     procedure AddDictMenuItemClick(Sender: TObject);
     procedure AddIntKeyMenuItemClick(Sender: TObject);
+    procedure AddKeyArrayMenuItemClick(Sender: TObject);
     procedure AddKeyBoolMenuItemClick(Sender: TObject);
     procedure AddKeyDateMenuItemClick(Sender: TObject);
     procedure AddKeyDictMenuItemClick(Sender: TObject);
@@ -72,7 +73,7 @@ type
     procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
-    procedure AddParametrDictInTreeView;
+    procedure AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean);
     procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean; b_isDict:boolean);
     procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
 
@@ -209,7 +210,7 @@ begin
   end;
 end;
 
-procedure TMainForm.AddParametrDictInTreeView;
+procedure TMainForm.AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean);
 //процедура добавления параметра dict в TreeView
 var s_ElementSelected, s_KeyName, s_ParametrValue: string;
     b_isTreeElementSelected: boolean;
@@ -219,50 +220,50 @@ var s_ElementSelected, s_KeyName, s_ParametrValue: string;
 
     //i_CountTreeItem, tmp_CountTreeItem: integer;
 begin
-  LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Процедура добавления параметра с значением date в TreeView.');
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Процедура добавления параметра с значением date в TreeView.');
   s_ParametrValue := '';
   s_ElementSelected := '';
-  LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Проверяем первый ли это элемент в pliste');
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Проверяем первый ли это элемент в pliste');
   if b_FirstParametr then begin
     try
-      LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
       ParentNode := TreeView.Selected;
       b_isTreeElementSelected := true;
-      LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Увеличеваем размер массива записей на один.');
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Увеличеваем размер массива записей на один.');
       SetLength(a_PlistParametr, 1);
     except
-      LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
       ShowMessage('Не выбран элемент куда добавлять параметр');
       b_isTreeElementSelected := false;
     end;
-    LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
     if not b_isTreeElementSelected then exit;
   end else begin
     try
-      LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Присваеваем переменной s_ElementSelected строку из выбраного в дереве элемента.');
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Присваеваем переменной s_ElementSelected строку из выбраного в дереве элемента.');
       s_ElementSelected := TreeView.Selected.Text;
       b_isTreeElementSelected := true;
     except
-      LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
       ShowMessage('Не выбран элемент куда добавлять параметр');
       b_isTreeElementSelected := false;
     end;
-    LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
     if not b_isTreeElementSelected then exit;
   end;
 
   //i_CountTreeItem := TreeView.Items.Count;
 
-  LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Вызываем окно ввода названия параметра.');
+  LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Вызываем окно ввода названия параметра.');
   AddParametrKeyName(s_KeyName);
   if s_KeyName = '' then begin
-    LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра.');
     ShowMessage('Значение параметра не введено');
     exit;
   end;
 
   if b_FirstParametr then begin
-    LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Добавляем новую запись параметров в массив.');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDictOrArrayInTreeView. Добавляем новую запись параметров в массив.');
     with a_PlistParametr[0] do begin
       Name := s_KeyName;
       type_parm:= key;
@@ -274,7 +275,10 @@ begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
     p_PlistParam^ := a_PlistParametr[0];
     ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
-    AddDictOrArrayInTreeView(ParentNode, true, true);
+
+    if b_isKeyDict then AddDictOrArrayInTreeView(ParentNode, true, true)
+    else AddDictOrArrayInTreeView(ParentNode, false, false);
+
     b_FirstParametr := false;
   end else begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDictInTreeView. Запоминаем выбранный узел считаем его за радительский.');
@@ -306,8 +310,9 @@ begin
     AddOneParametrInArray(CurentPlistParametr);
 
     TreeView.EndUpdate;
-    // Должен быть вызов функции добавления dict в TreeView
-    AddDictOrArrayInTreeView(ParentNode, true, true);
+    // Должен быть вызов функции добавления dict или array в TreeView
+    if b_isKeyDict then AddDictOrArrayInTreeView(ParentNode, true, true)
+    else AddDictOrArrayInTreeView(ParentNode, false, false);
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
     if Node = nil then TreeView.FullExpand
     else Node.ExpandParents;
@@ -1003,6 +1008,32 @@ begin
   end;
 end;
 
+procedure TMainForm.AddKeyArrayMenuItemClick(Sender: TObject);
+begin
+  LogString.Add(DateTimeToStr(Now) + ': AddIntKeyMenuItemClick. Нажатие на кнопку AddIntKey в меню.');
+  //0. Проверяем на какой мы закладке
+  if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) + ' AddIntKeyMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
+     if Synedit.Focused then begin
+       LogString.Add(DateTimeToStr(Now) + ' AddIntKeyMenuItemClick. Вызываем процедуру добавления числового параметра');
+       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+     end else begin
+       LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+  end else begin
+     if PageControl.ActivePage = TabSheetTreeView then begin
+       LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Вызов процедуры AddParametrIntegerOrStringInTreeView()');
+       AddParametrDictOrArrayInTreeView(false);
+     end else begin
+       LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
+       ShowMessage('Выберете место куда вставлять новый параметр.');
+       exit;
+     end;
+  end;
+end;
+
 procedure TMainForm.AddDictMenuItemClick(Sender: TObject);
 begin
    LogString.Add(DateTimeToStr(Now) + ': AddDictMenuItemClick. Нажатие на кнопку AddDict в меню.');
@@ -1067,7 +1098,7 @@ end;
 
 procedure TMainForm.AddKeyDictMenuItemClick(Sender: TObject);
 begin
-  AddParametrDictInTreeView;
+  AddParametrDictOrArrayInTreeView(true);
 end;
 
 procedure TMainForm.AddKeyStringMenuItemClick(Sender: TObject);
