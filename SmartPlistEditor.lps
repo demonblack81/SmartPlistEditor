@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="346"/>
-        <CursorPos Y="365"/>
+        <TopLine Value="285"/>
+        <CursorPos X="41" Y="323"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -49,19 +49,18 @@
       <Unit4>
         <Filename Value="uplistread.pas"/>
         <UnitName Value="uPlistRead"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="23"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="22"/>
         <CursorPos X="160" Y="107"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2110"/>
         <CursorPos Y="2130"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="D:\Soft\lazarus\lcl\include\pagecontrol.inc"/>
@@ -84,127 +83,31 @@
         <UsageCount Value="9"/>
       </Unit8>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="6" HistoryIndex="5">
       <Position1>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="4385" TopLine="4366"/>
-      </Position1>
-      <Position2>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="4386" TopLine="4366"/>
-      </Position2>
-      <Position3>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2129" TopLine="2110"/>
-      </Position3>
-      <Position4>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2289" TopLine="2270"/>
-      </Position4>
-      <Position5>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2298" TopLine="2270"/>
-      </Position5>
-      <Position6>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2299" TopLine="2270"/>
-      </Position6>
-      <Position7>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2300" TopLine="2270"/>
-      </Position7>
-      <Position8>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5410" TopLine="5391"/>
-      </Position8>
-      <Position9>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5411" TopLine="5391"/>
-      </Position9>
-      <Position10>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5413" TopLine="5391"/>
-      </Position10>
-      <Position11>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5415" TopLine="5391"/>
-      </Position11>
-      <Position12>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5416" TopLine="5391"/>
-      </Position12>
-      <Position13>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5417" TopLine="5391"/>
-      </Position13>
-      <Position14>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="5419" TopLine="5391"/>
-      </Position14>
-      <Position15>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2301" TopLine="2283"/>
-      </Position15>
-      <Position16>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2302" Column="29" TopLine="2283"/>
-      </Position16>
-      <Position17>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2304" TopLine="2283"/>
-      </Position17>
-      <Position18>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2305" TopLine="2283"/>
-      </Position18>
-      <Position19>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2307" TopLine="2283"/>
-      </Position19>
-      <Position20>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2308" TopLine="2283"/>
-      </Position20>
-      <Position21>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2310" TopLine="2283"/>
-      </Position21>
-      <Position22>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2311" TopLine="2283"/>
-      </Position22>
-      <Position23>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2312" TopLine="2283"/>
-      </Position23>
-      <Position24>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2313" TopLine="2283"/>
-      </Position24>
-      <Position25>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2323" TopLine="2304"/>
-      </Position25>
-      <Position26>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2326" TopLine="2304"/>
-      </Position26>
-      <Position27>
-        <Filename Value="D:\Soft\lazarus\lcl\include\treeview.inc"/>
-        <Caret Line="2130" TopLine="2110"/>
-      </Position27>
-      <Position28>
         <Filename Value="umain.pas"/>
         <Caret Line="279" TopLine="258"/>
-      </Position28>
-      <Position29>
+      </Position1>
+      <Position2>
         <Filename Value="umain.pas"/>
         <Caret Line="280" TopLine="258"/>
-      </Position29>
-      <Position30>
+      </Position2>
+      <Position3>
         <Filename Value="umain.pas"/>
         <Caret Line="315" Column="33" TopLine="295"/>
-      </Position30>
+      </Position3>
+      <Position4>
+        <Filename Value="umain.pas"/>
+        <Caret Line="322" Column="33" TopLine="318"/>
+      </Position4>
+      <Position5>
+        <Filename Value="umain.pas"/>
+        <Caret Line="76" Column="29" TopLine="59"/>
+      </Position5>
+      <Position6>
+        <Filename Value="umain.pas"/>
+        <Caret Line="322" Column="41" TopLine="112"/>
+      </Position6>
     </JumpHistory>
   </ProjectSession>
   <Debugging>

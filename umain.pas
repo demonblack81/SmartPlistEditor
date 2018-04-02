@@ -5,7 +5,7 @@ unit uMain;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, SynEdit, SynHighlighterHTML,
+  Classes, SysUtils, FileUtil, SynEdit, SynHighlighterHTML, SynCompletion,
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
   LCLType,
 
@@ -41,6 +41,7 @@ type
     MenuItemFile: TMenuItem;
     PageControl: TPageControl;
     StatusBar: TStatusBar;
+    SynAutoComplete: TSynAutoComplete;
     SynEdit: TSynEdit;
     SynHTMLSyn: TSynHTMLSyn;
     TabSheetTreeView: TTabSheet;
@@ -277,7 +278,7 @@ begin
     ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
 
     if b_isKeyDict then AddDictOrArrayInTreeView(ParentNode, true, true)
-    else AddDictOrArrayInTreeView(ParentNode, false, false);
+    else AddDictOrArrayInTreeView(ParentNode, false, true);
 
     b_FirstParametr := false;
   end else begin
@@ -312,7 +313,7 @@ begin
     TreeView.EndUpdate;
     // Должен быть вызов функции добавления dict или array в TreeView
     if b_isKeyDict then AddDictOrArrayInTreeView(ParentNode, true, true)
-    else AddDictOrArrayInTreeView(ParentNode, false, false);
+    else AddDictOrArrayInTreeView(ParentNode, false, true);
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
     if Node = nil then TreeView.FullExpand
     else Node.ExpandParents;
