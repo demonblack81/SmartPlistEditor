@@ -77,6 +77,7 @@ type
     procedure AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean);
     procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean; b_isDict:boolean);
     procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
+    procedure AddParametrIntegerOrStringInSynEdit(b_isInt:boolean);
 
   private
     { private declarations }
@@ -489,6 +490,21 @@ begin
       CurentPlistParametr.position:= CurentPlistParametr.position + 1;
     end;
   end;
+end;
+
+procedure TMainForm.AddParametrIntegerOrStringInSynEdit(b_isInt: boolean);
+var s_KeyName, s_ParametrValue: string;
+begin
+  if SynEdit.Focused then begin
+
+  end;
+   //Проверяем есть ли фокус на SynEdit
+   //Проверяем заполнена ли строка в фокусе
+  // Если есть то добавляем две строки вперди заполненой строки
+  // Если нет то добавляем еще одну строку
+  // Вызываем процедуру AddParametrKeyValue
+  // Состовляем 2 строки с параметром
+  // Вставлем составленые строки в SynEdit
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
