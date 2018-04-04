@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="9">
+    <Units Count="13">
       <Unit0>
         <Filename Value="SmartPlistEditor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="477"/>
-        <CursorPos X="5" Y="499"/>
+        <TopLine Value="512"/>
+        <CursorPos Y="529"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -50,8 +50,8 @@
         <Filename Value="uplistread.pas"/>
         <UnitName Value="uPlistRead"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="22"/>
-        <CursorPos X="160" Y="107"/>
+        <TopLine Value="3"/>
+        <CursorPos X="18" Y="22"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -82,60 +82,120 @@
         <CursorPos Y="335"/>
         <UsageCount Value="9"/>
       </Unit8>
+      <Unit9>
+        <Filename Value="D:\Soft\lazarus\lcl\dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="677"/>
+        <CursorPos X="11" Y="696"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
+        <UnitName Value="SynEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4427"/>
+        <CursorPos Y="4447"/>
+        <UsageCount Value="10"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="D:\Soft\lazarus\components\synedit\syneditlines.pas"/>
+        <UnitName Value="SynEditLines"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="298"/>
+        <CursorPos Y="318"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedittextbuffer.pp"/>
+        <UnitName Value="SynEditTextBuffer"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="697"/>
+        <CursorPos Y="716"/>
+        <UsageCount Value="10"/>
+      </Unit12>
     </Units>
-    <JumpHistory Count="13" HistoryIndex="12">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="umain.pas"/>
-        <Caret Line="279" TopLine="258"/>
+        <Caret Line="495" Column="36" TopLine="492"/>
       </Position1>
       <Position2>
         <Filename Value="umain.pas"/>
-        <Caret Line="280" TopLine="258"/>
+        <Caret Line="74" Column="31" TopLine="62"/>
       </Position2>
       <Position3>
         <Filename Value="umain.pas"/>
-        <Caret Line="315" Column="33" TopLine="295"/>
+        <Caret Line="632" Column="30" TopLine="626"/>
       </Position3>
       <Position4>
         <Filename Value="umain.pas"/>
-        <Caret Line="322" Column="33" TopLine="318"/>
+        <Caret Line="80" Column="31" TopLine="56"/>
       </Position4>
       <Position5>
         <Filename Value="umain.pas"/>
-        <Caret Line="76" Column="29" TopLine="59"/>
+        <Caret Line="495" Column="35" TopLine="492"/>
       </Position5>
       <Position6>
         <Filename Value="umain.pas"/>
-        <Caret Line="322" Column="41" TopLine="112"/>
+        <Caret Line="74" Column="25" TopLine="62"/>
       </Position6>
       <Position7>
         <Filename Value="umain.pas"/>
-        <Caret Line="80" Column="42" TopLine="53"/>
+        <Caret Line="692" Column="19" TopLine="664"/>
       </Position7>
       <Position8>
         <Filename Value="umain.pas"/>
-        <Caret Line="495" Column="51" TopLine="468"/>
+        <Caret Line="80" Column="19" TopLine="54"/>
       </Position8>
       <Position9>
         <Filename Value="umain.pas"/>
-        <Caret Line="80" Column="37" TopLine="59"/>
+        <Caret Line="535" Column="52" TopLine="499"/>
       </Position9>
       <Position10>
         <Filename Value="umain.pas"/>
-        <Caret Line="495" Column="42" TopLine="492"/>
+        <Caret Line="531" Column="59" TopLine="513"/>
       </Position10>
       <Position11>
         <Filename Value="umain.pas"/>
-        <Caret Line="74" Column="29" TopLine="62"/>
+        <Caret Line="530" TopLine="512"/>
       </Position11>
       <Position12>
         <Filename Value="umain.pas"/>
-        <Caret Line="617" Column="37" TopLine="605"/>
+        <Caret Line="531" TopLine="512"/>
       </Position12>
       <Position13>
         <Filename Value="umain.pas"/>
-        <Caret Line="80" Column="37" TopLine="56"/>
+        <Caret Line="531" TopLine="512"/>
       </Position13>
+      <Position14>
+        <Filename Value="umain.pas"/>
+        <Caret Line="532" TopLine="512"/>
+      </Position14>
+      <Position15>
+        <Filename Value="umain.pas"/>
+        <Caret Line="533" TopLine="512"/>
+      </Position15>
+      <Position16>
+        <Filename Value="umain.pas"/>
+        <Caret Line="530" TopLine="512"/>
+      </Position16>
+      <Position17>
+        <Filename Value="umain.pas"/>
+        <Caret Line="531" TopLine="512"/>
+      </Position17>
+      <Position18>
+        <Filename Value="umain.pas"/>
+        <Caret Line="532" TopLine="512"/>
+      </Position18>
+      <Position19>
+        <Filename Value="umain.pas"/>
+        <Caret Line="530" TopLine="512"/>
+      </Position19>
+      <Position20>
+        <Filename Value="umain.pas"/>
+        <Caret Line="531" TopLine="512"/>
+      </Position20>
     </JumpHistory>
   </ProjectSession>
   <Debugging>

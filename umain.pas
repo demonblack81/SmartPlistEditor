@@ -494,17 +494,51 @@ end;
 
 procedure TMainForm.AddParametrIntegerOrStringInSynEdit(b_isInt: boolean);
 var s_KeyName, s_ParametrValue: string;
+    CurPos: TPoint;
+    i, level: integer;
 begin
-  if SynEdit.Focused then begin
-
-  end;
-   //Проверяем есть ли фокус на SynEdit
+  //Проверяем есть ли фокус на SynEdit
    //Проверяем заполнена ли строка в фокусе
   // Если есть то добавляем две строки вперди заполненой строки
   // Если нет то добавляем еще одну строку
   // Вызываем процедуру AddParametrKeyValue
   // Состовляем 2 строки с параметром
   // Вставлем составленые строки в SynEdit
+  s_KeyName := '';
+  s_ParametrValue := '';
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+    AddParametrKeyName(s_KeyName);
+    if s_KeyName = '' then begin
+      LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInSynEdit. Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра.');
+      ShowMessage('Значение параметра не введено');
+      exit;
+    end;
+    AddParametrKeyValue(b_isInt, s_ParametrValue);
+    LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInSynEdit. Если название введено то вызываем окно для ввода значения параметра.');
+    if s_ParametrValue = '' then begin
+     LogString.Add(DateTimeToStr(Now) +': AddParametrIntegerOrStringInSynEdit. Если не введено название выходим и выводим сообщение что не введено название файла.');
+     ShowMessage('Имя параметра не введено');
+     exit;
+    end;
+    s_KeyName :=  c_BIGINKEY + s_KeyName + c_ENDKEY;
+    if b_isInt then begin
+      s_ParametrValue := c_BEGININTEGER + s_ParametrValue + c_ENDINTEGER;
+    end else begin
+      s_ParametrValue := c_BEGINSTRING + s_ParametrValue + c_ENDSTRING;
+    end;
+    if CurPos.y-2 > 2 then begin
+      level := Pos('<', SynEdit.Lines[CurPos.y-2]);
+      if level > 1 then begin
+        for i:= 0 to level do begin
+          s_KeyName := ' ' +  s_KeyName;
+          s_ParametrValue := ' ' + s_ParametrValue;
+        end;
+      end;
+    end;
+    SynEdit.Lines.Insert((CurPos.y-1), s_ParametrValue);
+    SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
+  end;
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
@@ -1007,7 +1041,8 @@ begin
      LogString.Add(DateTimeToStr(Now) + ' AddIntKeyMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
      if Synedit.Focused then begin
        LogString.Add(DateTimeToStr(Now) + ' AddIntKeyMenuItemClick. Вызываем процедуру добавления числового параметра');
-       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+       AddParametrIntegerOrStringInSynEdit(True);
+       //Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
      end else begin
        LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
@@ -1126,7 +1161,8 @@ begin
      LogString.Add(DateTimeToStr(Now) +': AddKeyStringMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
      if Synedit.Focused then begin
         LogString.Add(DateTimeToStr(Now) +': AddKeyStringMenuItemClick. Вызываем процедуру добавления числового параметра');
-        Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+        AddParametrIntegerOrStringInSynEdit(false);
+        //Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
       end else begin
         LogString.Add(DateTimeToStr(Now) +': AddKeyStringMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
         ShowMessage('Выберете место куда вставлять новый параметр.');
