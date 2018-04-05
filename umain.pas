@@ -75,10 +75,13 @@ type
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean);
-    procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean; b_isDict:boolean);
+    procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKey: boolean; b_isDict:boolean);
     procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
     procedure AddParametrIntegerOrStringInSynEdit(b_isInt:boolean);
-
+    procedure AddParametrDateInSynEdit;
+    procedure AddParametrBooleanInSynEdit;
+    procedure AddDictInSynEdit;
+    procedure AddArrayInSynEdit;
   private
     { private declarations }
   public
@@ -321,7 +324,7 @@ begin
   end;
 end;
 
-procedure TMainForm.AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKeyDict: boolean; b_isDict:boolean);
+procedure TMainForm.AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKey: boolean; b_isDict:boolean);
 // Процедура добавления тега <dict></dict> в TreeView
 var s_ElementSelected:string;
     b_isTreeElementSelected: boolean;
@@ -415,7 +418,7 @@ begin
     LogString.Add(DateTimeToStr(Now) +': AddDictInTreeView . Заполняем данными новую record.');
 
     if b_isDict then begin
-      if b_isKeyDict then CurentPlistParametr.Name:= 'dictkey'
+      if b_isKey then CurentPlistParametr.Name:= 'dictkey'
       else CurentPlistParametr.Name:= 'dict';
       CurentPlistParametr.type_parm:= dict;
       CurentPlistParametr.value:= 'dict';
@@ -423,7 +426,7 @@ begin
       CurentPlistParametr.position := i_TempPosition + 1;
       p_PlistParam^ := CurentPlistParametr;
     end else begin
-      if b_isKeyDict then CurentPlistParametr.Name:= 'arraykey'
+      if b_isKey then CurentPlistParametr.Name:= 'arraykey'
       else CurentPlistParametr.Name:= 'array';
       CurentPlistParametr.type_parm:= aray;
       CurentPlistParametr.value:= 'array';
@@ -539,6 +542,55 @@ begin
     SynEdit.Lines.Insert((CurPos.y-1), s_ParametrValue);
     SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
   end;
+end;
+
+procedure TMainForm.AddParametrDateInSynEdit;
+// Процедура добавления парамтер Date в Syn Edit
+var  s_KeyName, s_ParametrValue: string;
+    CurPos: TPoint;
+    i, level: integer;
+begin
+  s_KeyName := '';
+  s_ParametrValue := '';
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+
+  end;
+end;
+
+procedure TMainForm.AddParametrBooleanInSynEdit;
+// Процедура добавления парамтер Boolean в Syn Edit
+var  s_KeyName, s_ParametrValue: string;
+    CurPos: TPoint;
+    i, level: integer;
+begin
+  s_KeyName := '';
+  s_ParametrValue := '';
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+
+  end;
+end;
+
+procedure TMainForm.AddDictInSynEdit;
+var CurPos: TPoint;
+    i, level: integer;
+begin
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+
+  end;
+end;
+
+procedure TMainForm.AddArrayInSynEdit;
+var CurPos: TPoint;
+    i, level: integer;
+begin
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+
+  end;
+
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
