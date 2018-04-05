@@ -554,7 +554,38 @@ begin
   s_ParametrValue := '';
   if SynEdit.Focused then begin
     CurPos := SynEdit.CaretXY;
-
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Выставлям ключ b_EditMode в режим добавления date.');
+    b_isEditMode := 1;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Изменяем форму Editkey для добавления ключа с датой');
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Показваем форму Editkey');
+    if EditKeyForm.ShowModal = mrOK then begin
+     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Проверяем все ли поля заполнены после нажатия Ок на форме Editkey');
+     if EditKeyForm.KeyEdit.Text = '' then begin
+       LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5');
+       ShowMessage('Значение параметра не введено. Заполните поле: Имя параметра.');
+       exit;
+     end;
+    end else begin
+     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Если не заполнены пол показваем алерт что не введено и возвращаемся к п.5');
+     ShowMessage('Отмена ввода.');
+     exit;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр.');
+    s_KeyName := EditKeyForm.KeyEdit.Text;
+    s_ParametrValue := FormatdateTime('yyyy-mm-dd"T"hh:mm:ss"Z"', EditKeyForm.DateTimePicker.DateTime);
+    s_KeyName :=  c_BIGINKEY + s_KeyName + c_ENDKEY;
+    s_ParametrValue := c_BEGINDATE + s_ParametrValue + c_ENDDATE;
+    if CurPos.y-2 > 2 then begin
+      level := Pos('<', SynEdit.Lines[CurPos.y-2]);
+      if level > 1 then begin
+        for i:= 0 to level do begin
+          s_KeyName := ' ' +  s_KeyName;
+          s_ParametrValue := ' ' + s_ParametrValue;
+        end;
+      end;
+    end;
+    SynEdit.Lines.Insert((CurPos.y-1), s_ParametrValue);
+    SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
   end;
 end;
 
