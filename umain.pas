@@ -32,6 +32,7 @@ type
     AddKeyDataMenuItem: TMenuItem;
     AddDictMenuItem: TMenuItem;
     AddArrayMenuItem: TMenuItem;
+    AddKeyRealMenuItem: TMenuItem;
     SaveASMenuItem: TMenuItem;
     SaveDialog: TSaveDialog;
     SaveMenuItem: TMenuItem;
@@ -78,10 +79,10 @@ type
     procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKey: boolean; b_isDict:boolean);
     procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
     procedure AddParametrIntegerOrStringInSynEdit(b_isInt:boolean);
-    procedure AddParametrDateInSynEdit;
-    procedure AddParametrBooleanInSynEdit;
+    procedure AddParametrDateOrBooleanInSynEdit(b_isDate:boolean);
     procedure AddDictInSynEdit;
     procedure AddArrayInSynEdit;
+    procedure AddDictOrArrayInSynEdit(b_isKeyDict: boolean);
   private
     { private declarations }
   public
@@ -544,7 +545,7 @@ begin
   end;
 end;
 
-procedure TMainForm.AddParametrDateInSynEdit;
+procedure TMainForm.AddParametrDateOrBooleanInSynEdit(b_isDate:boolean);
 // Процедура добавления парамтер Date в Syn Edit
 var  s_KeyName, s_ParametrValue: string;
     CurPos: TPoint;
@@ -555,7 +556,8 @@ begin
   if SynEdit.Focused then begin
     CurPos := SynEdit.CaretXY;
     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Выставлям ключ b_EditMode в режим добавления date.');
-    b_isEditMode := 1;
+    if b_isDate then b_isEditMode := 1
+    else b_isEditMode :=2;
     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Изменяем форму Editkey для добавления ключа с датой');
     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInSynEdit. Показваем форму Editkey');
     if EditKeyForm.ShowModal = mrOK then begin
@@ -572,9 +574,15 @@ begin
     end;
     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Если поля заполнены то создаем новую запись  PlistParametr и добавляем туда заполненый параметр.');
     s_KeyName := EditKeyForm.KeyEdit.Text;
-    s_ParametrValue := FormatdateTime('yyyy-mm-dd"T"hh:mm:ss"Z"', EditKeyForm.DateTimePicker.DateTime);
+    if b_isDate then begin
+      s_ParametrValue := FormatdateTime('yyyy-mm-dd"T"hh:mm:ss"Z"', EditKeyForm.DateTimePicker.DateTime);
+      s_ParametrValue := c_BEGINDATE + s_ParametrValue + c_ENDDATE;
+    end else begin
+      if EditKeyForm.KeyBooleanCheckBox.Checked then s_ParametrValue := '<true />'
+      else s_ParametrValue := '<false />';
+    end;
+
     s_KeyName :=  c_BIGINKEY + s_KeyName + c_ENDKEY;
-    s_ParametrValue := c_BEGINDATE + s_ParametrValue + c_ENDDATE;
     if CurPos.y-2 > 2 then begin
       level := Pos('<', SynEdit.Lines[CurPos.y-2]);
       if level > 1 then begin
@@ -589,39 +597,60 @@ begin
   end;
 end;
 
-procedure TMainForm.AddParametrBooleanInSynEdit;
-// Процедура добавления парамтер Boolean в Syn Edit
-var  s_KeyName, s_ParametrValue: string;
-    CurPos: TPoint;
-    i, level: integer;
-begin
-  s_KeyName := '';
-  s_ParametrValue := '';
-  if SynEdit.Focused then begin
-    CurPos := SynEdit.CaretXY;
-
-  end;
-end;
-
 procedure TMainForm.AddDictInSynEdit;
 var CurPos: TPoint;
     i, level: integer;
+    begdict, enddict: string;
 begin
   if SynEdit.Focused then begin
     CurPos := SynEdit.CaretXY;
-
+    begdict := c_BEGINDICT ;
+    enddict := c_ENDDICT;
+    if CurPos.y-2 > 2 then begin
+      level := Pos('<', SynEdit.Lines[CurPos.y-2]);
+      if level > 1 then begin
+        for i:= 0 to level do begin
+          begdict := ' ' +  begdict;
+          enddict := ' ' + enddict;
+        end;
+      end;
+    end;
+    SynEdit.Lines.Insert((CurPos.y-1), enddict);
+    SynEdit.Lines.Insert((CurPos.y-1), begdict);
   end;
 end;
 
 procedure TMainForm.AddArrayInSynEdit;
 var CurPos: TPoint;
     i, level: integer;
+    begarray, endarray: string;
+begin
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+    begarray := c_BEGINARRAY ;
+    endarray := c_ENDARRAY;
+    if CurPos.y-2 > 2 then begin
+      level := Pos('<', SynEdit.Lines[CurPos.y-2]);
+      if level > 1 then begin
+        for i:= 0 to level do begin
+          begarray := ' ' +  begarray;
+          endarray := ' ' + endarray;
+        end;
+      end;
+    end;
+    SynEdit.Lines.Insert((CurPos.y-1), endarray);
+    SynEdit.Lines.Insert((CurPos.y-1), begarray);
+  end;
+end;
+
+procedure TMainForm.AddDictOrArrayInSynEdit(b_isKeyDict: boolean);
+var CurPos: TPoint;
+    i, level: integer;
 begin
   if SynEdit.Focused then begin
     CurPos := SynEdit.CaretXY;
 
   end;
-
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
@@ -1223,12 +1252,56 @@ end;
 
 procedure TMainForm.AddKeyBoolMenuItemClick(Sender: TObject);
 begin
-  AddParametrBooleanInTreeView;
+  LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Нажатие на кнопку AddStringKey в меню.');
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
+     if Synedit.Focused then begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Вызываем процедуру добавления числового параметра');
+        AddParametrDateOrBooleanInSynEdit(false);
+        //Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
+        AddParametrBooleanInTreeView;
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end;
 end;
 
 procedure TMainForm.AddKeyDateMenuItemClick(Sender: TObject);
 begin
-  AddParametrDateInTreeView;
+  LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Нажатие на кнопку AddStringKey в меню.');
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
+     if Synedit.Focused then begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Вызываем процедуру добавления числового параметра');
+        AddParametrDateOrBooleanInSynEdit(true);
+        //Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
+        AddParametrDateInTreeView;
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDateMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end;
 end;
 
 procedure TMainForm.AddKeyDictMenuItemClick(Sender: TObject);

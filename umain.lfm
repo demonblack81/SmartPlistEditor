@@ -622,6 +622,10 @@ object MainForm: TMainForm
         Caption = 'Add Key Array'
         OnClick = AddKeyArrayMenuItemClick
       end
+      object AddKeyRealMenuItem: TMenuItem
+        Caption = 'Add Key Real'
+        Enabled = False
+      end
       object AddKeyDataMenuItem: TMenuItem
         Caption = 'Add Key Data'
         Enabled = False
