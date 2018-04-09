@@ -82,7 +82,7 @@ type
     procedure AddParametrDateOrBooleanInSynEdit(b_isDate:boolean);
     procedure AddDictInSynEdit;
     procedure AddArrayInSynEdit;
-    procedure AddDictOrArrayInSynEdit(b_isKeyDict: boolean);
+    procedure AddParametrDictOrArrayInSynEdit(b_isKeyDict: boolean);
   private
     { private declarations }
   public
@@ -643,13 +643,30 @@ begin
   end;
 end;
 
-procedure TMainForm.AddDictOrArrayInSynEdit(b_isKeyDict: boolean);
+procedure TMainForm.AddParametrDictOrArrayInSynEdit(b_isKeyDict: boolean);
 var CurPos: TPoint;
     i, level: integer;
+    s_KeyName: string;
 begin
   if SynEdit.Focused then begin
     CurPos := SynEdit.CaretXY;
-
+    AddParametrKeyName(s_KeyName);
+    if s_KeyName = '' then begin
+      LogString.Add(DateTimeToStr(Now) +': AddDictOrArrayInSynEdit. Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра.');
+      ShowMessage('Значение параметра не введено');
+      exit;
+    end;
+    s_KeyName :=  c_BIGINKEY + s_KeyName + c_ENDKEY;
+    if CurPos.y-2 > 2 then begin
+      level := Pos('<', SynEdit.Lines[CurPos.y-2]);
+      if level > 1 then begin
+        for i:= 0 to level do begin
+          s_KeyName := ' ' +  s_KeyName;
+        end;
+      end;
+    end;
+    if b_isKeyDict then AddDictInSynEdit
+    else AddArrayInSynEdit;
   end;
 end;
 
@@ -1174,24 +1191,24 @@ end;
 
 procedure TMainForm.AddKeyArrayMenuItemClick(Sender: TObject);
 begin
-  LogString.Add(DateTimeToStr(Now) + ': AddIntKeyMenuItemClick. Нажатие на кнопку AddIntKey в меню.');
+  LogString.Add(DateTimeToStr(Now) + ': AddKeyArrayMenuItemClick. Нажатие на кнопку AddIntKey в меню.');
   //0. Проверяем на какой мы закладке
   if PageControl.ActivePage = TabSheetSynEdit then begin
-     LogString.Add(DateTimeToStr(Now) + ' AddIntKeyMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
+     LogString.Add(DateTimeToStr(Now) + ' AddKeyArrayMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
      if Synedit.Focused then begin
-       LogString.Add(DateTimeToStr(Now) + ' AddIntKeyMenuItemClick. Вызываем процедуру добавления числового параметра');
-       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+       LogString.Add(DateTimeToStr(Now) + ' AddKeyArrayMenuItemClick. Вызываем процедуру добавления числового параметра');
+      AddParametrDictOrArrayInSynEdit(false);
      end else begin
-       LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+       LogString.Add(DateTimeToStr(Now) +': AddKeyArrayMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
        exit;
      end;
   end else begin
      if PageControl.ActivePage = TabSheetTreeView then begin
-       LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Вызов процедуры AddParametrIntegerOrStringInTreeView()');
+       LogString.Add(DateTimeToStr(Now) +': AddKeyArrayMenuItemClick. Вызов процедуры AddParametrIntegerOrStringInTreeView()');
        AddParametrDictOrArrayInTreeView(false);
      end else begin
-       LogString.Add(DateTimeToStr(Now) +': AddIntKeyMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
+       LogString.Add(DateTimeToStr(Now) +': AddKeyArrayMenuItemClick. Показываем алерт что не выбрано место в TreeView куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
        exit;
      end;
@@ -1206,7 +1223,7 @@ begin
      LogString.Add(DateTimeToStr(Now) + ' AddDictMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
      if Synedit.Focused then begin
        LogString.Add(DateTimeToStr(Now) + ' AddDictMenuItemClick. Вызываем процедуру добавления числового параметра');
-       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+       AddDictInSynEdit;
      end else begin
        LogString.Add(DateTimeToStr(Now) +': AddDictMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
@@ -1232,7 +1249,7 @@ begin
      LogString.Add(DateTimeToStr(Now) + ' AddArrayMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим');
      if Synedit.Focused then begin
        LogString.Add(DateTimeToStr(Now) + ' AddArrayMenuItemClick. Вызываем процедуру добавления числового параметра');
-       Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+       AddArrayInSynEdit;
      end else begin
        LogString.Add(DateTimeToStr(Now) +': AddArrayMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
        ShowMessage('Выберете место куда вставлять новый параметр.');
@@ -1306,7 +1323,28 @@ end;
 
 procedure TMainForm.AddKeyDictMenuItemClick(Sender: TObject);
 begin
-  AddParametrDictOrArrayInTreeView(true);
+  LogString.Add(DateTimeToStr(Now) +': AddKeyDictMenuItemClick. Нажатие на кнопку AddStringKey в меню.');
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) +': AddKeyDictMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
+     if Synedit.Focused then begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDictMenuItemClick. Вызываем процедуру добавления числового параметра');
+        AddParametrDictOrArrayInSynEdit(true);
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDictMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDictMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
+        AddParametrDictOrArrayInTreeView(true);
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddKeyDictMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end;
 end;
 
 procedure TMainForm.AddKeyStringMenuItemClick(Sender: TObject);
