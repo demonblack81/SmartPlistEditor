@@ -517,6 +517,7 @@ object MainForm: TMainForm
         MouseLinkColor.Foreground = clBlue
         LineHighlightColor.Background = clNone
         LineHighlightColor.Foreground = clNone
+        OnChange = SynEditChange
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
             Width = 24
@@ -600,42 +601,52 @@ object MainForm: TMainForm
       Caption = 'Add Key'
       object AddIntKeyMenuItem: TMenuItem
         Caption = 'Add Key Integer'
+        ShortCut = 32817
         OnClick = AddIntKeyMenuItemClick
       end
       object AddKeyStringMenuItem: TMenuItem
         Caption = 'Add Key String'
+        ShortCut = 32818
         OnClick = AddKeyStringMenuItemClick
       end
       object AddKeyBoolMenuItem: TMenuItem
         Caption = 'Add Key Boolean'
+        ShortCut = 32819
         OnClick = AddKeyBoolMenuItemClick
       end
       object AddKeyDateMenuItem: TMenuItem
         Caption = 'Add Key Date'
+        ShortCut = 32820
         OnClick = AddKeyDateMenuItemClick
       end
       object AddKeyDictMenuItem: TMenuItem
         Caption = 'Add Key Dict'
+        ShortCut = 32821
         OnClick = AddKeyDictMenuItemClick
       end
       object AddKeyArrayMenuItem: TMenuItem
         Caption = 'Add Key Array'
+        ShortCut = 32823
         OnClick = AddKeyArrayMenuItemClick
       end
       object AddKeyRealMenuItem: TMenuItem
         Caption = 'Add Key Real'
         Enabled = False
+        ShortCut = 32825
       end
       object AddKeyDataMenuItem: TMenuItem
         Caption = 'Add Key Data'
         Enabled = False
+        ShortCut = 32816
       end
       object AddDictMenuItem: TMenuItem
         Caption = 'Add Dict'
+        ShortCut = 32822
         OnClick = AddDictMenuItemClick
       end
       object AddArrayMenuItem: TMenuItem
         Caption = 'Add Array'
+        ShortCut = 32824
         OnClick = AddArrayMenuItemClick
       end
     end

@@ -68,6 +68,7 @@ type
     procedure SavePlist;
     procedure OpenPlist;
     procedure ClearEditView;
+    procedure SynEditChange(Sender: TObject);
     procedure UpdateTreeView(a_PlistParametr: array of PlistParametr);
     procedure ClearMassiveAndList;
     procedure AddParametrKeyName(out KeyName: string);
@@ -97,6 +98,7 @@ var
   s_ErrorMessage: string; // строка ошибки
   sl_PlistStrings: TStringList; // массив строк plist'а
   b_FirstParametr: boolean; // первый ли параметр
+  b_isChengedInSynEdit: boolean; //Изменилось ли что небудь в SynEdit
   LogString: TStringList; // массив строк логирования программы
   StartPath: string; //Строка пути к программе
 implementation
@@ -542,6 +544,7 @@ begin
     end;
     SynEdit.Lines.Insert((CurPos.y-1), s_ParametrValue);
     SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
+    b_isChengedInSynEdit:= true;
   end;
 end;
 
@@ -594,6 +597,7 @@ begin
     end;
     SynEdit.Lines.Insert((CurPos.y-1), s_ParametrValue);
     SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
+    b_isChengedInSynEdit:= true;
   end;
 end;
 
@@ -617,6 +621,7 @@ begin
     end;
     SynEdit.Lines.Insert((CurPos.y-1), enddict);
     SynEdit.Lines.Insert((CurPos.y-1), begdict);
+    b_isChengedInSynEdit:= true;
   end;
 end;
 
@@ -640,6 +645,7 @@ begin
     end;
     SynEdit.Lines.Insert((CurPos.y-1), endarray);
     SynEdit.Lines.Insert((CurPos.y-1), begarray);
+    b_isChengedInSynEdit:= true;
   end;
 end;
 
@@ -667,6 +673,7 @@ begin
     end;
     if b_isKeyDict then AddDictInSynEdit
     else AddArrayInSynEdit;
+    b_isChengedInSynEdit:= true;
   end;
 end;
 
@@ -909,10 +916,10 @@ begin
    LogString.Add(DateTimeToStr(Now) +': AddParametrKeyValue. Проверяем добовляем ли мы парамметр integer.');
    if b_isInt then begin
       LogString.Add(DateTimeToStr(Now) +': AddParametrKeyValue. Показываем окно ввода параметра integer.');
-      if not InputQuery('Числовое название', 'Введите числовое значение параметра', ParametrValue) then exit;
+      if not InputQuery('Числовой параметр', 'Введите числовое значение параметра', ParametrValue) then exit;
    end else begin
       LogString.Add(DateTimeToStr(Now) +': AddParametrKeyValue. Показываем окно ввода параметра string.');
-      if not InputQuery('Parametr Value', 'Enter Value of Parametr', ParametrValue) then exit;
+      if not InputQuery('Строковой параметр', 'Введите строковое значение параметра', ParametrValue) then exit;
    end;
 end;
 
@@ -1000,6 +1007,12 @@ begin
   LogString.Add(DateTimeToStr(Now) +': ClearEditView. Запукаем процедура очистки дерева и синедита.');
   TreeView.Items.Clear;
   SynEdit.Lines.Clear;
+  b_isChengedInSynEdit := false;
+end;
+
+procedure TMainForm.SynEditChange(Sender: TObject);
+begin
+  b_isChengedInSynEdit := true;
 end;
 
 procedure TMainForm.OpenPlist; 
@@ -1020,6 +1033,7 @@ begin
     if err = 0 then begin
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Загружаем файл в SynEdit.');
       SynEdit.Lines.LoadFromFile(OpenDialog.FileName);
+      b_isChengedInSynEdit := false;
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Задаем размер масиву a_PlistParametr.');
       setLength(a_PlistParametr, sl_PlistStrings.Count -4);
       LogString.Add(DateTimeToStr(Now) +': OpenPlist. Разбиваем файл на параметры.');
@@ -1094,8 +1108,17 @@ begin
 end;
 
 procedure TMainForm.PageControlChange(Sender: TObject);
+var err: integer;
 begin
   LogString.Add(DateTimeToStr(Now) +': PageControlChange. Вызов процедуру если меняем таб c TreeView на SynEdit или наоборот.');
+  if b_isChengedInSynEdit then begin
+    ClearMassiveAndList;
+    sl_PlistStrings.AddStrings(SynEdit.Lines);
+    setLength(a_PlistParametr, sl_PlistStrings.Count - 4);
+    err := GroupPlistParametrs(sl_PlistStrings, a_PlistParametr);
+    setLength(a_PlistParametr, err);
+    b_isChengedInSynEdit:= false;
+  end;
   LogString.Add(DateTimeToStr(Now) +': PageControlChange. Вызываем очистку View.');
   ClearEditView;
   if PageControl.ActivePage = TabSheetTreeView then begin
@@ -1156,7 +1179,7 @@ begin
   New(p_PlistParam);
   //выделяем память для буферного стринглиста
   sl_PlistStrings := TStringList.Create;
-
+  b_isChengedInSynEdit := false;
   //выделяем память под массив пораметров
   SetLength(a_PlistParametr, 0);
 end;
