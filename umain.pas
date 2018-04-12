@@ -536,7 +536,7 @@ begin
     if CurPos.y-2 > 2 then begin
       level := Pos('<', SynEdit.Lines[CurPos.y-2]);
       if level > 1 then begin
-        for i:= 0 to level do begin
+        for i:= 0 to (level - 2) do begin
           s_KeyName := ' ' +  s_KeyName;
           s_ParametrValue := ' ' + s_ParametrValue;
         end;
@@ -589,7 +589,7 @@ begin
     if CurPos.y-2 > 2 then begin
       level := Pos('<', SynEdit.Lines[CurPos.y-2]);
       if level > 1 then begin
-        for i:= 0 to level do begin
+        for i:= 0 to (level - 2) do begin
           s_KeyName := ' ' +  s_KeyName;
           s_ParametrValue := ' ' + s_ParametrValue;
         end;
@@ -613,13 +613,14 @@ begin
     if CurPos.y-2 > 2 then begin
       level := Pos('<', SynEdit.Lines[CurPos.y-2]);
       if level > 1 then begin
-        for i:= 0 to level do begin
+        for i:= 0 to (level - 2) do begin
           begdict := ' ' +  begdict;
           enddict := ' ' + enddict;
         end;
       end;
     end;
     SynEdit.Lines.Insert((CurPos.y-1), enddict);
+    SynEdit.Lines.Insert((CurPos.y-1), ' ');
     SynEdit.Lines.Insert((CurPos.y-1), begdict);
     b_isChengedInSynEdit:= true;
   end;
@@ -637,13 +638,14 @@ begin
     if CurPos.y-2 > 2 then begin
       level := Pos('<', SynEdit.Lines[CurPos.y-2]);
       if level > 1 then begin
-        for i:= 0 to level do begin
+        for i:= 0 to (level - 2) do begin
           begarray := ' ' +  begarray;
           endarray := ' ' + endarray;
         end;
       end;
     end;
     SynEdit.Lines.Insert((CurPos.y-1), endarray);
+    SynEdit.Lines.Insert((CurPos.y-1), ' ');
     SynEdit.Lines.Insert((CurPos.y-1), begarray);
     b_isChengedInSynEdit:= true;
   end;
@@ -666,13 +668,16 @@ begin
     if CurPos.y-2 > 2 then begin
       level := Pos('<', SynEdit.Lines[CurPos.y-2]);
       if level > 1 then begin
-        for i:= 0 to level do begin
+        for i:= 0 to (level - 2) do begin
           s_KeyName := ' ' +  s_KeyName;
         end;
       end;
     end;
+
     if b_isKeyDict then AddDictInSynEdit
     else AddArrayInSynEdit;
+    SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
+
     b_isChengedInSynEdit:= true;
   end;
 end;
