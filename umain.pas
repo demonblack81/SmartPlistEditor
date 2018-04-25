@@ -33,6 +33,10 @@ type
     AddDictMenuItem: TMenuItem;
     AddArrayMenuItem: TMenuItem;
     AddKeyRealMenuItem: TMenuItem;
+    AddStringMenuItem: TMenuItem;
+    AddIntegerMenuItem: TMenuItem;
+    AddRealMenuItem: TMenuItem;
+    AddDateMenuItem: TMenuItem;
     SaveASMenuItem: TMenuItem;
     SaveDialog: TSaveDialog;
     SaveMenuItem: TMenuItem;
@@ -84,6 +88,7 @@ type
     procedure AddDictInSynEdit;
     procedure AddArrayInSynEdit;
     procedure AddParametrDictOrArrayInSynEdit(b_isKeyDict: boolean);
+    procedure AddStringOrIntegerInSynEdit(b_isInt:boolean);
   private
     { private declarations }
   public
@@ -678,6 +683,38 @@ begin
     else AddArrayInSynEdit;
     SynEdit.Lines.Insert((CurPos.y-1), s_KeyName);
 
+    b_isChengedInSynEdit:= true;
+  end;
+end;
+
+procedure TMainForm.AddStringOrIntegerInSynEdit(b_isInt:boolean);
+var CurPos: TPoint;
+    i, level: integer;
+    s_ParametrValue: string;
+begin
+  if SynEdit.Focused then begin
+    CurPos := SynEdit.CaretXY;
+    AddParametrKeyValue(b_isInt, s_ParametrValue);
+    LogString.Add(DateTimeToStr(Now) +': AddStringOrIntegerInSynEdit. Если название введено то вызываем окно для ввода значения параметра.');
+    if s_ParametrValue = '' then begin
+     LogString.Add(DateTimeToStr(Now) +': AddStringOrIntegerInSynEdit. Если не введено название выходим и выводим сообщение что не введено название файла.');
+     ShowMessage('Имя параметра не введено');
+     exit;
+    end;
+    if b_isInt then begin
+      s_ParametrValue := c_BEGININTEGER + s_ParametrValue + c_ENDINTEGER;
+    end else begin
+      s_ParametrValue := c_BEGINSTRING + s_ParametrValue + c_ENDSTRING;
+    end;
+    if CurPos.y-2 > 2 then begin
+      level := Pos('<', SynEdit.Lines[CurPos.y-2]);
+      if level > 1 then begin
+        for i:= 0 to (level - 2) do begin
+          s_ParametrValue := ' ' + s_ParametrValue;
+        end;
+      end;
+    end;
+    SynEdit.Lines.Insert((CurPos.y-1), s_ParametrValue);
     b_isChengedInSynEdit:= true;
   end;
 end;

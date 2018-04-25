@@ -626,28 +626,44 @@ object MainForm: TMainForm
       end
       object AddKeyArrayMenuItem: TMenuItem
         Caption = 'Add Key Array'
-        ShortCut = 32823
+        ShortCut = 32822
         OnClick = AddKeyArrayMenuItemClick
       end
       object AddKeyRealMenuItem: TMenuItem
         Caption = 'Add Key Real'
         Enabled = False
-        ShortCut = 32825
+        ShortCut = 32823
       end
       object AddKeyDataMenuItem: TMenuItem
         Caption = 'Add Key Data'
         Enabled = False
         ShortCut = 32816
       end
+      object AddStringMenuItem: TMenuItem
+        Caption = 'Add String'
+        ShortCut = 41010
+      end
       object AddDictMenuItem: TMenuItem
         Caption = 'Add Dict'
-        ShortCut = 32822
+        ShortCut = 41013
         OnClick = AddDictMenuItemClick
       end
       object AddArrayMenuItem: TMenuItem
         Caption = 'Add Array'
-        ShortCut = 32824
+        ShortCut = 41014
         OnClick = AddArrayMenuItemClick
+      end
+      object AddIntegerMenuItem: TMenuItem
+        Caption = 'Add Integer'
+        ShortCut = 41009
+      end
+      object AddRealMenuItem: TMenuItem
+        Caption = 'Add Real'
+        ShortCut = 41015
+      end
+      object AddDateMenuItem: TMenuItem
+        Caption = 'Add Date'
+        ShortCut = 41012
       end
     end
   end
