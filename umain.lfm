@@ -639,9 +639,15 @@ object MainForm: TMainForm
         Enabled = False
         ShortCut = 32816
       end
+      object AddIntegerMenuItem: TMenuItem
+        Caption = 'Add Integer'
+        ShortCut = 41009
+        OnClick = AddIntegerMenuItemClick
+      end
       object AddStringMenuItem: TMenuItem
         Caption = 'Add String'
         ShortCut = 41010
+        OnClick = AddStringMenuItemClick
       end
       object AddDictMenuItem: TMenuItem
         Caption = 'Add Dict'
@@ -653,16 +659,14 @@ object MainForm: TMainForm
         ShortCut = 41014
         OnClick = AddArrayMenuItemClick
       end
-      object AddIntegerMenuItem: TMenuItem
-        Caption = 'Add Integer'
-        ShortCut = 41009
-      end
       object AddRealMenuItem: TMenuItem
         Caption = 'Add Real'
+        Enabled = False
         ShortCut = 41015
       end
       object AddDateMenuItem: TMenuItem
         Caption = 'Add Date'
+        Enabled = False
         ShortCut = 41012
       end
     end

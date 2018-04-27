@@ -11,7 +11,7 @@ object EditKeyForm: TEditKeyForm
   FormStyle = fsStayOnTop
   OnShow = OnFormShow
   Position = poMainFormCenter
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.8.0.6'
   object KeyEdit: TLabeledEdit
     Left = 10
     Height = 23

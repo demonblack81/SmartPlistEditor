@@ -30,7 +30,7 @@ const c_HEADER1 = '<?xml version="1.0" encoding="UTF-8"?>';
       c_ENDREAL = '</real>';
 
 type
-    tParam  = (dict, bool, date , int, str, aray, data, key);
+    tParam  = (dict, bool, date , int, str, aray, data, key, reale);
     PlistParametr = record
        Name: string;
        type_parm: tParam;
@@ -100,6 +100,11 @@ begin
       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
       plist.Add(param);
       param := level + c_BEGINDATA +  a_PlistParametr[i].value + c_ENDDATA;
+    end;
+    if a_PlistParametr[i].type_parm = reale then begin
+      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+      plist.Add(param);
+      param := level + c_BEGINREAL +  a_PlistParametr[i].value + c_ENDREAL;
     end;
     if param <> '' then plist.Add(param);
   end;
@@ -360,6 +365,21 @@ begin
             numarray := numarray + 1;
             newpos:= newpos + 1;
          end;
+         if Pos(c_BEGINREAL, plist.Strings[i]) <> 0 then begin
+            begpos :=  Pos(c_BEGINREAL, plist.Strings[i]);
+            endpos :=  Pos('</', plist.Strings[i]);
+            s := copy(plist.Strings[i], begpos+6, endpos-(begpos+6));
+            if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
+            with  m_PlistParametr[numarray] do begin
+                  Name := s;
+                  type_parm:= reale;
+                  level := lev;
+                  position:= newpos;
+                  value:= '';
+            end;
+            numarray := numarray + 1;
+            newpos:= newpos + 1;
+         end;
          if Pos(c_BIGINKEY, plist.Strings[i]) <> 0 then begin
             begpos :=  Pos(c_BIGINKEY, plist.Strings[i]);
             endpos :=  Pos('</', plist.Strings[i]);
@@ -418,6 +438,15 @@ begin
               endpos :=  Pos('</', plist.Strings[i+1]);
               s := copy(plist.Strings[i+1], begpos+6, endpos-(begpos+6));
               m_PlistParametr[numarray].type_parm:=data;
+              m_PlistParametr[numarray].value:=s;
+              newpos:= newpos + 1;
+              i := i + 1;
+            end;
+            if Pos(c_BEGINREAL, plist.Strings[i+1]) <> 0 then begin
+              begpos :=  Pos(c_BEGINREAL, plist.Strings[i+1]);
+              endpos :=  Pos('</', plist.Strings[i+1]);
+              s := copy(plist.Strings[i+1], begpos+6, endpos-(begpos+6));
+              m_PlistParametr[numarray].type_parm:=reale;
               m_PlistParametr[numarray].value:=s;
               newpos:= newpos + 1;
               i := i + 1;

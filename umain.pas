@@ -55,12 +55,14 @@ type
     TreeView: TTreeView;
     procedure AddArrayMenuItemClick(Sender: TObject);
     procedure AddDictMenuItemClick(Sender: TObject);
+    procedure AddIntegerMenuItemClick(Sender: TObject);
     procedure AddIntKeyMenuItemClick(Sender: TObject);
     procedure AddKeyArrayMenuItemClick(Sender: TObject);
     procedure AddKeyBoolMenuItemClick(Sender: TObject);
     procedure AddKeyDateMenuItemClick(Sender: TObject);
     procedure AddKeyDictMenuItemClick(Sender: TObject);
     procedure AddKeyStringMenuItemClick(Sender: TObject);
+    procedure AddStringMenuItemClick(Sender: TObject);
     procedure CloseMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -89,6 +91,8 @@ type
     procedure AddArrayInSynEdit;
     procedure AddParametrDictOrArrayInSynEdit(b_isKeyDict: boolean);
     procedure AddStringOrIntegerInSynEdit(b_isInt:boolean);
+    procedure AddDateInSynEdit;
+    procedure AddParametrRealInTreeView;
   private
     { private declarations }
   public
@@ -719,6 +723,116 @@ begin
   end;
 end;
 
+procedure TMainForm.AddDateInSynEdit;
+// Процедура добавления Date в Plist
+begin
+  //Нужно сделать
+end;
+
+procedure TMainForm.AddParametrRealInTreeView;
+// Процедура добавления ключа Real
+var s_ElementSelected, s_KeyName, s_ParametrValue: string;
+    b_isTreeElementSelected: boolean;
+    Node, ParentNode, ChildNode: TTreeNode;
+    CurentPlistParametr, TempPlistParametr : PlistParametr;
+    i: integer;
+begin
+  LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Процедура добавления параметра с значением integer или string в TreeView.');
+  s_KeyName := '';
+  s_ParametrValue := '';
+  s_ElementSelected := '';
+  LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Проверяем если идет добавление первого параметра, то фокуса на дереве может и не быть.');
+  if b_FirstParametr then begin
+    try
+      LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
+      ParentNode := TreeView.Selected;
+      b_isTreeElementSelected := true;
+      LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Увеличеваем размер массива записей на один.');
+      SetLength(a_PlistParametr, 1);
+    except
+      LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      ShowMessage('Не выбран элемент куда добавлять параметр');
+      b_isTreeElementSelected := false;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    if not b_isTreeElementSelected then exit;
+  end else begin
+    try
+      LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Присваеваем переменной s_ElementSelected строку из выбраного в дереве элемента.');
+      s_ElementSelected := TreeView.Selected.Text;
+      b_isTreeElementSelected := true;
+    except
+      LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      ShowMessage('Не выбран элемент куда добавлять параметр');
+      b_isTreeElementSelected := false;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    if not b_isTreeElementSelected then exit;
+  end;
+  LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Вызываем окно ввода названия параметра.');
+  AddParametrKeyName(s_KeyName);
+  if s_KeyName = '' then begin
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Если значение параметра не введено то выходим и выводим сообщение что не введено значение параметра.');
+    ShowMessage('Значение параметра не введено');
+    exit;
+  end;
+  AddParametrKeyValue(True, s_ParametrValue);
+  LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Если название введено то вызываем окно для ввода значения параметра.');
+  if s_ParametrValue = '' then begin
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Если не введено название выходим и выводим сообщение что не введено название файла.');
+    ShowMessage('Имя параметра не введено');
+    exit;
+  end;
+  if b_FirstParametr then begin
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Добавляем новую запись параметров в массив.');
+    with a_PlistParametr[0] do begin
+      Name := s_KeyName;
+      type_parm:= reale;
+      level := 0;
+      position:= 3;
+      value:= s_ParametrValue;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Если выбран таб дерева то добавляем два новых элемента в дерево и вставляем туда данные по параметру.');
+    p_PlistParam^ := a_PlistParametr[0];
+    ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+    ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+    b_FirstParametr := false;
+  end else begin
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Запоминаем выбранный узел считаем его за радительский.');
+    ParentNode:= TreeView.Selected;
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Считываем record из выбраной ячейки.');
+    TempPlistParametr:= PlistParametr(ParentNode.Data^);
+    LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Заполняем данными новую record.');
+    CurentPlistParametr.Name:= s_KeyName;
+    CurentPlistParametr.type_parm:= reale;
+    CurentPlistParametr.value:= s_ParametrValue;
+    CurentPlistParametr.level:= TempPlistParametr.level;
+    CurentPlistParametr.position:= TempPlistParametr.position + 1;
+    p_PlistParam^ := CurentPlistParametr;
+    //
+    if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
+      ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
+      ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+      if s_ElementSelected = 'plist' then begin
+        CurentPlistParametr.position :=  3;
+      end else begin
+        CurentPlistParametr.position := TempPlistParametr.position + 1;
+      end;
+    end else begin
+       ParentNode := TreeView.Items.InsertObject(TreeView.Selected, s_KeyName, p_PlistParam);
+       ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);
+       CurentPlistParametr.position:= TempPlistParametr.position;
+    end;
+    AddOneParametrInArray(CurentPlistParametr);
+
+    Dispose(p_PlistParam);
+    TreeView.Items.Clear;
+    UpdateTreeView(a_PlistParametr);
+    Node := TreeView.Items.FindNodeWithText(s_KeyName);
+    Node.ExpandParents;
+  end;
+end;
+
 procedure TMainForm.AddParametrDateInTreeView;
 //процедура добавления параметра с значением date в TreeView
 var s_ElementSelected, s_KeyName, s_ParametrValue: string;
@@ -1306,6 +1420,34 @@ begin
   end;
 end;
 
+procedure TMainForm.AddIntegerMenuItemClick(Sender: TObject);
+begin
+   LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Нажатие на кнопку AddString в меню.');
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
+     if Synedit.Focused then begin
+        LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Вызываем процедуру добавления числового параметра');
+        AddStringOrIntegerInSynEdit(true);
+        //Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
+        //AddStringOrIntegerInTreeView(true);
+        Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end;
+end;
+
 procedure TMainForm.AddArrayMenuItemClick(Sender: TObject);
 begin
   LogString.Add(DateTimeToStr(Now) + ': AddArrayMenuItemClick. Нажатие на кнопку AddDict в меню.');
@@ -1433,6 +1575,35 @@ begin
         AddParametrIntegerOrStringInTreeView(false);
       end else begin
         LogString.Add(DateTimeToStr(Now) +': AddKeyStringMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end;
+end;
+
+procedure TMainForm.AddStringMenuItemClick(Sender: TObject);
+begin
+  LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Нажатие на кнопку AddString в меню.');
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
+     if Synedit.Focused then begin
+        LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Вызываем процедуру добавления числового параметра');
+        AddStringOrIntegerInSynEdit(false);
+        //AddParametrIntegerOrStringInSynEdit(false);
+        //Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
+        //AddStringOrIntegerInTreeView(true);
+        Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
         ShowMessage('Выберете место куда вставлять новый параметр.');
         exit;
       end;
