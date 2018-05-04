@@ -30,7 +30,7 @@ const c_HEADER1 = '<?xml version="1.0" encoding="UTF-8"?>';
       c_ENDREAL = '</real>';
 
 type
-    tParam  = (dict, bool, date , int, str, aray, data, key, reale);
+    tParam  = (dict, bool, date , int, str, aray, data, key, real_);
     PlistParametr = record
        Name: string;
        type_parm: tParam;
@@ -101,7 +101,7 @@ begin
       plist.Add(param);
       param := level + c_BEGINDATA +  a_PlistParametr[i].value + c_ENDDATA;
     end;
-    if a_PlistParametr[i].type_parm = reale then begin
+    if a_PlistParametr[i].type_parm = real_ then begin
       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
       plist.Add(param);
       param := level + c_BEGINREAL +  a_PlistParametr[i].value + c_ENDREAL;
@@ -372,7 +372,7 @@ begin
             if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
             with  m_PlistParametr[numarray] do begin
                   Name := s;
-                  type_parm:= reale;
+                  type_parm:= real_;
                   level := lev;
                   position:= newpos;
                   value:= '';
@@ -446,7 +446,7 @@ begin
               begpos :=  Pos(c_BEGINREAL, plist.Strings[i+1]);
               endpos :=  Pos('</', plist.Strings[i+1]);
               s := copy(plist.Strings[i+1], begpos+6, endpos-(begpos+6));
-              m_PlistParametr[numarray].type_parm:=reale;
+              m_PlistParametr[numarray].type_parm:=real_;
               m_PlistParametr[numarray].value:=s;
               newpos:= newpos + 1;
               i := i + 1;

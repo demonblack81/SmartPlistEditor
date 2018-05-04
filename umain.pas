@@ -787,7 +787,7 @@ begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Добавляем новую запись параметров в массив.');
     with a_PlistParametr[0] do begin
       Name := s_KeyName;
-      type_parm:= reale;
+      type_parm:= real_;
       level := 0;
       position:= 3;
       value:= s_ParametrValue;
@@ -804,12 +804,12 @@ begin
     TempPlistParametr:= PlistParametr(ParentNode.Data^);
     LogString.Add(DateTimeToStr(Now) +': AddParametrRealInTreeView. Заполняем данными новую record.');
     CurentPlistParametr.Name:= s_KeyName;
-    CurentPlistParametr.type_parm:= reale;
+    CurentPlistParametr.type_parm:= real_;
     CurentPlistParametr.value:= s_ParametrValue;
     CurentPlistParametr.level:= TempPlistParametr.level;
     CurentPlistParametr.position:= TempPlistParametr.position + 1;
     p_PlistParam^ := CurentPlistParametr;
-    //
+
     if (s_ElementSelected = 'dict') or (s_ElementSelected = 'array') or (s_ElementSelected = 'plist') then begin
       ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
       ChildNode :=  TreeView.Items.AddChildObject(ParentNode, s_ParametrValue, p_PlistParam);

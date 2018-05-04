@@ -19,8 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <TopLine Value="767"/>
-        <CursorPos X="42" Y="807"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="60"/>
+        <CursorPos X="30" Y="95"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -50,9 +51,9 @@
       <Unit4>
         <Filename Value="uplistread.pas"/>
         <UnitName Value="uPlistRead"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="75" Y="107"/>
+        <TopLine Value="418"/>
+        <CursorPos X="58" Y="449"/>
         <UsageCount Value="103"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -134,63 +135,63 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="umain.pas"/>
-        <Caret Line="89" Column="15" TopLine="70"/>
+        <Caret Line="732" Column="33" TopLine="729"/>
       </Position1>
       <Position2>
         <Filename Value="umain.pas"/>
-        <Caret Line="574" Column="15" TopLine="553"/>
+        <Caret Line="82" Column="29" TopLine="74"/>
       </Position2>
       <Position3>
         <Filename Value="umain.pas"/>
-        <Caret Line="559" Column="41" TopLine="547"/>
+        <Caret Line="848" Column="38" TopLine="848"/>
       </Position3>
       <Position4>
         <Filename Value="umain.pas"/>
-        <Caret Line="94" Column="15" TopLine="75"/>
+        <Caret Line="95" Column="36" TopLine="64"/>
       </Position4>
       <Position5>
         <Filename Value="umain.pas"/>
-        <Caret Line="559" Column="42" TopLine="545"/>
+        <Caret Line="732" Column="34" TopLine="717"/>
       </Position5>
       <Position6>
         <Filename Value="umain.pas"/>
-        <Caret Line="95" Column="36" TopLine="68"/>
+        <Caret Line="82" Column="32" TopLine="74"/>
       </Position6>
       <Position7>
         <Filename Value="umain.pas"/>
-        <Caret Line="732" Column="33" TopLine="729"/>
+        <Caret Line="854" Column="48" TopLine="839"/>
       </Position7>
       <Position8>
         <Filename Value="umain.pas"/>
-        <Caret Line="82" Column="29" TopLine="74"/>
+        <Caret Line="95" Column="32" TopLine="64"/>
       </Position8>
       <Position9>
         <Filename Value="umain.pas"/>
-        <Caret Line="848" Column="38" TopLine="848"/>
+        <Caret Line="779" Column="16" TopLine="765"/>
       </Position9>
       <Position10>
         <Filename Value="umain.pas"/>
-        <Caret Line="95" Column="36" TopLine="64"/>
+        <Caret Line="95" Column="15" TopLine="77"/>
       </Position10>
       <Position11>
         <Filename Value="umain.pas"/>
-        <Caret Line="732" Column="34" TopLine="717"/>
+        <Caret Line="773" Column="17" TopLine="757"/>
       </Position11>
       <Position12>
         <Filename Value="umain.pas"/>
-        <Caret Line="82" Column="32" TopLine="74"/>
+        <Caret Line="80" Column="15" TopLine="62"/>
       </Position12>
       <Position13>
         <Filename Value="umain.pas"/>
-        <Caret Line="854" Column="48" TopLine="839"/>
+        <Caret Line="1078" Column="30" TopLine="1069"/>
       </Position13>
       <Position14>
         <Filename Value="umain.pas"/>
-        <Caret Line="95" Column="32" TopLine="64"/>
+        <Caret Line="95" Column="28" TopLine="63"/>
       </Position14>
       <Position15>
         <Filename Value="umain.pas"/>
-        <Caret Line="779" Column="16" TopLine="765"/>
+        <Caret Line="779" Column="17" TopLine="757"/>
       </Position15>
       <Position16>
         <Filename Value="umain.pas"/>
@@ -198,59 +199,59 @@
       </Position16>
       <Position17>
         <Filename Value="umain.pas"/>
-        <Caret Line="773" Column="17" TopLine="757"/>
+        <Caret Line="779" Column="17" TopLine="754"/>
       </Position17>
       <Position18>
         <Filename Value="umain.pas"/>
-        <Caret Line="80" Column="15" TopLine="62"/>
+        <Caret Line="81" Column="15" TopLine="63"/>
       </Position18>
       <Position19>
         <Filename Value="umain.pas"/>
-        <Caret Line="1078" Column="30" TopLine="1069"/>
+        <Caret Line="1078" Column="28" TopLine="1069"/>
       </Position19>
       <Position20>
         <Filename Value="umain.pas"/>
-        <Caret Line="95" Column="28" TopLine="63"/>
+        <Caret Line="95" Column="33" TopLine="63"/>
       </Position20>
       <Position21>
-        <Filename Value="umain.pas"/>
-        <Caret Line="779" Column="17" TopLine="757"/>
+        <Filename Value="uplistread.pas"/>
+        <Caret Line="47" Column="13" TopLine="28"/>
       </Position21>
       <Position22>
-        <Filename Value="umain.pas"/>
-        <Caret Line="95" Column="15" TopLine="77"/>
+        <Filename Value="uplistread.pas"/>
+        <Caret Line="47" Column="21" TopLine="22"/>
       </Position22>
       <Position23>
-        <Filename Value="umain.pas"/>
-        <Caret Line="779" Column="17" TopLine="754"/>
+        <Filename Value="uplistread.pas"/>
+        <Caret Line="444" Column="57" TopLine="417"/>
       </Position23>
       <Position24>
         <Filename Value="umain.pas"/>
-        <Caret Line="81" Column="15" TopLine="63"/>
+        <Caret Line="790" Column="24" TopLine="767"/>
       </Position24>
       <Position25>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1078" Column="28" TopLine="1069"/>
+        <Filename Value="uplistread.pas"/>
+        <Caret Line="36" Column="30" TopLine="7"/>
       </Position25>
       <Position26>
-        <Filename Value="umain.pas"/>
-        <Caret Line="95" Column="33" TopLine="63"/>
+        <Filename Value="uplistread.pas"/>
+        <Caret Line="104" Column="45" TopLine="79"/>
       </Position26>
       <Position27>
         <Filename Value="uplistread.pas"/>
-        <Caret Line="47" Column="13" TopLine="28"/>
+        <Caret Line="375" Column="36" TopLine="344"/>
       </Position27>
       <Position28>
-        <Filename Value="uplistread.pas"/>
-        <Caret Line="213" Column="6" TopLine="217"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="732" Column="35" TopLine="712"/>
       </Position28>
       <Position29>
-        <Filename Value="uplistread.pas"/>
-        <Caret Line="47" Column="21" TopLine="22"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="78" Column="24" TopLine="62"/>
       </Position29>
       <Position30>
-        <Filename Value="uplistread.pas"/>
-        <Caret Line="444" Column="57" TopLine="417"/>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1104" Column="28" TopLine="1095"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
