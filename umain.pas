@@ -78,9 +78,9 @@ type
     procedure SynEditChange(Sender: TObject); // Установка флага что данные в SynEdit изменились
     procedure UpdateTreeView(a_PlistParametr: array of PlistParametr); // Процедура обнавления дерева(TreeView)
     procedure ClearMassiveAndList; // Процедура очистки массивов
-    procedure AddParametrKeyName(out KeyName: string);
-    procedure AddParametrKeyValue(b_isInt:boolean; out ParametrValue:string);
-    procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
+    procedure AddParametrKeyName(out KeyName: string);  // Процедура вызова окна ввода названия ключа
+    procedure AddParametrKeyValue(b_isInt:boolean; out ParametrValue:string); // Процедура вызова окна ввода значения параметра integer или string
+    procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean); // Процедура добавления параметра integer или string
     procedure AddParametrDateInTreeView;
     procedure AddParametrBooleanInTreeView;
     procedure AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean);

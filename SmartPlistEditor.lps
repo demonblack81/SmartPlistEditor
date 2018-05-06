@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="63"/>
-        <CursorPos X="56" Y="81"/>
+        <TopLine Value="66"/>
+        <CursorPos X="41" Y="84"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -62,27 +62,27 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2051"/>
         <CursorPos Y="2082"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit5>
       <Unit6>
         <Filename Value="D:\Soft\lazarus\lcl\include\pagecontrol.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="28"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit6>
       <Unit7>
         <Filename Value="D:\Soft\lazarus\lcl\include\menuitem.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="67"/>
         <CursorPos Y="85"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit7>
       <Unit8>
         <Filename Value="D:\Soft\lazarus\lcl\include\customnotebook.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="316"/>
         <CursorPos Y="335"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit8>
       <Unit9>
         <Filename Value="D:\Soft\lazarus\lcl\dialogs.pp"/>
@@ -90,7 +90,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="677"/>
         <CursorPos X="11" Y="696"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit9>
       <Unit10>
         <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
@@ -98,7 +98,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="4427"/>
         <CursorPos Y="4447"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit10>
       <Unit11>
         <Filename Value="D:\Soft\lazarus\components\synedit\syneditlines.pas"/>
@@ -106,7 +106,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="298"/>
         <CursorPos Y="318"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit11>
       <Unit12>
         <Filename Value="D:\Soft\lazarus\components\synedit\synedittextbuffer.pp"/>
@@ -114,14 +114,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="697"/>
         <CursorPos Y="716"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit12>
       <Unit13>
         <Filename Value="D:\Soft\lazarus\lcl\include\control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="179"/>
         <CursorPos Y="209"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit13>
       <Unit14>
         <Filename Value="D:\Soft\lazarus\components\lazutils\laz_avl_tree.pp"/>
@@ -129,7 +129,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="615"/>
         <CursorPos Y="638"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit14>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
