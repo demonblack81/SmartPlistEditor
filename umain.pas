@@ -53,31 +53,31 @@ type
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
     TreeView: TTreeView;
-    procedure AddArrayMenuItemClick(Sender: TObject);
-    procedure AddDictMenuItemClick(Sender: TObject);
-    procedure AddIntegerMenuItemClick(Sender: TObject);
-    procedure AddIntKeyMenuItemClick(Sender: TObject);
-    procedure AddKeyArrayMenuItemClick(Sender: TObject);
-    procedure AddKeyBoolMenuItemClick(Sender: TObject);
-    procedure AddKeyDateMenuItemClick(Sender: TObject);
-    procedure AddKeyDictMenuItemClick(Sender: TObject);
-    procedure AddKeyRealMenuItemClick(Sender: TObject);
-    procedure AddKeyStringMenuItemClick(Sender: TObject);
-    procedure AddStringMenuItemClick(Sender: TObject);
-    procedure CloseMenuItemClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormCreate(Sender: TObject);
-    procedure MenuItemNewPlistClick(Sender: TObject);
-    procedure MakeNewFile;
-    procedure OpenPlistMenuItemClick(Sender: TObject);
-    procedure PageControlChange(Sender: TObject);
-    procedure SaveMenuItemClick(Sender: TObject);
-    procedure SavePlist;
-    procedure OpenPlist;
-    procedure ClearEditView;
-    procedure SynEditChange(Sender: TObject);
-    procedure UpdateTreeView(a_PlistParametr: array of PlistParametr);
-    procedure ClearMassiveAndList;
+    procedure AddArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Array
+    procedure AddDictMenuItemClick(Sender: TObject);  // нажатие в меню на Add Dict
+    procedure AddIntegerMenuItemClick(Sender: TObject); // нажатие в меню на Add Integer
+    procedure AddIntKeyMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Integer
+    procedure AddKeyArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Array
+    procedure AddKeyBoolMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Bool
+    procedure AddKeyDateMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Date
+    procedure AddKeyDictMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Dict
+    procedure AddKeyRealMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Real
+    procedure AddKeyStringMenuItemClick(Sender: TObject); // нажатие в меню на Add Key String
+    procedure AddStringMenuItemClick(Sender: TObject); // нажатие в меню на Add String
+    procedure CloseMenuItemClick(Sender: TObject); // нажатие в меню на Close (Завершение программы)
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction); // Процедура закрытия формы
+    procedure FormCreate(Sender: TObject); // Процедура создания формы
+    procedure MenuItemNewPlistClick(Sender: TObject); // нажатие в меню на New Plist (Новый плист)
+    procedure MakeNewFile; // Процедура создания нового файла
+    procedure OpenPlistMenuItemClick(Sender: TObject); // нажатие в меню на Открыть plist
+    procedure PageControlChange(Sender: TObject); // Процедура измения закладки (Treeview или SynEdit)
+    procedure SaveMenuItemClick(Sender: TObject); // нажатие в меню на сохранить файл
+    procedure SavePlist; // Процедура сохранения plist'a
+    procedure OpenPlist; // Процедура открытия plist'a
+    procedure ClearEditView; // Процедура очистки Treeview и SynEdit
+    procedure SynEditChange(Sender: TObject); // Установка флага что данные в SynEdit изменились
+    procedure UpdateTreeView(a_PlistParametr: array of PlistParametr); // Процедура обнавления дерева(TreeView)
+    procedure ClearMassiveAndList; // Процедура очистки массивов
     procedure AddParametrKeyName(out KeyName: string);
     procedure AddParametrKeyValue(b_isInt:boolean; out ParametrValue:string);
     procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean);
@@ -1209,7 +1209,7 @@ end;
 
 procedure TMainForm.ClearEditView;
 begin
-  LogString.Add(DateTimeToStr(Now) +': ClearEditView. Запукаем процедура очистки дерева и синедита.');
+  LogString.Add(DateTimeToStr(Now) +': ClearEditView. Запуcкаем процедура очистки дерева и синедита.');
   TreeView.Items.Clear;
   SynEdit.Lines.Clear;
   b_isChengedInSynEdit := false;
