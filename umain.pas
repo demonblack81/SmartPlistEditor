@@ -80,21 +80,21 @@ type
     procedure ClearMassiveAndList; // Процедура очистки массивов
     procedure AddParametrKeyName(out KeyName: string);  // Процедура вызова окна ввода названия ключа
     procedure AddParametrKeyValue(b_isInt:boolean; out ParametrValue:string); // Процедура вызова окна ввода значения параметра integer или string
-    procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean); // Процедура добавления параметра integer или string
-    procedure AddParametrDateInTreeView;
-    procedure AddParametrBooleanInTreeView;
-    procedure AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean);
-    procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKey: boolean; b_isDict:boolean);
-    procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr);
-    procedure AddParametrIntegerOrStringInSynEdit(b_isInt:boolean);
-    procedure AddParametrDateOrBooleanInSynEdit(b_isDate:boolean);
-    procedure AddDictInSynEdit;
-    procedure AddArrayInSynEdit;
-    procedure AddParametrDictOrArrayInSynEdit(b_isKeyDict: boolean);
-    procedure AddStringOrIntegerInSynEdit(b_isInt:boolean);
-    procedure AddDateInSynEdit;
-    procedure AddParametrRealInTreeView;
-    procedure AddParametrRealInSynEdit;
+    procedure AddParametrIntegerOrStringInTreeView(b_isInt:boolean); // Процедура добавления параметра integer или string в дерево
+    procedure AddParametrDateInTreeView; // Процедура добавления параметра date в дерево
+    procedure AddParametrBooleanInTreeView; // Процеура добавления булевого параметра в дерево
+    procedure AddParametrDictOrArrayInTreeView(b_isKeyDict: boolean); // Процедура добавления параметра dict или array в дерево
+    procedure AddDictOrArrayInTreeView(ParentNode: TTreeNode; b_isKey: boolean; b_isDict:boolean); // Процедура добавления dict или array в дерево
+    procedure AddOneParametrInArray(CurentPlistParametr:PlistParametr); // Процедура добавления одного параметра в массив параметров
+    procedure AddParametrIntegerOrStringInSynEdit(b_isInt:boolean); // Процедура добавления параметра integer или string в SynEdit
+    procedure AddParametrDateOrBooleanInSynEdit(b_isDate:boolean); // Процедура добавления параметра даты или булевого параметра в SynEdit
+    procedure AddDictInSynEdit; // Процедура добавления dict в SynEdit
+    procedure AddArrayInSynEdit; // Процедура добавления array в SynEdit
+    procedure AddParametrDictOrArrayInSynEdit(b_isKeyDict: boolean); // Процедура добавления параметра dict или array в SynEdit
+    procedure AddStringOrIntegerInSynEdit(b_isInt:boolean); // Процедура Добавления string или integer в SynEdit
+    procedure AddDateInSynEdit; // Процедура добавления даты в SynEdit
+    procedure AddParametrRealInTreeView; // Процедура добавления параметра Real в дерево
+    procedure AddParametrRealInSynEdit;  // Процедура добавления параметра real в SynEdit
   private
     { private declarations }
   public
