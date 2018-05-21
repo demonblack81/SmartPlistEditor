@@ -598,7 +598,7 @@ object MainForm: TMainForm
       end
     end
     object AddKeyMenuItem: TMenuItem
-      Caption = 'Add Key'
+      Caption = 'Add Parametr'
       object AddIntKeyMenuItem: TMenuItem
         Caption = 'Add Key Integer'
         ShortCut = 32817

@@ -95,6 +95,7 @@ type
     procedure AddDateInSynEdit; // Процедура добавления даты в SynEdit
     procedure AddParametrRealInTreeView; // Процедура добавления параметра Real в дерево
     procedure AddParametrRealInSynEdit;  // Процедура добавления параметра real в SynEdit
+    procedure AddNoKeyParametrInTreeView(type_parm: tParam); // Процедура добавления не Key параметра в TreeView
   private
     { private declarations }
   public
@@ -880,6 +881,66 @@ begin
     b_isChengedInSynEdit:= true;
   end;
 
+end;
+
+procedure TMainForm.AddNoKeyParametrInTreeView(type_p: tParam);
+// Процедура добавления не Key параметра в TreeView
+var s_ElementSelected, s_KeyName, s_ParametrValue: string;
+    b_isTreeElementSelected: boolean;
+    Node, ParentNode, ChildNode: TTreeNode;
+    CurentPlistParametr, TempPlistParametr : PlistParametr;
+    i: integer;
+begin
+  LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Процедура добавления параметра с значением date в TreeView.');
+  s_ParametrValue := '';
+  s_ElementSelected := '';
+  LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Проверяем первый ли это элемент в pliste');
+  if b_FirstParametr then begin
+    try
+      LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Присваеваем переменной ParentNode выбранный в дереве элемент.');
+      ParentNode := TreeView.Selected;
+      b_isTreeElementSelected := true;
+      LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Увеличеваем размер массива записей на один.');
+      SetLength(a_PlistParametr, 1);
+    except
+      LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      ShowMessage('Не выбран элемент куда добавлять параметр');
+      b_isTreeElementSelected := false;
+    end;
+  LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    if not b_isTreeElementSelected then exit;
+  end else begin
+    try
+      LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Присваеваем переменной s_ElementSelected строку из выбраного в дереве элемента.');
+      s_ElementSelected := TreeView.Selected.Text;
+      b_isTreeElementSelected := true;
+    except
+      LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Выводим сообщение что в дереве не выбран элемент куда втавлять параметр.');
+      ShowMessage('Не выбран элемент куда добавлять параметр');
+      b_isTreeElementSelected := false;
+    end;
+    LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    if not b_isTreeElementSelected then exit;
+  end;
+
+  LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Показываем окно ввода параметра integer.');
+  case type_p of
+     int, real_:
+       begin
+         if not InputQuery('Числовой параметр', 'Введите числовое значение параметра', ParametrValue) then exit;
+       end;
+     str:
+       begin
+         if not InputQuery('Строковой параметр', 'Введите строковое значение параметра', ParametrValue) then exit;
+       end;
+     date:
+       begin
+         // Нужно продумать как вызывать EditKeyForm только с выбором календаря
+       end;
+  else
+    ShowMessage('Не выбран тип добавляемого параметра');
+    exit;
+  end;
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
