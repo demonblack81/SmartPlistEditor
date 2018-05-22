@@ -907,7 +907,7 @@ begin
       ShowMessage('Не выбран элемент куда добавлять параметр');
       b_isTreeElementSelected := false;
     end;
-  LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
+    LogString.Add(DateTimeToStr(Now) +': AddNoKeyParametrInTreeView. Если не выбрано место куда вставлять параметр выходим из процедуры.');
     if not b_isTreeElementSelected then exit;
   end else begin
     try
