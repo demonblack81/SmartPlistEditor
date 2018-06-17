@@ -661,8 +661,8 @@ object MainForm: TMainForm
       end
       object AddRealMenuItem: TMenuItem
         Caption = 'Add Real'
-        Enabled = False
         ShortCut = 41015
+        OnClick = AddRealMenuItemClick
       end
       object AddDateMenuItem: TMenuItem
         Caption = 'Add Date'

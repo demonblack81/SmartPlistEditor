@@ -63,6 +63,7 @@ type
     procedure AddKeyDictMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Dict
     procedure AddKeyRealMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Real
     procedure AddKeyStringMenuItemClick(Sender: TObject); // нажатие в меню на Add Key String
+    procedure AddRealMenuItemClick(Sender: TObject);
     procedure AddStringMenuItemClick(Sender: TObject); // нажатие в меню на Add String
     procedure CloseMenuItemClick(Sender: TObject); // нажатие в меню на Close (Завершение программы)
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction); // Процедура закрытия формы
@@ -1597,8 +1598,7 @@ begin
    end else begin
       if PageControl.ActivePage = TabSheetTreeView then begin
         LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
-        //AddStringOrIntegerInTreeView(true);
-        Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+        AddNoKeyParametrInTreeView(int);
       end else begin
         LogString.Add(DateTimeToStr(Now) +': AddIntegerMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
         ShowMessage('Выберете место куда вставлять новый параметр.');
@@ -1767,6 +1767,33 @@ begin
    end;
 end;
 
+procedure TMainForm.AddRealMenuItemClick(Sender: TObject);
+begin
+  LogString.Add(DateTimeToStr(Now) +': AddRealMenuItemClick. Нажатие на кнопку AddString в меню.');
+   //0. Проверяем на какой мы закладке
+   if PageControl.ActivePage = TabSheetSynEdit then begin
+     LogString.Add(DateTimeToStr(Now) +': AddRealMenuItemClick. Если мы на закладке synedit проверяем что фокус на edite иначе выходим.');
+     if Synedit.Focused then begin
+        LogString.Add(DateTimeToStr(Now) +': AddRealMenuItemClick. Вызываем процедуру добавления числового параметра');
+        //AddStringOrIntegerInSynEdit(false);
+
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddRealMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end else begin
+      if PageControl.ActivePage = TabSheetTreeView then begin
+        LogString.Add(DateTimeToStr(Now) +': AddRealMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
+        AddNoKeyParametrInTreeView(real_);
+      end else begin
+        LogString.Add(DateTimeToStr(Now) +': AddRealMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
+        ShowMessage('Выберете место куда вставлять новый параметр.');
+        exit;
+      end;
+   end;
+end;
+
 procedure TMainForm.AddStringMenuItemClick(Sender: TObject);
 begin
   LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Нажатие на кнопку AddString в меню.');
@@ -1786,8 +1813,7 @@ begin
    end else begin
       if PageControl.ActivePage = TabSheetTreeView then begin
         LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Вызываем процедуру добавления строкового параметра в дерево.');
-        //AddStringOrIntegerInTreeView(true);
-        Showmessage('Должна вызватся функция добавления но пока она не реализована :(');
+        AddNoKeyParametrInTreeView(str);
       end else begin
         LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Показываем алерт что не выбрано место куда вставлять параметр.');
         ShowMessage('Выберете место куда вставлять новый параметр.');
