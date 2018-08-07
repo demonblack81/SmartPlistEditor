@@ -54,7 +54,7 @@ type
     ToolBar: TToolBar;
     TreeView: TTreeView;
     procedure AddArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Array
-    procedure AddDateMenuItemClick(Sender: TObject);
+    procedure AddDateMenuItemClick(Sender: TObject);  // нажатие в меню на Add Date
     procedure AddDictMenuItemClick(Sender: TObject);  // нажатие в меню на Add Dict
     procedure AddIntegerMenuItemClick(Sender: TObject); // нажатие в меню на Add Integer
     procedure AddIntKeyMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Integer
@@ -64,7 +64,7 @@ type
     procedure AddKeyDictMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Dict
     procedure AddKeyRealMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Real
     procedure AddKeyStringMenuItemClick(Sender: TObject); // нажатие в меню на Add Key String
-    procedure AddRealMenuItemClick(Sender: TObject);
+    procedure AddRealMenuItemClick(Sender: TObject); //  нажатие в меню на Add Real
     procedure AddStringMenuItemClick(Sender: TObject); // нажатие в меню на Add String
     procedure CloseMenuItemClick(Sender: TObject); // нажатие в меню на Close (Завершение программы)
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction); // Процедура закрытия формы

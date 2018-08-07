@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 131
+  Left = 674
   Height = 700
-  Top = 42
+  Top = 125
   Width = 1150
   Caption = 'Smart Plist Editor'
   ClientHeight = 680
