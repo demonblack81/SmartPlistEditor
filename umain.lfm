@@ -18,6 +18,19 @@ object MainForm: TMainForm
     Width = 1150
     Caption = 'ToolBar'
     TabOrder = 0
+    object SerchEdit: TEdit
+      Left = 1
+      Height = 23
+      Top = 2
+      Width = 167
+      TabOrder = 0
+      Text = 'Искать'
+    end
+    object SearchToolButton: TToolButton
+      Left = 168
+      Top = 2
+      Caption = 'Search'
+    end
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -31,9 +44,9 @@ object MainForm: TMainForm
     Height = 631
     Top = 26
     Width = 1150
-    ActivePage = TabSheetSynEdit
+    ActivePage = TabSheetTreeView
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
@@ -714,5 +727,9 @@ object MainForm: TMainForm
     Editor = SynEdit
     left = 1104
     top = 56
+  end
+  object ToolbarImageList: TImageList
+    left = 864
+    top = 8
   end
 end

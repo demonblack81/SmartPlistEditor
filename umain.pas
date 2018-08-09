@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterHTML, SynCompletion,
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
-  LCLType,
+  LCLType, StdCtrls,
 
   uPlistRead, uEditKey, eventlog;
 
@@ -16,6 +16,8 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ToolbarImageList: TImageList;
+    SerchEdit: TEdit;
     EventLog: TEventLog;
     MainMenu: TMainMenu;
     CloseMenuItem: TMenuItem;
@@ -52,6 +54,7 @@ type
     TabSheetTreeView: TTabSheet;
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
+    SearchToolButton: TToolButton;
     TreeView: TTreeView;
     procedure AddArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Array
     procedure AddDateMenuItemClick(Sender: TObject);  // нажатие в меню на Add Date
@@ -99,6 +102,7 @@ type
     procedure AddParametrRealInTreeView; // Процедура добавления параметра Real в дерево
     procedure AddParametrRealInSynEdit;  // Процедура добавления параметра real в SynEdit
     procedure AddNoKeyParametrInTreeView(type_p: tParam); // Процедура добавления не Key параметра в TreeView
+    procedure SearchInTreaView(SearchText: string); //Процедура поиска в Treeview
   private
     { private declarations }
   public
@@ -1005,7 +1009,6 @@ begin
      end;
   end;
 
-
   if b_FirstParametr then begin
     LogString.Add(DateTimeToStr(Now) +': AddParametrDateInTreeView. Добавляем новую запись параметров в массив.');
     with a_PlistParametr[0] do begin
@@ -1051,6 +1054,13 @@ begin
     Node := TreeView.Items.FindNodeWithText(s_KeyName);
     Node.ExpandParents;
   end;
+end;
+
+procedure TMainForm.SearchInTreaView(SearchText: string);
+//Процедура поиска в Treeview
+var i:integer;
+begin
+
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
