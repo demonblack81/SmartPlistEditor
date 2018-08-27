@@ -9,7 +9,7 @@ uses
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
   LCLType, StdCtrls,
 
-  uPlistRead, uEditKey, eventlog;
+  uPlistRead, uEditKey, eventlog, SynEditTypes;
 
 type
 
@@ -104,6 +104,8 @@ type
     procedure AddParametrRealInSynEdit;  // Процедура добавления параметра real в SynEdit
     procedure AddNoKeyParametrInTreeView(type_p: tParam); // Процедура добавления не Key параметра в TreeView
     function SearchInTreaView(SearchText: string):integer; //Процедура поиска в Treeview
+    procedure Search(SearchText: string); // Процедура поиска
+    function SearchInSynEdit(SearchText: string):integer; //Процедура поиска в SynEdit
   private
     { private declarations }
   public
@@ -1061,7 +1063,7 @@ function TMainForm.SearchInTreaView(SearchText: string):integer;
 //Процедура поиска в Treeview
 var i, p :integer;
     s: string;
-    Node, tempNode: TTreeNode;
+    Node: TTreeNode;
 begin
   result:= 0;
   p := 0;
@@ -1080,15 +1082,59 @@ begin
              s := Node.Text;
              p := Pos(SearchText, s);
              if  p > 0 then begin
-                Node.ExpandParents;
-                Node.Selected:= true;
-                result := result + 1;
+               if result = 0 then begin
+                 Node.ExpandParents;
+                 Node.Selected:= true;
+               end;
+               result := result + 1;
              end;
              //операции с узлом
              Node:=Node.GetNext;
          end;
       end;
    end;
+end;
+
+procedure TMainForm.Search(SearchText: string);
+// Процедура запуска поиска
+var SerchCount: integer;
+begin
+  if PageControl.ActivePage = TabSheetSynEdit then begin
+    // Пока нет функции поиска в SynEdit
+  end else begin
+      if SearchEdit.Text <> '' then begin
+         SerchCount := 0;
+         SerchCount := SearchInTreaView(SearchEdit.Text);
+         if (SerchCount = 0) then begin
+            ShowMessage('Нечего не найдено.');
+         end;
+      end else begin
+        ShowMessage('Нечего не введено в поисковую строку.');
+      end;
+  end;
+end;
+
+function TMainForm.SearchInSynEdit(SearchText: string): integer;
+var p, i : integer;
+begin
+  result := 0;
+  if SearchText <> '' then begin
+    result :=  0;
+    //SynEdit.SearchReplace(SearchText, '', (ssoFindContinue in TSynSearchOptions));
+
+    { for i:= 0 to (SynEdit.Lines.Count-1) do begin
+      p := Pos(SearchText, SynEdit.Lines[i]);
+      if  p > 0 then begin
+        if result = 0 then begin
+          //выделяем строку
+
+          SynEdit.SelStart :=
+          SynEdit.SelEnd :=
+        end;
+        result := result + 1;
+      end;
+    end;}
+  end;
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
@@ -1424,11 +1470,7 @@ end;
 
 procedure TMainForm.SearchToolButtonClick(Sender: TObject);
 begin
-  if SearchEdit.Text <> "" then begin
-    if SearchInTreaView(SearchEdit.Text) = 0 then begin
-      ShowMessage('Нечего не найдено.');
-    end;
-  end;
+  Search(SearchEdit.Text);
 end;
 
 procedure TMainForm.SynEditChange(Sender: TObject);

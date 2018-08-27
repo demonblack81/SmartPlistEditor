@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="15">
+    <Units Count="17">
       <Unit0>
         <Filename Value="SmartPlistEditor.lpr"/>
         <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="11" Y="10"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="umain.pas"/>
@@ -20,9 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="1056"/>
-        <CursorPos X="14" Y="1088"/>
+        <TopLine Value="1105"/>
+        <CursorPos X="7" Y="1123"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -96,10 +95,11 @@
       <Unit10>
         <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
         <UnitName Value="SynEdit"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4427"/>
-        <CursorPos Y="4447"/>
-        <UsageCount Value="5"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="7524"/>
+        <CursorPos X="23" Y="7528"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="D:\Soft\lazarus\components\synedit\syneditlines.pas"/>
@@ -120,9 +120,9 @@
       <Unit13>
         <Filename Value="D:\Soft\lazarus\lcl\include\control.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="179"/>
-        <CursorPos Y="209"/>
-        <UsageCount Value="5"/>
+        <TopLine Value="3481"/>
+        <CursorPos Y="3500"/>
+        <UsageCount Value="10"/>
       </Unit13>
       <Unit14>
         <Filename Value="D:\Soft\lazarus\components\lazutils\laz_avl_tree.pp"/>
@@ -132,124 +132,143 @@
         <CursorPos Y="638"/>
         <UsageCount Value="5"/>
       </Unit14>
+      <Unit15>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedittypes.pp"/>
+        <UnitName Value="SynEditTypes"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="68"/>
+        <CursorPos X="22" Y="90"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="D:\Soft\lazarus\components\synedit\syneditsearch.pp"/>
+        <UnitName Value="SynEditSearch"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="103"/>
+        <UsageCount Value="10"/>
+      </Unit16>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="umain.pas"/>
-        <Caret Line="57" Column="22" TopLine="48"/>
+        <Caret Line="108" Column="19" TopLine="90"/>
       </Position1>
       <Position2>
         <Filename Value="umain.pas"/>
-        <Caret Line="1694" Column="30" TopLine="1694"/>
+        <Caret Line="1122" Column="21" TopLine="1103"/>
       </Position2>
       <Position3>
         <Filename Value="umain.pas"/>
-        <Caret Line="57" Column="21" TopLine="54"/>
+        <Caret Line="108" Column="19" TopLine="90"/>
       </Position3>
       <Position4>
         <Filename Value="umain.pas"/>
-        <Caret Line="1641" Column="29" TopLine="1628"/>
+        <Caret Line="1124" Column="17" TopLine="1117"/>
       </Position4>
       <Position5>
         <Filename Value="umain.pas"/>
-        <Caret Line="101" Column="19" TopLine="87"/>
+        <Caret Line="108" Column="15" TopLine="90"/>
       </Position5>
       <Position6>
         <Filename Value="umain.pas"/>
-        <Caret Line="942" Column="34" TopLine="933"/>
+        <Caret Line="1124" Column="18" TopLine="1117"/>
       </Position6>
       <Position7>
         <Filename Value="umain.pas"/>
-        <Caret Line="125" Column="42" TopLine="100"/>
+        <Caret Line="52" Column="18" TopLine="34"/>
       </Position7>
       <Position8>
         <Filename Value="umain.pas"/>
-        <Caret Line="126" Column="42" TopLine="101"/>
+        <Caret Line="108" Column="15" TopLine="89"/>
       </Position8>
       <Position9>
         <Filename Value="umain.pas"/>
-        <Caret Line="125" Column="42" TopLine="100"/>
+        <Caret Line="1125" Column="23" TopLine="1087"/>
       </Position9>
       <Position10>
         <Filename Value="umain.pas"/>
-        <Caret Line="126" Column="42" TopLine="101"/>
+        <Caret Line="108" Column="14" TopLine="89"/>
       </Position10>
       <Position11>
         <Filename Value="umain.pas"/>
-        <Caret Line="125" Column="42" TopLine="100"/>
+        <Caret Line="1124" Column="59" TopLine="1117"/>
       </Position11>
       <Position12>
         <Filename Value="umain.pas"/>
-        <Caret Line="126" Column="42" TopLine="101"/>
+        <Caret Line="1119" Column="24" TopLine="1100"/>
       </Position12>
       <Position13>
         <Filename Value="umain.pas"/>
-        <Caret Line="125" Column="42" TopLine="100"/>
+        <Caret Line="1110" Column="32" TopLine="1101"/>
       </Position13>
       <Position14>
         <Filename Value="umain.pas"/>
-        <Caret Line="126" Column="42" TopLine="101"/>
+        <Caret Line="12" Column="41"/>
       </Position14>
       <Position15>
         <Filename Value="umain.pas"/>
-        <Caret Line="127" Column="42" TopLine="102"/>
+        <Caret Line="1119" Column="34" TopLine="1004"/>
       </Position15>
       <Position16>
         <Filename Value="umain.pas"/>
-        <Caret Line="128" Column="42" TopLine="103"/>
+        <Caret Line="12" Column="47"/>
       </Position16>
       <Position17>
         <Filename Value="umain.pas"/>
-        <Caret Line="127" Column="42" TopLine="102"/>
+        <Caret Line="1119" Column="20" TopLine="1103"/>
       </Position17>
       <Position18>
         <Filename Value="umain.pas"/>
-        <Caret Line="105" Column="22" TopLine="89"/>
+        <Caret Line="108" Column="15" TopLine="89"/>
       </Position18>
       <Position19>
         <Filename Value="umain.pas"/>
-        <Caret Line="1059" Column="32" TopLine="1039"/>
+        <Caret Line="1119" Column="23" TopLine="1102"/>
       </Position19>
       <Position20>
         <Filename Value="umain.pas"/>
-        <Caret Line="105" Column="25" TopLine="86"/>
+        <Caret Line="1122" Column="67" TopLine="1103"/>
       </Position20>
       <Position21>
         <Filename Value="umain.pas"/>
-        <Caret Line="1059" Column="30" TopLine="1040"/>
+        <Caret Line="1119" Column="7" TopLine="1103"/>
       </Position21>
       <Position22>
         <Filename Value="umain.pas"/>
-        <Caret Line="105" Column="16" TopLine="86"/>
+        <Caret Line="1123" Column="29" TopLine="1104"/>
       </Position22>
       <Position23>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1067" Column="37" TopLine="1048"/>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
+        <Caret Line="1072" Column="20" TopLine="1053"/>
       </Position23>
       <Position24>
         <Filename Value="umain.pas"/>
-        <Caret Line="1073" Column="29" TopLine="1048"/>
+        <Caret Line="1119" Column="7" TopLine="1104"/>
       </Position24>
       <Position25>
         <Filename Value="umain.pas"/>
-        <Caret Line="1067" Column="12" TopLine="1015"/>
+        <Caret Line="1121" Column="15" TopLine="1104"/>
       </Position25>
       <Position26>
         <Filename Value="umain.pas"/>
-        <Caret Line="1065" Column="3" TopLine="1035"/>
+        <Caret Line="1122" Column="52" TopLine="1098"/>
       </Position26>
       <Position27>
-        <Filename Value="umain.pas"/>
-        <Caret Line="13" Column="17"/>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
+        <Caret Line="7557" Column="10" TopLine="7530"/>
       </Position27>
       <Position28>
-        <Filename Value="umain.pas"/>
-        <Caret Line="105" Column="26" TopLine="86"/>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
+        <Caret Line="7532" Column="22" TopLine="7524"/>
       </Position28>
       <Position29>
-        <Filename Value="umain.pas"/>
-        <Caret Line="1067" Column="16" TopLine="1059"/>
+        <Filename Value="D:\Soft\lazarus\components\synedit\synedit.pp"/>
+        <Caret Line="7528" Column="23" TopLine="7524"/>
       </Position29>
+      <Position30>
+        <Filename Value="umain.pas"/>
+        <Caret Line="1124" Column="91" TopLine="1105"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
