@@ -18,7 +18,7 @@ object MainForm: TMainForm
     Width = 1150
     Caption = 'ToolBar'
     TabOrder = 0
-    object SerchEdit: TEdit
+    object SearchEdit: TEdit
       Left = 1
       Height = 23
       Top = 2

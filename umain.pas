@@ -17,7 +17,7 @@ type
 
   TMainForm = class(TForm)
     ToolbarImageList: TImageList;
-    SerchEdit: TEdit;
+    SearchEdit: TEdit;
     EventLog: TEventLog;
     MainMenu: TMainMenu;
     CloseMenuItem: TMenuItem;
@@ -102,7 +102,7 @@ type
     procedure AddParametrRealInTreeView; // Процедура добавления параметра Real в дерево
     procedure AddParametrRealInSynEdit;  // Процедура добавления параметра real в SynEdit
     procedure AddNoKeyParametrInTreeView(type_p: tParam); // Процедура добавления не Key параметра в TreeView
-    procedure SearchInTreaView(SearchText: string); //Процедура поиска в Treeview
+    function SearchInTreaView(SearchText: string):integer; //Процедура поиска в Treeview
   private
     { private declarations }
   public
@@ -1056,11 +1056,38 @@ begin
   end;
 end;
 
-procedure TMainForm.SearchInTreaView(SearchText: string);
+function TMainForm.SearchInTreaView(SearchText: string):integer;
 //Процедура поиска в Treeview
-var i:integer;
+var i, p :integer;
+    s: string;
+    Node, tempNode: TTreeNode;
 begin
-
+  result:= 0;
+  p := 0;
+  if SearchText <> '' then begin
+      Node := nil;
+      Node := TreeView.Items.FindNodeWithText(SearchText);
+       //TreeView1.Items.FindNodeWithTextPath();
+      //Memo1.Lines.Add('Node :' + ObjectToStr(Node) );
+      if Node <> nil then begin
+         Node.ExpandParents;
+         Node.Selected:= true;
+         result := 1;
+      end else begin
+         Node :=   TreeView.Items.GetFirstNode;
+         while Node<>nil do begin
+             s := Node.Text;
+             p := Pos(SearchText, s);
+             if  p > 0 then begin
+                Node.ExpandParents;
+                Node.Selected:= true;
+                result := 1;
+             end;
+             //операции с узлом
+             Node:=Node.GetNext;
+         end;
+      end;
+   end;
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;
