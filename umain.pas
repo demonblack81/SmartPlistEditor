@@ -80,6 +80,7 @@ type
     procedure SavePlist; // Процедура сохранения plist'a
     procedure OpenPlist; // Процедура открытия plist'a
     procedure ClearEditView; // Процедура очистки Treeview и SynEdit
+    procedure SearchToolButtonClick(Sender: TObject);
     procedure SynEditChange(Sender: TObject); // Установка флага что данные в SynEdit изменились
     procedure UpdateTreeView(a_PlistParametr: array of PlistParametr); // Процедура обнавления дерева(TreeView)
     procedure ClearMassiveAndList; // Процедура очистки массивов
@@ -1072,7 +1073,7 @@ begin
       if Node <> nil then begin
          Node.ExpandParents;
          Node.Selected:= true;
-         result := 1;
+         result := result + 1;
       end else begin
          Node :=   TreeView.Items.GetFirstNode;
          while Node<>nil do begin
@@ -1081,7 +1082,7 @@ begin
              if  p > 0 then begin
                 Node.ExpandParents;
                 Node.Selected:= true;
-                result := 1;
+                result := result + 1;
              end;
              //операции с узлом
              Node:=Node.GetNext;
@@ -1419,6 +1420,15 @@ begin
   TreeView.Items.Clear;
   SynEdit.Lines.Clear;
   b_isChengedInSynEdit := false;
+end;
+
+procedure TMainForm.SearchToolButtonClick(Sender: TObject);
+begin
+  if SearchEdit.Text <> "" then begin
+    if SearchInTreaView(SearchEdit.Text) = 0 then begin
+      ShowMessage('Нечего не найдено.');
+    end;
+  end;
 end;
 
 procedure TMainForm.SynEditChange(Sender: TObject);

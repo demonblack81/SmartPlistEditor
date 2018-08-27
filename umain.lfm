@@ -32,6 +32,7 @@ object MainForm: TMainForm
       Top = 2
       Caption = 'Search'
       ImageIndex = 0
+      OnClick = SearchToolButtonClick
     end
   end
   object StatusBar: TStatusBar
