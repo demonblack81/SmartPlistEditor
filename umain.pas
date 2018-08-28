@@ -9,7 +9,7 @@ uses
   Forms, Controls, Graphics, Dialogs, Menus, ExtCtrls, ComCtrls,
   LCLType, StdCtrls,
 
-  uPlistRead, uEditKey, eventlog, SynEditTypes;
+  uPlistRead, uEditKey, eventlog;
 
 type
 
@@ -1099,18 +1099,16 @@ procedure TMainForm.Search(SearchText: string);
 // Процедура запуска поиска
 var SerchCount: integer;
 begin
-  if PageControl.ActivePage = TabSheetSynEdit then begin
-    // Пока нет функции поиска в SynEdit
+  if SearchEdit.Text <> '' then begin
+    SerchCount := 0;
+    if PageControl.ActivePage = TabSheetSynEdit then begin
+      SerchCount := SearchInSynEdit(SearchEdit.Text)
+    end else begin
+      SerchCount := SearchInTreaView(SearchEdit.Text);
+    end;
+    if SerchCount = 0 then ShowMessage('Нечего ненайдено');
   end else begin
-      if SearchEdit.Text <> '' then begin
-         SerchCount := 0;
-         SerchCount := SearchInTreaView(SearchEdit.Text);
-         if (SerchCount = 0) then begin
-            ShowMessage('Нечего не найдено.');
-         end;
-      end else begin
-        ShowMessage('Нечего не введено в поисковую строку.');
-      end;
+      ShowMessage('Нечего не введено в поисковую строку.');
   end;
 end;
 
@@ -1119,21 +1117,8 @@ var p, i : integer;
 begin
   result := 0;
   if SearchText <> '' then begin
-    result :=  0;
-    //SynEdit.SearchReplace(SearchText, '', (ssoFindContinue in TSynSearchOptions));
-
-    { for i:= 0 to (SynEdit.Lines.Count-1) do begin
-      p := Pos(SearchText, SynEdit.Lines[i]);
-      if  p > 0 then begin
-        if result = 0 then begin
-          //выделяем строку
-
-          SynEdit.SelStart :=
-          SynEdit.SelEnd :=
-        end;
-        result := result + 1;
-      end;
-    end;}
+    p := SynEdit.SearchReplace(SearchText, '', []);
+    if p > 0 then result := p;
   end;
 end;
 
