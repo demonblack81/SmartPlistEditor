@@ -228,15 +228,15 @@ begin
            if  (Pos(c_BIGINKEY, plist.Strings[i-1]) <> 0) or
                (Pos(c_BIGINKEY, plist.Strings[i-2]) <> 0) then begin
                if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
-               with  m_PlistParametr[numarray] do begin
-                  Name := 'dictkey';
+               with  m_PlistParametr[numarray-1] do begin
+                  //Name := 'dictkey';
                   type_parm:= dict;
                   level := lev;
                   position:= newpos;
                   value:= 'dict';
                end;
-               m_PlistParametr[numarray-1].type_parm:=dict;
-               numarray := numarray + 1;
+               //m_PlistParametr[numarray-1].type_parm:=dict;
+               //numarray := numarray + 1;
                newpos:= newpos + 1;
            end else begin
               if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
@@ -269,15 +269,15 @@ begin
            if  (Pos(c_BIGINKEY, plist.Strings[i-1]) <> 0) or
                (Pos(c_BIGINKEY, plist.Strings[i-2]) <> 0) then begin
                if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
-               with  m_PlistParametr[numarray] do begin
-                  Name := 'arraykey';
+               with  m_PlistParametr[numarray-1] do begin
+                  //Name := 'arraykey';
                    type_parm:= aray;
                    level := lev;
                    position:= newpos;
                    value:= 'array';
                end;
-               m_PlistParametr[numarray-1].type_parm:=aray;
-               numarray := numarray + 1;
+               //m_PlistParametr[numarray-1].type_parm:=aray;
+               //numarray := numarray + 1;
                newpos:= newpos + 1;
            end else begin
                if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));
