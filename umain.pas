@@ -1431,7 +1431,7 @@ begin
         //if  childNode.Parent <> Node then childNode := childNode.Parent;
       end else begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если имя параметра не dict end или array end, то проверяем заполнена ли value.');
-        if  (a_PlistParametr[i].Name <> 'dict') or (a_PlistParametr[i].Name <> 'array') then  begin
+        if  (a_PlistParametr[i].value <> '') then  begin
           LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].value + ' .');
           a_Node[lev] := TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].value, p_PlistParam);
         end else begin
