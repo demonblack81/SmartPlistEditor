@@ -1401,9 +1401,8 @@ begin
   SetLength(a_Node, 1);
   lev:= 0;
   a_Node[lev]:= Node;
-  LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Присваеваем переменной childNode то что в Node.');
-  childNode := Node;
   LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Запускаем в цикле добавление параетров из plist.');
+  lev:= 1;
   for i:=0 to (Length(a_PlistParametr)-1) do begin
     LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Выделяем память для переменной p_PlistParam.');
     New(p_PlistParam);
@@ -1426,7 +1425,7 @@ begin
          (a_PlistParametr[i].Name = 'end dict')  then begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
         TreeView.Items.AddChildObject(a_Node[lev], a_PlistParametr[i].Name, p_PlistParam);
-        a_Node[lev] := a_Node[lev-1];
+        //if (lev-1 > 1) then a_Node[lev-1] := a_Node[lev-2];
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Присваиваем childNode радительское node.');
         //if  childNode.Parent <> Node then childNode := childNode.Parent;
       end else begin
