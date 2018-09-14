@@ -1417,6 +1417,7 @@ begin
     end else begin
       lev := lev + 1;
       SetLength(a_Node, lev);
+      a_Node[lev-1] := Node;
     end;
     if (a_PlistParametr[i].type_parm = dict) or
        (a_PlistParametr[i].type_parm = aray) then begin
