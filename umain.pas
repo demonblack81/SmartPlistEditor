@@ -1417,7 +1417,7 @@ begin
     end else begin
       lev := lev + 1;
       SetLength(a_Node, lev);
-      a_Node[lev-1] := Node;
+      if a_Node[lev-2] <> Node then a_Node[lev-2] := Node;
     end;
     if (a_PlistParametr[i].type_parm = dict) or
        (a_PlistParametr[i].type_parm = aray) then begin
@@ -1425,29 +1425,28 @@ begin
       if (a_PlistParametr[i].Name = 'end array') or
          (a_PlistParametr[i].Name = 'end dict')  then begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
-        TreeView.Items.AddChildObject(a_Node[lev], a_PlistParametr[i].Name, p_PlistParam);
-        //if (lev-1 > 1) then a_Node[lev-1] := a_Node[lev-2];
+        TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].Name, p_PlistParam);
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Присваиваем childNode радительское node.');
         //if  childNode.Parent <> Node then childNode := childNode.Parent;
       end else begin
         LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если имя параметра не dict end или array end, то проверяем заполнена ли value.');
         if  (a_PlistParametr[i].value <> '') then  begin
           LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].value + ' .');
-          a_Node[lev] := TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].value, p_PlistParam);
+          a_Node[lev-1] := TreeView.Items.AddChildObject(a_Node[lev-2], a_PlistParametr[i].value, p_PlistParam);
         end else begin
           LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
-          a_Node[lev] := TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].Name, p_PlistParam);
-          TreeView.Items.AddChildObject(a_Node[lev], a_PlistParametr[i].value, p_PlistParam);
+          a_Node[lev-1] := TreeView.Items.AddChildObject(a_Node[lev-2], a_PlistParametr[i].Name, p_PlistParam);
+          TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].value, p_PlistParam);
         end;
       end;
     end else if a_PlistParametr[i].value <> '' then begin
       LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].Name + ' .');
-      childNode := TreeView.Items.AddChildObject(a_Node[lev], a_PlistParametr[i].Name, p_PlistParam);
+      childNode := TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].Name, p_PlistParam);
       LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value не пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].value + ' .');
       TreeView.Items.AddChildObject(childNode, a_PlistParametr[i].value, p_PlistParam);
     end else begin
       LogString.Add(DateTimeToStr(Now) +': UpdateTreeView. Если value пустое, то добовлем в дерево обьект: ' + a_PlistParametr[i].Name+ ' .');
-      TreeView.Items.AddChildObject(a_Node[lev], a_PlistParametr[i].Name, p_PlistParam);
+      {a_Node[lev-1] :=} TreeView.Items.AddChildObject(a_Node[lev-1], a_PlistParametr[i].Name, p_PlistParam);
     end;
   end;
   SetLength(a_Node,0);
