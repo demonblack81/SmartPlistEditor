@@ -55,6 +55,9 @@ type
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
     SearchToolButton: TToolButton;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     TreeView: TTreeView;
     procedure AddArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Array
     procedure AddDateMenuItemClick(Sender: TObject);  // нажатие в меню на Add Date
