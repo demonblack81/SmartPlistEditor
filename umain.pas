@@ -109,6 +109,7 @@ type
     function SearchInTreaView(SearchText: string):integer; //Процедура поиска в Treeview
     procedure Search(SearchText: string); // Процедура поиска
     function SearchInSynEdit(SearchText: string):integer; //Процедура поиска в SynEdit
+    function EditParametrInTreeView:integer; // Функция редактирования параметра в T reeView
   private
     { private declarations }
   public
@@ -1123,6 +1124,24 @@ begin
     p := SynEdit.SearchReplace(SearchText, '', []);
     if p > 0 then result := p;
   end;
+end;
+
+function TMainForm.EditParametrInTreeView: integer;
+var i:integer;
+begin
+  result := 0;
+  if TreeView.Selected = nil then exit;
+
+  {
+   1. Проверяем что в TreeView что то выбрано
+   2. Смотрим какой элемент выбран
+   3. Если параметр dict или array то присваеваем b_isEditMode := 7 и отображаем форму EditKeyForm
+   4. В ComboBox пишим array или dict и даем выбрать только их этих двух патамтров
+   5. Если пареметр с key то смотрим какой он и выбираем нужный b_isEditMode
+   6.
+   . Если после закрыти формы что то изменилось то записываем изменения
+  }
+
 end;
 
 procedure TMainForm.AddParametrDateInTreeView;

@@ -14,6 +14,8 @@ type
 
   TEditKeyForm = class(TForm)
     CancelBitBtn: TBitBtn;
+    TypeComboBox: TComboBox;
+    LabelType: TLabel;
     OKBitBtn: TBitBtn;
     KeyBooleanCheckBox: TCheckBox;
     DateTimePicker: TDateTimePicker;
@@ -35,10 +37,15 @@ var
     // 0 - не выбран не один из режимов
     // 1 - Режим добавления параметра Date
     // 2 - Режим добавления параметра boolean
-    // 3 - Режим редактирования параметра string, integer
-    // 4 - Режим редактирования параметра Date
-    // 5 - Режим редактирования параметра boolean
+    // 3 - Режим редактирования параметра key string, integer
+    // 4 - Режим редактирования параметра key Date
+    // 5 - Режим редактирования параметра key boolean
     // 6 - Режим добавления Date
+    // 7 - Режим редакттирования array, dict
+    // 8 - Режим редактирования key array или key dict
+    // 9 - Режим редактирования string, integer
+    // 10 - Режим редактирования Date ?? (Нужно убедится что такое бывает)
+
 
 implementation
 
@@ -58,6 +65,8 @@ begin
       EditLabel.Caption:= 'Дата';
       EditLabel.Visible:= true;
       KeyEdit.SetFocus;
+      LabelType.Visible:=  false;
+      TypeCombobox.Visible:= false;
     end;
     2: begin
       KeyEdit.Text:= '';
@@ -68,6 +77,8 @@ begin
       EditLabel.Caption:= 'Вкл/Выкл';
       EditLabel.Visible:= true;
       KeyEdit.SetFocus;
+      LabelType.Visible:=  false;
+      TypeCombobox.Visible:= false;
     end;
     6: begin
       KeyEdit.Text:= '';
@@ -78,6 +89,14 @@ begin
       DateTimePicker.DateTime:=Now;
       EditLabel.Caption:= 'Дата';
       EditLabel.Visible:= true;
+      LabelType.Visible:=  false;
+      TypeCombobox.Visible:= false;
+    end;
+    7: begin
+      LabelType.Visible:=  true;
+      TypeCombobox.Visible:= true;
+      // Нужно продумать
+
     end;
     else begin
       ValueEdit.Visible:= true;

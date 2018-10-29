@@ -42,10 +42,10 @@ object EditKeyForm: TEditKeyForm
     EditLabel.Height = 15
     EditLabel.Top = 51
     EditLabel.Width = 460
-    EditLabel.Caption = 'Parametr Value'
+    EditLabel.Caption = 'Значения параметра:'
     EditLabel.ParentColor = False
     TabOrder = 1
-    TextHint = 'This value of parametr'
+    TextHint = 'Значения параметра'
   end
   object DateTimePicker: TDateTimePicker
     Left = 10
@@ -110,5 +110,33 @@ object EditKeyForm: TEditKeyForm
     Kind = bkCancel
     ModalResult = 2
     TabOrder = 5
+  end
+  object TypeComboBox: TComboBox
+    Left = 10
+    Height = 23
+    Top = 112
+    Width = 110
+    ItemHeight = 15
+    ItemIndex = 0
+    Items.Strings = (
+      'Dict'
+      'Array'
+      'Key'
+      'Key - Integer'
+      'Key - String'
+      ''
+    )
+    TabOrder = 6
+    Text = 'Dict'
+    Visible = False
+  end
+  object LabelType: TLabel
+    Left = 10
+    Height = 15
+    Top = 96
+    Width = 86
+    Caption = 'Тип параметра:'
+    ParentColor = False
+    Visible = False
   end
 end
