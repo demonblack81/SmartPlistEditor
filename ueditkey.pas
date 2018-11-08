@@ -80,6 +80,12 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= false;
     end;
+    3: begin
+       KeyEdit.Text:= '';
+       KeyBooleanCheckBox.Visible:= false;
+       ValueEdit.Text := '';
+       ValueEdit.Visible:= true;
+      end;
     6: begin
       KeyEdit.Text:= '';
       KeyEdit.Visible:= false;
@@ -97,15 +103,14 @@ begin
       TypeCombobox.Visible:= true;
       // Нужно продумать
 
-    end;
+      end;
+    end
     else begin
       ValueEdit.Visible:= true;
       DateTimePicker.Visible:= false;
       EditLabel.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
     end;
-  end;
-
 end;
 
 procedure TEditKeyForm.KeyBooleanCheckBoxChange(Sender: TObject);
