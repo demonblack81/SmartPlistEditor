@@ -85,6 +85,7 @@ begin
        KeyBooleanCheckBox.Visible:= false;
        ValueEdit.Text := '';
        ValueEdit.Visible:= true;
+       DateTimePicker.Visible:= false;
       end;
     6: begin
       KeyEdit.Text:= '';
@@ -104,13 +105,13 @@ begin
       // Нужно продумать
 
       end;
-    end
     else begin
       ValueEdit.Visible:= true;
       DateTimePicker.Visible:= false;
       EditLabel.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
     end;
+  end;
 end;
 
 procedure TEditKeyForm.KeyBooleanCheckBoxChange(Sender: TObject);
