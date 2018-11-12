@@ -24,6 +24,7 @@ type
     ValueEdit: TLabeledEdit;
     procedure KeyBooleanCheckBoxChange(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
+    function AddNeededParamInTypeCombobox(NeedeParm:integer): integer;
   private
     { private declarations }
   public
@@ -44,7 +45,7 @@ var
     // 7 - Режим редакттирования array, dict
     // 8 - Режим редактирования key array или key dict
     // 9 - Режим редактирования string, integer
-    // 10 - Режим редактирования Date ?? (Нужно убедится что такое бывает)
+    // 10 - Режим редактирования параметра Date
 
 
 implementation
@@ -85,7 +86,11 @@ begin
        KeyBooleanCheckBox.Visible:= false;
        ValueEdit.Text := '';
        ValueEdit.Visible:= true;
+       EditLabel.Caption:= '';
+       EditLabel.Visible:= false;
        DateTimePicker.Visible:= false;
+       TypeComboBox.Text:= '';
+       TypeComboBox.Visible:= true;
       end;
     6: begin
       KeyEdit.Text:= '';
@@ -110,6 +115,48 @@ begin
       DateTimePicker.Visible:= false;
       EditLabel.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
+    end;
+  end;
+end;
+
+function TEditKeyForm.AddNeededParamInTypeCombobox(NeedeParm: integer): integer;
+begin
+  result := 0;
+  EditKeyForm.TypeComboBox.Items.Clear;
+  Case NeedeParm of
+    1: begin // только dict и integer
+      EditKeyForm.TypeComboBox.Items.Add('<array>');
+      EditKeyForm.TypeComboBox.Items.Add('<dict>');
+    end;
+    2: begin // Все параметры <key>
+      EditKeyForm.TypeComboBox.Items.Add('<key> <array>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <dict>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <string>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <integer>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <real>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <date>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <boolean>');
+    end;
+    3: begin // просто параметры
+      EditKeyForm.TypeComboBox.Items.Add('<string>');
+      EditKeyForm.TypeComboBox.Items.Add('<integer>');
+      EditKeyForm.TypeComboBox.Items.Add('<real>');
+      EditKeyForm.TypeComboBox.Items.Add('<date>');
+    end;
+    else begin // Все параметры
+      EditKeyForm.TypeComboBox.Items.Add('<array>');
+      EditKeyForm.TypeComboBox.Items.Add('<dict>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <array>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <dict>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <string>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <integer>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <real>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <date>');
+      EditKeyForm.TypeComboBox.Items.Add('<key> <boolean>');
+      EditKeyForm.TypeComboBox.Items.Add('<string>');
+      EditKeyForm.TypeComboBox.Items.Add('<integer>');
+      EditKeyForm.TypeComboBox.Items.Add('<real>');
+      EditKeyForm.TypeComboBox.Items.Add('<date>');
     end;
   end;
 end;

@@ -85,6 +85,7 @@ type
     procedure ClearEditView; // Процедура очистки Treeview и SynEdit
     procedure SearchToolButtonClick(Sender: TObject);
     procedure SynEditChange(Sender: TObject); // Установка флага что данные в SynEdit изменились
+    procedure TreeViewDblClick(Sender: TObject);
     procedure UpdateTreeView(a_PlistParametr: array of PlistParametr); // Процедура обнавления дерева(TreeView)
     procedure ClearMassiveAndList; // Процедура очистки массивов
     procedure AddParametrKeyName(out KeyName: string);  // Процедура вызова окна ввода названия ключа
@@ -1128,18 +1129,50 @@ end;
 
 function TMainForm.EditParametrInTreeView: integer;
 var i:integer;
+    select_param: tParam;
+   CurPlistParam: PlistParametr;
 begin
   result := 0;
+  //1. Проверяем что в TreeView что то выбрано
   if TreeView.Selected = nil then exit;
+  //2. Смотрим какой элемент выбран
+  CurPlistParam := PlistParametr(TreeView.Selected.Data^);
+  // 3. Если параметр dict или array то присваеваем b_isEditMode := 7
+  case CurPlistParam.type_parm of
+     aray, dict: begin
+       b_isEditMode := 7;
+       if CurPlistParam.type_parm = aray then EditKeyForm.TypeComboBox.Text := '<array>'
+       else EditKeyForm.TypeComboBox.Text := '<dict>';
+       EditKeyForm.TypeComboBox.Items.Clear;
+       EditKeyForm.AddNeededParamInTypeCombobox(1);
+     end;
+     str: begin
+       b_isEditMode := 3;
+       EditKeyForm.TypeCombobox.Text := '<key> ' + '<string>';
+       EditKeyForm.TypeComboBox.Items.Clear;
+       EditKeyForm.AddNeededParamInTypeCombobox(2);
+     end;
+     int: begin
+       b_isEditMode := 3;
+       EditKeyForm.TypeCombobox.Text := '<key> ' + '<integer>';
+       EditKeyForm.TypeComboBox.Items.Clear;
+       EditKeyForm.AddNeededParamInTypeCombobox(2);
+     end;
 
+     else begin
+      result := -1; // в PlistParam неверный type_parm
+     end;
+  end;
+  // отображаем форму EditKeyForm
+  if EditKeyForm.ShowModal = mrOK then begin
+
+
+  end;
   {
-   1. Проверяем что в TreeView что то выбрано
-   2. Смотрим какой элемент выбран
-   3. Если параметр dict или array то присваеваем b_isEditMode := 7 и отображаем форму EditKeyForm
    4. В ComboBox пишим array или dict и даем выбрать только их этих двух патамтров
    5. Если пареметр с key то смотрим какой он и выбираем нужный b_isEditMode
    6.
-   . Если после закрыти формы что то изменилось то записываем изменения
+   //Если после закрыти формы что то изменилось то записываем изменения
   }
 
 end;
@@ -1494,6 +1527,18 @@ end;
 procedure TMainForm.SynEditChange(Sender: TObject);
 begin
   b_isChengedInSynEdit := true;
+end;
+
+procedure TMainForm.TreeViewDblClick(Sender: TObject);
+var err:integer;
+begin
+  if TreeView.Selected = nil then exit;
+  err := EditParametrInTreeView;
+  if err < 0 then begin
+    ShowMessage(IntToStr(err));
+  end;
+   //b_isEditMode
+
 end;
 
 procedure TMainForm.OpenPlist; 

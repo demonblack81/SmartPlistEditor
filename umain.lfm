@@ -84,6 +84,7 @@ object MainForm: TMainForm
         Width = 1142
         Align = alClient
         TabOrder = 0
+        OnDblClick = TreeViewDblClick
       end
     end
     object TabSheetSynEdit: TTabSheet
