@@ -16,6 +16,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    MenuItem2: TMenuItem;
     ToolbarImageList: TImageList;
     SearchEdit: TEdit;
     EventLog: TEventLog;
@@ -55,9 +56,21 @@ type
     TabSheetSynEdit: TTabSheet;
     ToolBar: TToolBar;
     SearchToolButton: TToolButton;
+    KeyArrayToolBtn: TToolButton;
+    KeyDateToolBtn: TToolButton;
+    KeyDictToolBtn: TToolButton;
+    KeyIntToolBtn: TToolButton;
+    KeyRealToolBtn: TToolButton;
+    KeyStrToolBtn: TToolButton;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
+    AddArrayToolBtn: TToolButton;
+    AddDateToolBtn: TToolButton;
+    AddDictToolBtn: TToolButton;
+    AddItToolBtn: TToolButton;
+    AddRealToolBtn: TToolButton;
+    AddStringToolBtn: TToolButton;
     TreeView: TTreeView;
     procedure AddArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Array
     procedure AddDateMenuItemClick(Sender: TObject);  // нажатие в меню на Add Date
