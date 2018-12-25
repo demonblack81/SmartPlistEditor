@@ -1216,7 +1216,7 @@ begin
     if (CurPlistParam.Name <> TempPlistParametr.Name)
        or (CurPlistParam.type_parm <> TempPlistParametr.type_parm)
        or (CurPlistParam.value <> TempPlistParametr.value) then begin
-      TreeView.Selected.Data := @CurPlistParam;
+
       with CurPlistParam do begin
         a_PlistParametr[CurParamInArray].Name := Name;
         a_PlistParametr[CurParamInArray].type_parm := type_parm;
@@ -1224,9 +1224,12 @@ begin
         a_PlistParametr[CurParamInArray].position := position;
         a_PlistParametr[CurParamInArray].value := value;
       end;
+      p_PlistParam^ := a_PlistParametr[CurParamInArray];
+      TreeView.Selected.Data := p_PlistParam;
     end;
   end;
 
+  Dispose(p_PlistParam);
   TreeView.Items.Clear;
   UpdateTreeView(a_PlistParametr);
   {
