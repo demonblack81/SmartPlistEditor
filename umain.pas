@@ -1141,17 +1141,19 @@ begin
 end;
 
 function TMainForm.EditParametrInTreeView: integer;
-var i:integer;
+var i, CurParamInArray:integer;
     select_param: tParam;
-   CurPlistParam: PlistParametr;
+    CurPlistParam, TempPlistParametr: PlistParametr;
 begin
   result := 0;
+  i:= 0;
   //1. Проверяем что в TreeView что то выбрано
   if TreeView.Selected = nil then exit;
   //2. Смотрим какой элемент выбран
   CurPlistParam := PlistParametr(TreeView.Selected.Data^);
-  // 3. Если параметр dict или array то присваеваем b_isEditMode := 7
+
   case CurPlistParam.type_parm of
+     // 3. Если параметр dict или array то присваеваем b_isEditMode := 7
      aray, dict: begin
        b_isEditMode := 7;
        if CurPlistParam.type_parm = aray then EditKeyForm.TypeComboBox.Text := '<array>'
@@ -1174,13 +1176,59 @@ begin
 
      else begin
       result := -1; // в PlistParam неверный type_parm
+      exit;
      end;
   end;
-  // отображаем форму EditKeyForm
-  if EditKeyForm.ShowModal = mrOK then begin
 
-
+  for i:= 0 to Length(a_PlistParametr) do begin
+   if CurPlistParam.position = a_PlistParametr[i].position then begin
+     CurParamInArray := i;
+     exit;
+   end;
   end;
+  // отображаем форму EditKeyForm
+  TempPlistParametr := PlistParametr(TreeView.Selected.Data^);
+  if EditKeyForm.ShowModal = mrOK then begin
+    // Переносим данные с формы в CurPlistParam
+    with CurPlistParam do begin
+      //level :=
+      Name := EditKeyForm.KeyEdit.Text;
+      case EditKeyForm.TypeComboBox.Text of
+         '<array>': type_parm := aray;
+         '<dict>': type_parm := dict;
+         '<key> <array>', '<key> <dict>',
+         '<key> <string>', '<key> <integer>',
+         '<key> <real>', '<key> <date>',
+         '<key> <boolean>': type_parm := key;
+         '<string>': type_parm := str;
+         '<integer>': type_parm := int;
+         '<real>' : type_parm := real_;
+         '<date>' : type_parm := date;
+         else begin
+          result := -2;  // в EditKeyForm.TypeComboBox не правильный type_parm
+          exit;
+         end;
+      end;
+      // !!!! нужно для разных типов сохранять value по разному !!! пока оставляю так
+      value := EditKeyForm.ValueEdit.Text;
+    end;
+    // Проверяем что данные изменились
+    if (CurPlistParam.Name <> TempPlistParametr.Name)
+       or (CurPlistParam.type_parm <> TempPlistParametr.type_parm)
+       or (CurPlistParam.value <> TempPlistParametr.value) then begin
+      TreeView.Selected.Data := @CurPlistParam;
+      with CurPlistParam do begin
+        a_PlistParametr[CurParamInArray].Name := Name;
+        a_PlistParametr[CurParamInArray].type_parm := type_parm;
+        a_PlistParametr[CurParamInArray].level := level;
+        a_PlistParametr[CurParamInArray].position := position;
+        a_PlistParametr[CurParamInArray].value := value;
+      end;
+    end;
+  end;
+
+  TreeView.Items.Clear;
+  UpdateTreeView(a_PlistParametr);
   {
    4. В ComboBox пишим array или dict и даем выбрать только их этих двух патамтров
    5. Если пареметр с key то смотрим какой он и выбираем нужный b_isEditMode

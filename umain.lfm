@@ -141,9 +141,9 @@ object MainForm: TMainForm
     Height = 615
     Top = 42
     Width = 1150
-    ActivePage = TabSheetTreeView
+    ActivePage = TabSheetSynEdit
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
@@ -162,11 +162,11 @@ object MainForm: TMainForm
     end
     object TabSheetSynEdit: TTabSheet
       Caption = 'TabSheetSynEdit'
-      ClientHeight = 603
+      ClientHeight = 587
       ClientWidth = 1142
       inline SynEdit: TSynEdit
         Left = 0
-        Height = 603
+        Height = 587
         Top = 0
         Width = 1142
         Align = alClient
