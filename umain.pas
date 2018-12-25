@@ -1224,12 +1224,14 @@ begin
         a_PlistParametr[CurParamInArray].position := position;
         a_PlistParametr[CurParamInArray].value := value;
       end;
+      New(p_PlistParam);
       p_PlistParam^ := a_PlistParametr[CurParamInArray];
       TreeView.Selected.Data := p_PlistParam;
+      Dispose(p_PlistParam);
     end;
   end;
 
-  Dispose(p_PlistParam);
+ 
   TreeView.Items.Clear;
   UpdateTreeView(a_PlistParametr);
   {
