@@ -1141,16 +1141,25 @@ begin
 end;
 
 function TMainForm.EditParametrInTreeView: integer;
-var i, CurParamInArray:integer;
+var i, CurParamInArray, EndArrayorDict:integer;
     select_param: tParam;
     CurPlistParam, TempPlistParametr: PlistParametr;
 begin
   result := 0;
   i:= 0;
+  CurParamInArray := 0;
+  EndArrayorDict := 0;
   //1. Проверяем что в TreeView что то выбрано
   if TreeView.Selected = nil then exit;
   //2. Смотрим какой элемент выбран
   CurPlistParam := PlistParametr(TreeView.Selected.Data^);
+  // находим параметр в массиве
+  for i:= 0 to Pred(Length(a_PlistParametr)) do begin
+   if CurPlistParam.position = a_PlistParametr[i].position then begin
+     CurParamInArray:= i;
+     break;
+   end;
+  end;
 
   case CurPlistParam.type_parm of
      // 3. Если параметр dict или array то присваеваем b_isEditMode := 7
@@ -1160,6 +1169,15 @@ begin
        else EditKeyForm.TypeComboBox.Text := '<dict>';
        EditKeyForm.TypeComboBox.Items.Clear;
        EditKeyForm.AddNeededParamInTypeCombobox(1);
+        // находим завершение dict или array
+       for i:= ord(CurParamInArray) to Pred(Length(a_PlistParametr)) do begin
+        if (a_PlistParametr[i].Name = 'end dict') or (a_PlistParametr[i].Name = 'end array') then begin
+          if a_PlistParametr[i].level = Pred(CurPlistParam.level) then begin
+            EndArrayorDict := i;
+            break;
+          end;
+        end;
+       end;
      end;
      str: begin
        b_isEditMode := 3;
@@ -1180,12 +1198,7 @@ begin
      end;
   end;
 
-  for i:= 0 to Length(a_PlistParametr) do begin
-   if CurPlistParam.position = a_PlistParametr[i].position then begin
-     CurParamInArray := i;
-     exit;
-   end;
-  end;
+
   // отображаем форму EditKeyForm
   TempPlistParametr := PlistParametr(TreeView.Selected.Data^);
   if EditKeyForm.ShowModal = mrOK then begin
@@ -1224,10 +1237,27 @@ begin
         a_PlistParametr[CurParamInArray].position := position;
         a_PlistParametr[CurParamInArray].value := value;
       end;
+
       New(p_PlistParam);
       p_PlistParam^ := a_PlistParametr[CurParamInArray];
       TreeView.Selected.Data := p_PlistParam;
       Dispose(p_PlistParam);
+
+      // проверяем если мы изменили dict или array, то нужно изменить их завершение
+      if EndArrayorDict <> 0 then begin
+        if CurPlistParam.type_parm = dict then begin
+          a_PlistParametr[EndArrayorDict].Name := 'end dict';
+          a_PlistParametr[EndArrayorDict].type_parm:= dict;
+          a_PlistParametr[EndArrayorDict].value:= '/dict';
+        end else begin
+          a_PlistParametr[EndArrayorDict].Name := 'end array';
+          a_PlistParametr[EndArrayorDict].type_parm:= aray;
+          a_PlistParametr[EndArrayorDict].value:= '/array';
+        end;
+        New(p_PlistParam);
+        p_PlistParam^ := a_PlistParametr[EndArrayorDict];
+        Dispose(p_PlistParam);
+      end;
     end;
   end;
 
@@ -1604,7 +1634,6 @@ begin
     ShowMessage(IntToStr(err));
   end;
    //b_isEditMode
-
 end;
 
 procedure TMainForm.OpenPlist; 

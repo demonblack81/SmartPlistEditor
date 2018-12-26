@@ -1,129 +1,132 @@
 object MainForm: TMainForm
-  Left = 434
-  Height = 700
-  Top = 122
-  Width = 1150
+  Left = 293
+  Height = 875
+  Top = 60
+  Width = 1438
   Caption = 'Smart Plist Editor'
-  ClientHeight = 680
-  ClientWidth = 1150
+  ClientHeight = 850
+  ClientWidth = 1438
+  DesignTimePPI = 120
   Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.8.0.6'
+  LCLVersion = '2.0.0.2'
   object ToolBar: TToolBar
     Left = 0
-    Height = 42
+    Height = 52
     Top = 0
-    Width = 1150
-    ButtonHeight = 38
-    ButtonWidth = 39
+    Width = 1438
+    ButtonHeight = 48
+    ButtonWidth = 49
     Caption = 'ToolBar'
     Images = ToolbarImageList
+    ParentFont = False
     TabOrder = 0
     object SearchEdit: TEdit
-      Left = 9
-      Height = 23
+      Left = 11
+      Height = 28
       Top = 2
-      Width = 180
+      Width = 225
+      ParentFont = False
       TabOrder = 0
     end
     object SearchToolButton: TToolButton
-      Left = 189
+      Left = 236
       Top = 2
       Caption = 'Search'
       ImageIndex = 12
       OnClick = SearchToolButtonClick
     end
     object KeyArrayToolBtn: TToolButton
-      Left = 236
+      Left = 295
       Top = 2
       Caption = 'KeyArrayToolBtn'
       ImageIndex = 0
     end
     object ToolButton2: TToolButton
-      Left = 228
-      Height = 38
+      Left = 285
+      Height = 48
       Top = 2
       Caption = 'ToolButton2'
       Style = tbsSeparator
     end
     object ToolButton3: TToolButton
       Left = 1
-      Height = 38
+      Height = 48
       Top = 2
       Caption = 'ToolButton3'
       Style = tbsSeparator
     end
     object KeyDateToolBtn: TToolButton
-      Left = 275
+      Left = 344
       Top = 2
       Caption = 'KeyDateToolBtn'
       ImageIndex = 1
     end
     object KeyDictToolBtn: TToolButton
-      Left = 314
+      Left = 393
       Top = 2
       Caption = 'KeyDictToolBtn'
       ImageIndex = 2
     end
     object KeyIntToolBtn: TToolButton
-      Left = 353
+      Left = 442
       Top = 2
       Caption = 'KeyIntToolBtn'
       ImageIndex = 3
     end
     object KeyRealToolBtn: TToolButton
-      Left = 392
+      Left = 491
       Top = 2
       Caption = 'KeyRealToolBtn'
       ImageIndex = 4
     end
     object KeyStrToolBtn: TToolButton
-      Left = 431
+      Left = 540
       Top = 2
       Caption = 'KeyStrToolBtn'
       ImageIndex = 5
     end
     object ToolButton1: TToolButton
-      Left = 470
-      Height = 38
+      Left = 589
+      Height = 48
       Top = 2
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
     object AddArrayToolBtn: TToolButton
-      Left = 478
+      Left = 599
       Top = 2
       Caption = 'AddArrayToolBtn'
       ImageIndex = 6
     end
     object AddDateToolBtn: TToolButton
-      Left = 517
+      Left = 648
       Top = 2
       Caption = 'AddDateToolBtn'
       ImageIndex = 7
     end
     object AddDictToolBtn: TToolButton
-      Left = 556
+      Left = 697
       Top = 2
       Caption = 'AddDictToolBtn'
       ImageIndex = 8
     end
     object AddItToolBtn: TToolButton
-      Left = 595
+      Left = 746
       Top = 2
       Caption = 'AddItToolBtn'
       ImageIndex = 9
     end
     object AddRealToolBtn: TToolButton
-      Left = 634
+      Left = 795
       Top = 2
       Caption = 'AddRealToolBtn'
       ImageIndex = 10
     end
     object AddStringToolBtn: TToolButton
-      Left = 673
+      Left = 844
       Top = 2
       Caption = 'AddStringToolBtn'
       ImageIndex = 11
@@ -131,53 +134,58 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Height = 23
-    Top = 657
-    Width = 1150
+    Height = 29
+    Top = 821
+    Width = 1438
     Panels = <>
+    ParentFont = False
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 615
-    Top = 42
-    Width = 1150
-    ActivePage = TabSheetSynEdit
+    Height = 769
+    Top = 52
+    Width = 1438
+    ActivePage = TabSheetTreeView
     Align = alClient
-    TabIndex = 1
+    ParentFont = False
+    TabIndex = 0
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 587
-      ClientWidth = 1142
+      ClientHeight = 736
+      ClientWidth = 1430
+      ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 587
+        Height = 736
         Top = 0
-        Width = 1142
+        Width = 1430
         Align = alClient
+        ParentFont = False
         TabOrder = 0
         OnDblClick = TreeViewDblClick
       end
     end
     object TabSheetSynEdit: TTabSheet
       Caption = 'TabSheetSynEdit'
-      ClientHeight = 587
-      ClientWidth = 1142
+      ClientHeight = 736
+      ClientWidth = 1430
+      ParentFont = False
       inline SynEdit: TSynEdit
         Left = 0
-        Height = 587
+        Height = 736
         Top = 0
-        Width = 1142
+        Width = 1430
         Align = alClient
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Courier New'
         Font.Pitch = fpFixed
         Font.Quality = fqNonAntialiased
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 57
+        Gutter.Width = 72
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -631,11 +639,11 @@ object MainForm: TMainForm
         OnChange = SynEditChange
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
-            Width = 24
+            Width = 30
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 17
+            Width = 21
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -645,18 +653,19 @@ object MainForm: TMainForm
             LeadingZeros = False
           end
           object SynGutterChanges1: TSynGutterChanges
-            Width = 4
+            Width = 5
             MouseActions = <>
             ModifiedColor = 59900
             SavedColor = clGreen
           end
           object SynGutterSeparator1: TSynGutterSeparator
-            Width = 2
+            Width = 3
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
+            Width = 13
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray
@@ -668,8 +677,8 @@ object MainForm: TMainForm
     end
   end
   object MainMenu: TMainMenu
-    left = 1064
-    top = 8
+    left = 1330
+    top = 10
     object MenuItemFile: TMenuItem
       Caption = 'Файл'
       object MenuItemNewPlist: TMenuItem
@@ -788,18 +797,18 @@ object MainForm: TMainForm
   object SynHTMLSyn: TSynHTMLSyn
     DefaultFilter = 'Документ HTML (*.htm,*.html)|*.htm;*.html'
     Enabled = False
-    left = 1104
-    top = 8
+    left = 1380
+    top = 10
   end
   object OpenDialog: TOpenDialog
     Filter = 'Plist Files|*.plist|Xml Files|*.xml|All Files|*.*'
-    left = 1016
-    top = 8
+    left = 1270
+    top = 10
   end
   object SaveDialog: TSaveDialog
     Filter = 'plist файл|*.plist|все файлы|*.*'
-    left = 960
-    top = 8
+    left = 1200
+    top = 10
   end
   object EventLog: TEventLog
     AppendContent = False
@@ -811,8 +820,8 @@ object MainForm: TMainForm
     CustomLogType = 0
     EventIDOffset = 0
     Paused = False
-    left = 904
-    top = 8
+    left = 1130
+    top = 10
   end
   object SynAutoComplete: TSynAutoComplete
     AutoCompleteList.Strings = (
@@ -826,14 +835,14 @@ object MainForm: TMainForm
     ShortCut = 8224
     ExecCommandID = ecSynAutoCompletionExecute
     Editor = SynEdit
-    left = 1104
-    top = 56
+    left = 1380
+    top = 70
   end
   object ToolbarImageList: TImageList
     Height = 32
     Width = 32
-    left = 864
-    top = 8
+    left = 1080
+    top = 10
     Bitmap = {
       4C690D0000002000000020000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
