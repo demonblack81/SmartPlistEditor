@@ -1170,7 +1170,7 @@ begin
        EditKeyForm.TypeComboBox.Items.Clear;
        EditKeyForm.AddNeededParamInTypeCombobox(1);
         // находим завершение dict или array
-       for i:= ord(CurParamInArray) to Pred(Length(a_PlistParametr)) do begin
+       for i:= Ord(CurParamInArray) to Pred(Length(a_PlistParametr)) do begin
         if (a_PlistParametr[i].Name = 'end dict') or (a_PlistParametr[i].Name = 'end array') then begin
           if a_PlistParametr[i].level = Pred(CurPlistParam.level) then begin
             EndArrayorDict := i;
