@@ -4,14 +4,13 @@ object MainForm: TMainForm
   Top = 60
   Width = 1438
   Caption = 'Smart Plist Editor'
-  ClientHeight = 850
+  ClientHeight = 855
   ClientWidth = 1438
-  DesignTimePPI = 120
   Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.0.0.2'
+  LCLVersion = '1.8.0.6'
   object ToolBar: TToolBar
     Left = 0
     Height = 52
@@ -24,28 +23,28 @@ object MainForm: TMainForm
     ParentFont = False
     TabOrder = 0
     object SearchEdit: TEdit
-      Left = 11
-      Height = 28
+      Left = 9
+      Height = 23
       Top = 2
       Width = 225
       ParentFont = False
       TabOrder = 0
     end
     object SearchToolButton: TToolButton
-      Left = 236
+      Left = 234
       Top = 2
       Caption = 'Search'
       ImageIndex = 12
       OnClick = SearchToolButtonClick
     end
     object KeyArrayToolBtn: TToolButton
-      Left = 295
+      Left = 291
       Top = 2
       Caption = 'KeyArrayToolBtn'
       ImageIndex = 0
     end
     object ToolButton2: TToolButton
-      Left = 285
+      Left = 283
       Height = 48
       Top = 2
       Caption = 'ToolButton2'
@@ -59,74 +58,74 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object KeyDateToolBtn: TToolButton
-      Left = 344
+      Left = 340
       Top = 2
       Caption = 'KeyDateToolBtn'
       ImageIndex = 1
     end
     object KeyDictToolBtn: TToolButton
-      Left = 393
+      Left = 389
       Top = 2
       Caption = 'KeyDictToolBtn'
       ImageIndex = 2
     end
     object KeyIntToolBtn: TToolButton
-      Left = 442
+      Left = 438
       Top = 2
       Caption = 'KeyIntToolBtn'
       ImageIndex = 3
     end
     object KeyRealToolBtn: TToolButton
-      Left = 491
+      Left = 487
       Top = 2
       Caption = 'KeyRealToolBtn'
       ImageIndex = 4
     end
     object KeyStrToolBtn: TToolButton
-      Left = 540
+      Left = 536
       Top = 2
       Caption = 'KeyStrToolBtn'
       ImageIndex = 5
     end
     object ToolButton1: TToolButton
-      Left = 589
+      Left = 585
       Height = 48
       Top = 2
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
     object AddArrayToolBtn: TToolButton
-      Left = 599
+      Left = 593
       Top = 2
       Caption = 'AddArrayToolBtn'
       ImageIndex = 6
     end
     object AddDateToolBtn: TToolButton
-      Left = 648
+      Left = 642
       Top = 2
       Caption = 'AddDateToolBtn'
       ImageIndex = 7
     end
     object AddDictToolBtn: TToolButton
-      Left = 697
+      Left = 691
       Top = 2
       Caption = 'AddDictToolBtn'
       ImageIndex = 8
     end
     object AddItToolBtn: TToolButton
-      Left = 746
+      Left = 740
       Top = 2
       Caption = 'AddItToolBtn'
       ImageIndex = 9
     end
     object AddRealToolBtn: TToolButton
-      Left = 795
+      Left = 789
       Top = 2
       Caption = 'AddRealToolBtn'
       ImageIndex = 10
     end
     object AddStringToolBtn: TToolButton
-      Left = 844
+      Left = 838
       Top = 2
       Caption = 'AddStringToolBtn'
       ImageIndex = 11
@@ -134,15 +133,15 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Height = 29
-    Top = 821
+    Height = 23
+    Top = 832
     Width = 1438
     Panels = <>
     ParentFont = False
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 769
+    Height = 780
     Top = 52
     Width = 1438
     ActivePage = TabSheetTreeView
@@ -153,12 +152,12 @@ object MainForm: TMainForm
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 736
+      ClientHeight = 752
       ClientWidth = 1430
       ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 736
+        Height = 752
         Top = 0
         Width = 1430
         Align = alClient
@@ -185,7 +184,7 @@ object MainForm: TMainForm
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 72
+        Gutter.Width = 57
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -639,11 +638,11 @@ object MainForm: TMainForm
         OnChange = SynEditChange
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
-            Width = 30
+            Width = 24
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 21
+            Width = 17
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -653,19 +652,18 @@ object MainForm: TMainForm
             LeadingZeros = False
           end
           object SynGutterChanges1: TSynGutterChanges
-            Width = 5
+            Width = 4
             MouseActions = <>
             ModifiedColor = 59900
             SavedColor = clGreen
           end
           object SynGutterSeparator1: TSynGutterSeparator
-            Width = 3
+            Width = 2
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
-            Width = 13
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray

@@ -1155,7 +1155,7 @@ begin
   CurPlistParam := PlistParametr(TreeView.Selected.Data^);
   // находим параметр в массиве
   for i:= 0 to Pred(Length(a_PlistParametr)) do begin
-   if CurPlistParam.position = a_PlistParametr[i].position then begin
+   if (CurPlistParam.position = a_PlistParametr[i].position) and (CurPlistParam.Name = a_PlistParametr[i].Name) then begin
      CurParamInArray:= i;
      break;
    end;
@@ -1204,8 +1204,8 @@ begin
   if EditKeyForm.ShowModal = mrOK then begin
     // Переносим данные с формы в CurPlistParam
     with CurPlistParam do begin
-      //level :=
-      Name := EditKeyForm.KeyEdit.Text;
+      // !!!! нужно для разных типов сохранять Name по разному !!! пока оставляю так
+      if (CurPlistParam.type_parm <> aray) or (CurPlistParam.type_parm <> dict) then Name := EditKeyForm.KeyEdit.Text;
       case EditKeyForm.TypeComboBox.Text of
          '<array>': type_parm := aray;
          '<dict>': type_parm := dict;
@@ -1223,7 +1223,7 @@ begin
          end;
       end;
       // !!!! нужно для разных типов сохранять value по разному !!! пока оставляю так
-      value := EditKeyForm.ValueEdit.Text;
+      if (CurPlistParam.type_parm <> aray) or (CurPlistParam.type_parm <> dict) then value := EditKeyForm.ValueEdit.Text;
     end;
     // Проверяем что данные изменились
     if (CurPlistParam.Name <> TempPlistParametr.Name)

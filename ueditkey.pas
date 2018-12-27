@@ -105,7 +105,7 @@ begin
       TypeCombobox.Visible:= false;
     end;
     7: begin // 7 - Режим редакттирования array, dict
-      KeyEdit.Text:= '';
+      //KeyEdit.Text:= '';
       KeyEdit.Visible:= false;
       ValueEdit.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
