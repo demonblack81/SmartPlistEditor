@@ -82,9 +82,9 @@ begin
       TypeCombobox.Visible:= false;
     end;
     3: begin // 3 - Режим редактирования параметра key string, integer
-      KeyEdit.Text:= '';
+      //KeyEdit.Text:= '';
       KeyBooleanCheckBox.Visible:= false;
-      ValueEdit.Text := '';
+      //ValueEdit.Text := '';
       ValueEdit.Visible:= true;
       EditLabel.Caption:= '';
       EditLabel.Visible:= false;
@@ -116,7 +116,7 @@ begin
       // Нужно продумать
     end;
     8: begin // 8 - Режим редактирования key array или key dict
-      KeyEdit.Text:= '';
+      //KeyEdit.Text:= '';
       KeyEdit.Visible:= true;
       ValueEdit.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
@@ -126,10 +126,10 @@ begin
       TypeCombobox.Visible:= true;
     end;
     9: begin // 9 - Режим редактирования string, integer
-      KeyEdit.Text:= '';
+      //KeyEdit.Text:= '';
       KeyEdit.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
-      ValueEdit.Text := '';
+      //ValueEdit.Text := '';
       ValueEdit.Visible:= true;
       EditLabel.Caption:= '';
       EditLabel.Visible:= false;

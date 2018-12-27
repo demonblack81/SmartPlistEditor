@@ -68,6 +68,7 @@ begin
         level := level + '  ';
       end;
     end;
+    if (a_PlistParametr[i].Name = 'dictkey') or (a_PlistParametr[i].Name = 'arraykey') then level := copy(level,0,(Length(level)-2));
     if (a_PlistParametr[i].type_parm = dict) or
        (a_PlistParametr[i].type_parm = aray) then begin
       if a_PlistParametr[i].value <> '' then param := level + '<' +  a_PlistParametr[i].value + '>'
@@ -77,9 +78,9 @@ begin
       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
     end;
     if a_PlistParametr[i].type_parm = bool then begin
-      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-      plist.Add(param);
-      param := level + '<' +  a_PlistParametr[i].value + '/>';
+       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+       plist.Add(param);
+       param := level + '<' +  a_PlistParametr[i].value + '/>';
     end;
     if a_PlistParametr[i].type_parm = date then begin
       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
@@ -87,24 +88,40 @@ begin
       param := level + c_BEGINDATE +  a_PlistParametr[i].value + c_ENDDATE;
     end;
     if a_PlistParametr[i].type_parm = int then begin
-      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-      plist.Add(param);
-      param := level + c_BEGININTEGER +  a_PlistParametr[i].value + c_ENDINTEGER;
+      if a_PlistParametr[i].value = '' then begin
+        param := level + c_BEGININTEGER +  a_PlistParametr[i].Name + c_ENDINTEGER;
+      end else begin
+       param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+       plist.Add(param);
+       param := level + c_BEGININTEGER +  a_PlistParametr[i].value + c_ENDINTEGER;
+      end;
     end;
     if a_PlistParametr[i].type_parm = str then begin
-      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-      plist.Add(param);
-      param := level + c_BEGINSTRING +  a_PlistParametr[i].value + c_ENDSTRING;
+      if a_PlistParametr[i].value = '' then begin
+        param := level + c_BEGINSTRING +  a_PlistParametr[i].Name + c_ENDSTRING;
+      end else begin
+        param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+        plist.Add(param);
+        param := level + c_BEGINSTRING +  a_PlistParametr[i].value + c_ENDSTRING;
+      end;
     end;
     if a_PlistParametr[i].type_parm = data then begin
-      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-      plist.Add(param);
-      param := level + c_BEGINDATA +  a_PlistParametr[i].value + c_ENDDATA;
+      if a_PlistParametr[i].value = '' then begin
+        param := level + c_BEGINDATA +  a_PlistParametr[i].Name + c_ENDDATA;
+      end else begin
+        param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+        plist.Add(param);
+        param := level + c_BEGINDATA +  a_PlistParametr[i].value + c_ENDDATA;
+      end;
     end;
     if a_PlistParametr[i].type_parm = real_ then begin
-      param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
-      plist.Add(param);
-      param := level + c_BEGINREAL +  a_PlistParametr[i].value + c_ENDREAL;
+      if a_PlistParametr[i].value = '' then begin
+        param := level + c_BEGINREAL +  a_PlistParametr[i].Name + c_ENDREAL;
+      end else begin
+        param := level + c_BIGINKEY +  a_PlistParametr[i].Name + c_ENDKEY;
+        plist.Add(param);
+        param := level + c_BEGINREAL +  a_PlistParametr[i].value + c_ENDREAL;
+      end;
     end;
     if param <> '' then plist.Add(param);
   end;
@@ -265,7 +282,7 @@ begin
             newpos:= newpos + 1;
          end;
          if Pos(c_BEGINARRAY, plist.strings[i])<> 0  then begin
-           lev := lev +1;
+           lev := lev + 1;
            if  (Pos(c_BIGINKEY, plist.Strings[i-1]) <> 0) or
                (Pos(c_BIGINKEY, plist.Strings[i-2]) <> 0) then begin
                if i > 3 then setLength(m_PlistParametr, (Length(m_PlistParametr)+1));

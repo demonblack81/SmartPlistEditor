@@ -1229,6 +1229,16 @@ begin
     if (CurPlistParam.Name <> TempPlistParametr.Name)
        or (CurPlistParam.type_parm <> TempPlistParametr.type_parm)
        or (CurPlistParam.value <> TempPlistParametr.value) then begin
+      if CurPlistParam.type_parm = aray then begin
+        if TempPlistParametr.Name = 'dictkey' then CurPlistParam.Name := 'arraykey'
+        else CurPlistParam.Name := 'array';
+        if TempPlistParametr.value = 'dict' then CurPlistParam.value:= 'array';
+      end;
+      if CurPlistParam.type_parm = dict then begin
+        if TempPlistParametr.Name = 'arraykey' then CurPlistParam.Name := 'dictkey'
+        else CurPlistParam.Name := 'dict';
+        if TempPlistParametr.value = 'array' then CurPlistParam.value:= 'dict';
+      end;
 
       with CurPlistParam do begin
         a_PlistParametr[CurParamInArray].Name := Name;
