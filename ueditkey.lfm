@@ -1,30 +1,25 @@
 object EditKeyForm: TEditKeyForm
   Left = 570
-  Height = 172
+  Height = 215
   Top = 192
-  Width = 609
+  Width = 761
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Edit Parametr'
-  ClientHeight = 172
-  ClientWidth = 609
+  ClientHeight = 215
+  ClientWidth = 761
+  DesignTimePPI = 120
   FormStyle = fsStayOnTop
   OnShow = OnFormShow
   Position = poMainFormCenter
-  LCLVersion = '1.8.0.6'
+  LCLVersion = '2.0.0.2'
   object KeyEdit: TLabeledEdit
-    Left = 12
-    Height = 23
-    Top = 31
-    Width = 575
-    EditLabel.AnchorSideLeft.Control = KeyEdit
-    EditLabel.AnchorSideRight.Control = KeyEdit
-    EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = KeyEdit
-    EditLabel.Left = 12
-    EditLabel.Height = 15
-    EditLabel.Top = 13
-    EditLabel.Width = 575
+    Left = 15
+    Height = 28
+    Top = 39
+    Width = 719
+    EditLabel.Height = 20
+    EditLabel.Width = 719
     EditLabel.Caption = 'Parametr Name'
     EditLabel.ParentColor = False
     EditLabel.ParentFont = False
@@ -32,18 +27,12 @@ object EditKeyForm: TEditKeyForm
     TabOrder = 0
   end
   object ValueEdit: TLabeledEdit
-    Left = 12
-    Height = 23
-    Top = 86
-    Width = 575
-    EditLabel.AnchorSideLeft.Control = ValueEdit
-    EditLabel.AnchorSideRight.Control = ValueEdit
-    EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = ValueEdit
-    EditLabel.Left = 12
-    EditLabel.Height = 15
-    EditLabel.Top = 68
-    EditLabel.Width = 575
+    Left = 15
+    Height = 28
+    Top = 108
+    Width = 719
+    EditLabel.Height = 20
+    EditLabel.Width = 719
     EditLabel.Caption = 'Значения параметра:'
     EditLabel.ParentColor = False
     EditLabel.ParentFont = False
@@ -52,10 +41,10 @@ object EditKeyForm: TEditKeyForm
     TextHint = 'Значения параметра'
   end
   object DateTimePicker: TDateTimePicker
-    Left = 12
-    Height = 23
-    Top = 88
-    Width = 133
+    Left = 15
+    Height = 28
+    Top = 110
+    Width = 169
     CenturyFrom = 1941
     MaxDate = 2958465
     MinDate = -53780
@@ -76,20 +65,20 @@ object EditKeyForm: TEditKeyForm
     MonthNames = 'Long'
   end
   object EditLabel: TLabel
-    Left = 12
-    Height = 15
-    Top = 66
-    Width = 27
+    Left = 15
+    Height = 20
+    Top = 82
+    Width = 35
     Caption = 'Date:'
     ParentColor = False
     ParentFont = False
     Visible = False
   end
   object KeyBooleanCheckBox: TCheckBox
-    Left = 12
-    Height = 19
-    Top = 91
-    Width = 46
+    Left = 15
+    Height = 24
+    Top = 114
+    Width = 57
     Caption = 'False'
     OnChange = KeyBooleanCheckBoxChange
     ParentFont = False
@@ -97,10 +86,10 @@ object EditKeyForm: TEditKeyForm
     Visible = False
   end
   object OKBitBtn: TBitBtn
-    Left = 370
-    Height = 38
-    Top = 130
-    Width = 94
+    Left = 462
+    Height = 48
+    Top = 162
+    Width = 118
     Default = True
     DefaultCaption = True
     Kind = bkOK
@@ -109,10 +98,10 @@ object EditKeyForm: TEditKeyForm
     TabOrder = 4
   end
   object CancelBitBtn: TBitBtn
-    Left = 500
-    Height = 38
-    Top = 130
-    Width = 94
+    Left = 625
+    Height = 48
+    Top = 162
+    Width = 118
     Cancel = True
     DefaultCaption = True
     Kind = bkCancel
@@ -121,11 +110,11 @@ object EditKeyForm: TEditKeyForm
     TabOrder = 5
   end
   object TypeComboBox: TComboBox
-    Left = 12
-    Height = 23
-    Top = 140
-    Width = 138
-    ItemHeight = 15
+    Left = 15
+    Height = 28
+    Top = 175
+    Width = 172
+    ItemHeight = 20
     ItemIndex = 0
     Items.Strings = (
       'Dict'
@@ -141,10 +130,10 @@ object EditKeyForm: TEditKeyForm
     Visible = False
   end
   object LabelType: TLabel
-    Left = 12
-    Height = 15
-    Top = 120
-    Width = 86
+    Left = 15
+    Height = 20
+    Top = 150
+    Width = 109
     Caption = 'Тип параметра:'
     ParentColor = False
     ParentFont = False

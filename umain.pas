@@ -1184,6 +1184,13 @@ begin
        EditKeyForm.TypeCombobox.Text := '<key> ' + '<string>';
        EditKeyForm.TypeComboBox.Items.Clear;
        EditKeyForm.AddNeededParamInTypeCombobox(2);
+       if CurPlistParam.value = '' then begin
+         EditKeyForm.ValueEdit.Text := CurPlistParam.Name;
+       end else begin
+         EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
+         EditKeyForm.ValueEdit.Text := CurPlistParam.value;
+       end;
+       EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
      end;
      int: begin
        b_isEditMode := 3;

@@ -57,7 +57,7 @@ implementation
 procedure TEditKeyForm.OnFormShow(Sender: TObject);
 begin
   case b_isEditMode of
-    1, 4: begin  // 1 - Режим добавления параметра Date, 4 - Режим редактирования параметра key Date
+    1: begin  // 1 - Режим добавления параметра Date
       KeyEdit.Text:= '';
       ValueEdit.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
@@ -89,9 +89,22 @@ begin
       EditLabel.Caption:= '';
       EditLabel.Visible:= false;
       DateTimePicker.Visible:= false;
-      TypeComboBox.Text:= '';
+      //TypeComboBox.Text:= '';
       TypeComboBox.Visible:= true;
     end;
+    4: begin  // 4 - Режим редактирования параметра key Date
+      //KeyEdit.Text:= '';
+      ValueEdit.Visible:= false;
+      KeyBooleanCheckBox.Visible:= false;
+      DateTimePicker.Visible:= true;
+      DateTimePicker.DateTime:=Now;
+      EditLabel.Caption:= 'Дата';
+      EditLabel.Visible:= true;
+      KeyEdit.SetFocus;
+      LabelType.Visible:=  false;
+      TypeCombobox.Visible:= true;
+    end;
+
     6, 10: begin // 6 - Режим добавления Date,  10 - Режим редактирования параметра Date
       KeyEdit.Text:= '';
       KeyEdit.Visible:= false;
