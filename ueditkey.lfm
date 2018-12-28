@@ -8,17 +8,22 @@ object EditKeyForm: TEditKeyForm
   Caption = 'Edit Parametr'
   ClientHeight = 215
   ClientWidth = 761
-  DesignTimePPI = 120
   FormStyle = fsStayOnTop
   OnShow = OnFormShow
   Position = poMainFormCenter
-  LCLVersion = '2.0.0.2'
+  LCLVersion = '1.8.0.6'
   object KeyEdit: TLabeledEdit
     Left = 15
-    Height = 28
+    Height = 23
     Top = 39
     Width = 719
-    EditLabel.Height = 20
+    EditLabel.AnchorSideLeft.Control = KeyEdit
+    EditLabel.AnchorSideRight.Control = KeyEdit
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = KeyEdit
+    EditLabel.Left = 15
+    EditLabel.Height = 15
+    EditLabel.Top = 21
     EditLabel.Width = 719
     EditLabel.Caption = 'Parametr Name'
     EditLabel.ParentColor = False
@@ -28,10 +33,16 @@ object EditKeyForm: TEditKeyForm
   end
   object ValueEdit: TLabeledEdit
     Left = 15
-    Height = 28
+    Height = 23
     Top = 108
     Width = 719
-    EditLabel.Height = 20
+    EditLabel.AnchorSideLeft.Control = ValueEdit
+    EditLabel.AnchorSideRight.Control = ValueEdit
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = ValueEdit
+    EditLabel.Left = 15
+    EditLabel.Height = 15
+    EditLabel.Top = 90
     EditLabel.Width = 719
     EditLabel.Caption = 'Значения параметра:'
     EditLabel.ParentColor = False
@@ -42,9 +53,9 @@ object EditKeyForm: TEditKeyForm
   end
   object DateTimePicker: TDateTimePicker
     Left = 15
-    Height = 28
+    Height = 23
     Top = 110
-    Width = 169
+    Width = 133
     CenturyFrom = 1941
     MaxDate = 2958465
     MinDate = -53780
@@ -66,9 +77,9 @@ object EditKeyForm: TEditKeyForm
   end
   object EditLabel: TLabel
     Left = 15
-    Height = 20
+    Height = 15
     Top = 82
-    Width = 35
+    Width = 27
     Caption = 'Date:'
     ParentColor = False
     ParentFont = False
@@ -76,9 +87,9 @@ object EditKeyForm: TEditKeyForm
   end
   object KeyBooleanCheckBox: TCheckBox
     Left = 15
-    Height = 24
+    Height = 19
     Top = 114
-    Width = 57
+    Width = 46
     Caption = 'False'
     OnChange = KeyBooleanCheckBoxChange
     ParentFont = False
@@ -111,10 +122,10 @@ object EditKeyForm: TEditKeyForm
   end
   object TypeComboBox: TComboBox
     Left = 15
-    Height = 28
+    Height = 23
     Top = 175
     Width = 172
-    ItemHeight = 20
+    ItemHeight = 15
     ItemIndex = 0
     Items.Strings = (
       'Dict'
@@ -131,9 +142,9 @@ object EditKeyForm: TEditKeyForm
   end
   object LabelType: TLabel
     Left = 15
-    Height = 20
+    Height = 15
     Top = 150
-    Width = 109
+    Width = 86
     Caption = 'Тип параметра:'
     ParentColor = False
     ParentFont = False

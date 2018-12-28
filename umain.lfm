@@ -1,22 +1,21 @@
 object MainForm: TMainForm
-  Left = 112
-  Height = 991
-  Top = 0
-  Width = 1798
+  Left = 413
+  Height = 776
+  Top = 115
+  Width = 1115
   Caption = 'Smart Plist Editor'
-  ClientHeight = 966
-  ClientWidth = 1798
-  DesignTimePPI = 120
+  ClientHeight = 756
+  ClientWidth = 1115
   Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.0.0.2'
+  LCLVersion = '1.8.0.6'
   object ToolBar: TToolBar
     Left = 0
     Height = 65
     Top = 0
-    Width = 1798
+    Width = 1115
     ButtonHeight = 60
     ButtonWidth = 61
     Caption = 'ToolBar'
@@ -25,7 +24,7 @@ object MainForm: TMainForm
     TabOrder = 0
     object SearchEdit: TEdit
       Left = 9
-      Height = 28
+      Height = 23
       Top = 2
       Width = 281
       ParentFont = False
@@ -134,34 +133,38 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Height = 29
-    Top = 937
-    Width = 1798
+    Height = 23
+    Top = 733
+    Width = 1115
     Panels = <>
     ParentFont = False
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 872
+    Height = 668
     Top = 65
-    Width = 1798
-    ActivePage = TabSheetTreeView
+    Width = 1115
+    ActivePage = TabSheetSynEdit
     Align = alClient
+    Font.Height = -17
+    Font.Name = 'Courier New'
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 839
-      ClientWidth = 1790
+      ClientHeight = 640
+      ClientWidth = 1107
       ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 839
+        Height = 640
         Top = 0
-        Width = 1790
+        Width = 1107
         Align = alClient
+        Font.Height = -17
+        Font.Name = 'Courier New'
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
@@ -171,23 +174,23 @@ object MainForm: TMainForm
     end
     object TabSheetSynEdit: TTabSheet
       Caption = 'TabSheetSynEdit'
-      ClientHeight = 736
-      ClientWidth = 1430
+      ClientHeight = 635
+      ClientWidth = 1107
       ParentFont = False
       inline SynEdit: TSynEdit
         Left = 0
-        Height = 736
+        Height = 635
         Top = 0
-        Width = 1430
+        Width = 1107
         Align = alClient
-        Font.Height = -20
+        Font.Height = -18
         Font.Name = 'Courier New'
         Font.Pitch = fpFixed
         Font.Quality = fqNonAntialiased
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 76
+        Gutter.Width = 63
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -641,11 +644,11 @@ object MainForm: TMainForm
         OnChange = SynEditChange
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
-            Width = 30
+            Width = 24
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 25
+            Width = 23
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -655,19 +658,18 @@ object MainForm: TMainForm
             LeadingZeros = False
           end
           object SynGutterChanges1: TSynGutterChanges
-            Width = 5
+            Width = 4
             MouseActions = <>
             ModifiedColor = 59900
             SavedColor = clGreen
           end
           object SynGutterSeparator1: TSynGutterSeparator
-            Width = 3
+            Width = 2
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
-            Width = 13
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray

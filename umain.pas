@@ -1180,24 +1180,51 @@ begin
        end;
      end;
      str: begin
-       b_isEditMode := 3;
-       EditKeyForm.TypeCombobox.Text := '<key> ' + '<string>';
        EditKeyForm.TypeComboBox.Items.Clear;
-       EditKeyForm.AddNeededParamInTypeCombobox(2);
        if CurPlistParam.value = '' then begin
+         EditKeyForm.TypeCombobox.Text := '<string>';
+         b_isEditMode := 6;
          EditKeyForm.ValueEdit.Text := CurPlistParam.Name;
+         EditKeyForm.AddNeededParamInTypeCombobox(3);
        end else begin
+         EditKeyForm.TypeCombobox.Text := '<key> <string>';
+         b_isEditMode := 3;
          EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
          EditKeyForm.ValueEdit.Text := CurPlistParam.value;
+         EditKeyForm.AddNeededParamInTypeCombobox(2);
        end;
-       EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
      end;
      int: begin
-       b_isEditMode := 3;
-       EditKeyForm.TypeCombobox.Text := '<key> ' + '<integer>';
        EditKeyForm.TypeComboBox.Items.Clear;
-       EditKeyForm.AddNeededParamInTypeCombobox(2);
+       if CurPlistParam.value = '' then begin
+         EditKeyForm.TypeCombobox.Text := '<integer>';
+         b_isEditMode := 6;
+         EditKeyForm.ValueEdit.Text := CurPlistParam.Name;
+         EditKeyForm.AddNeededParamInTypeCombobox(3);
+       end else begin
+         EditKeyForm.TypeCombobox.Text := '<key> <integer>';
+         b_isEditMode := 3;
+         EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
+         EditKeyForm.ValueEdit.Text := CurPlistParam.value;
+         EditKeyForm.AddNeededParamInTypeCombobox(2);
+       end;
      end;
+     real_: begin
+       EditKeyForm.TypeComboBox.Items.Clear;
+       if CurPlistParam.value = '' then begin
+         EditKeyForm.TypeCombobox.Text := '<real>';
+         b_isEditMode := 6;
+         EditKeyForm.ValueEdit.Text := CurPlistParam.Name;
+         EditKeyForm.AddNeededParamInTypeCombobox(3);
+       end else begin
+         EditKeyForm.TypeCombobox.Text := '<key> <real>';
+         b_isEditMode := 3;
+         EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
+         EditKeyForm.ValueEdit.Text := CurPlistParam.value;
+         EditKeyForm.AddNeededParamInTypeCombobox(2);
+       end;
+     end;
+
 
      else begin
       result := -1; // в PlistParam неверный type_parm

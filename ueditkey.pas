@@ -36,16 +36,16 @@ var
   EditKeyForm: TEditKeyForm;
   b_isEditMode: Byte;
     // 0 - не выбран не один из режимов
-    // 1 - Режим добавления параметра Date
-    // 2 - Режим добавления параметра boolean
+    // 1 - Режим добавления параметра key date
+    // 2 - Режим добавления параметра key boolean
     // 3 - Режим редактирования параметра key string, integer
     // 4 - Режим редактирования параметра key Date
-    // 5 - Режим редактирования параметра key boolean
-    // 6 - Режим добавления Date
-    // 7 - Режим редакттирования array, dict
-    // 8 - Режим редактирования key array или key dict
-    // 9 - Режим редактирования string, integer
-    // 10 - Режим редактирования Date
+    // 5 - Режим добавления параметра key boolean
+    // 6 - Режим редактирования string, integer
+    // 7 - Режим редакттирования array, dict и key array, dict
+    // 8 - ???
+    // 9 -
+    // 10 -
 
 
 implementation
@@ -69,7 +69,7 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= false;
     end;
-    2, 5: begin // 2 - Режим добавления параметра boolean, 5 - Режим редактирования параметра key boolean
+    2: begin // 2 - Режим добавления параметра boolean, 5 - Режим редактирования параметра key boolean
       KeyEdit.Text:= '';
       KeyBooleanCheckBox.Checked:= false;
       KeyBooleanCheckBox.Visible:= true;
@@ -81,7 +81,7 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= false;
     end;
-    3: begin // 3 - Режим редактирования параметра key string, integer
+    3: begin // 3 - Режим редактирования параметра key string, integer, real
       //KeyEdit.Text:= '';
       KeyBooleanCheckBox.Visible:= false;
       //ValueEdit.Text := '';
@@ -104,9 +104,7 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= true;
     end;
-
-    6, 10: begin // 6 - Режим добавления Date,  10 - Режим редактирования параметра Date
-      KeyEdit.Text:= '';
+    5: begin // 5 - Режим редактирования параметра key date
       KeyEdit.Visible:= false;
       ValueEdit.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
@@ -116,6 +114,18 @@ begin
       EditLabel.Visible:= true;
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= false;
+    end;
+    6: begin // 9 - Режим редактирования string, integer, real
+      //KeyEdit.Text:= '';
+      KeyEdit.Visible:= false;
+      KeyBooleanCheckBox.Visible:= false;
+      //ValueEdit.Text := '';
+      ValueEdit.Visible:= true;
+      EditLabel.Caption:= '';
+      EditLabel.Visible:= false;
+      DateTimePicker.Visible:= false;
+      TypeComboBox.Text:= '';
+      TypeComboBox.Visible:= true;
     end;
     7: begin // 7 - Режим редакттирования array, dict
       //KeyEdit.Text:= '';
@@ -138,18 +148,7 @@ begin
       LabelType.Visible:=  true;
       TypeCombobox.Visible:= true;
     end;
-    9: begin // 9 - Режим редактирования string, integer
-      //KeyEdit.Text:= '';
-      KeyEdit.Visible:= false;
-      KeyBooleanCheckBox.Visible:= false;
-      //ValueEdit.Text := '';
-      ValueEdit.Visible:= true;
-      EditLabel.Caption:= '';
-      EditLabel.Visible:= false;
-      DateTimePicker.Visible:= false;
-      TypeComboBox.Text:= '';
-      TypeComboBox.Visible:= true;
-    end;
+
     else begin
       ValueEdit.Visible:= true;
       DateTimePicker.Visible:= false;
