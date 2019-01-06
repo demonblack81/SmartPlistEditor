@@ -1182,15 +1182,17 @@ begin
      str: begin
        EditKeyForm.TypeComboBox.Items.Clear;
        if CurPlistParam.value = '' then begin
-         EditKeyForm.TypeCombobox.Text := '<string>';
          b_isEditMode := 6;
-         EditKeyForm.ValueEdit.Text := CurPlistParam.Name;
+         EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
+         EditKeyForm.TypeComboBox.Items.Clear;
          EditKeyForm.AddNeededParamInTypeCombobox(3);
+         EditKeyForm.TypeCombobox.Text := '<string>';
        end else begin
          EditKeyForm.TypeCombobox.Text := '<key> <string>';
          b_isEditMode := 3;
          EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
          EditKeyForm.ValueEdit.Text := CurPlistParam.value;
+         EditKeyForm.TypeComboBox.Items.Clear;
          EditKeyForm.AddNeededParamInTypeCombobox(2);
        end;
      end;
@@ -1243,14 +1245,11 @@ begin
       case EditKeyForm.TypeComboBox.Text of
          '<array>': type_parm := aray;
          '<dict>': type_parm := dict;
-         '<key> <array>', '<key> <dict>',
-         '<key> <string>', '<key> <integer>',
-         '<key> <real>', '<key> <date>',
-         '<key> <boolean>': type_parm := key;
-         '<string>': type_parm := str;
-         '<integer>': type_parm := int;
-         '<real>' : type_parm := real_;
-         '<date>' : type_parm := date;
+         '<key> <array>', '<key> <dict>', '<key> <boolean>': type_parm := key;
+         '<string>', '<key> <string>': type_parm := str;
+         '<integer>', '<key> <integer>': type_parm := int;
+         '<key> <real>', '<real>': type_parm := real_;
+         '<key> <date>', '<date>' : type_parm := date;
          else begin
           result := -2;  // в EditKeyForm.TypeComboBox не правильный type_parm
           exit;
@@ -1308,6 +1307,7 @@ begin
  
   TreeView.Items.Clear;
   UpdateTreeView(a_PlistParametr);
+  EditKeyForm.ClearAllControl;
   {
    4. В ComboBox пишим array или dict и даем выбрать только их этих двух патамтров
    5. Если пареметр с key то смотрим какой он и выбираем нужный b_isEditMode

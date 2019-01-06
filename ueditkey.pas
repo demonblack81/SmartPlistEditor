@@ -25,6 +25,7 @@ type
     procedure KeyBooleanCheckBoxChange(Sender: TObject);
     procedure OnFormShow(Sender: TObject);
     function AddNeededParamInTypeCombobox(NeedeParm:integer): integer;
+    procedure ClearAllControl;
   private
     { private declarations }
   public
@@ -115,16 +116,16 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= false;
     end;
-    6: begin // 9 - Режим редактирования string, integer, real
+    6: begin // 6 - Режим редактирования string, integer, real
       //KeyEdit.Text:= '';
-      KeyEdit.Visible:= false;
+      KeyEdit.Visible:= true;
       KeyBooleanCheckBox.Visible:= false;
       //ValueEdit.Text := '';
-      ValueEdit.Visible:= true;
+      ValueEdit.Visible:= false;
       EditLabel.Caption:= '';
       EditLabel.Visible:= false;
       DateTimePicker.Visible:= false;
-      TypeComboBox.Text:= '';
+      //TypeComboBox.Text:= '';
       TypeComboBox.Visible:= true;
     end;
     7: begin // 7 - Режим редакттирования array, dict
@@ -198,6 +199,13 @@ begin
       EditKeyForm.TypeComboBox.Items.Add('<date>');
     end;
   end;
+end;
+
+procedure TEditKeyForm.ClearAllControl;
+begin
+  EditKeyForm.TypeComboBox.Clear;
+  KeyEdit.Text:= '';
+  ValueEdit.Text := '';
 end;
 
 procedure TEditKeyForm.KeyBooleanCheckBoxChange(Sender: TObject);

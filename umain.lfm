@@ -23,28 +23,33 @@ object MainForm: TMainForm
     ParentFont = False
     TabOrder = 0
     object SearchEdit: TEdit
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Side = asrCenter
+      AnchorSideBottom.Side = asrCenter
       Left = 9
       Height = 23
       Top = 2
-      Width = 281
+      Width = 295
+      BorderSpacing.Bottom = 4
       ParentFont = False
       TabOrder = 0
     end
     object SearchToolButton: TToolButton
-      Left = 290
+      Left = 304
       Top = 2
       Caption = 'Search'
       ImageIndex = 12
       OnClick = SearchToolButtonClick
     end
     object KeyArrayToolBtn: TToolButton
-      Left = 359
+      Left = 373
       Top = 2
       Caption = 'KeyArrayToolBtn'
       ImageIndex = 0
     end
     object ToolButton2: TToolButton
-      Left = 351
+      Left = 365
       Height = 60
       Top = 2
       Caption = 'ToolButton2'
@@ -58,74 +63,74 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object KeyDateToolBtn: TToolButton
-      Left = 420
+      Left = 434
       Top = 2
       Caption = 'KeyDateToolBtn'
       ImageIndex = 1
     end
     object KeyDictToolBtn: TToolButton
-      Left = 481
+      Left = 495
       Top = 2
       Caption = 'KeyDictToolBtn'
       ImageIndex = 2
     end
     object KeyIntToolBtn: TToolButton
-      Left = 542
+      Left = 556
       Top = 2
       Caption = 'KeyIntToolBtn'
       ImageIndex = 3
     end
     object KeyRealToolBtn: TToolButton
-      Left = 603
+      Left = 617
       Top = 2
       Caption = 'KeyRealToolBtn'
       ImageIndex = 4
     end
     object KeyStrToolBtn: TToolButton
-      Left = 664
+      Left = 678
       Top = 2
       Caption = 'KeyStrToolBtn'
       ImageIndex = 5
     end
     object ToolButton1: TToolButton
-      Left = 725
+      Left = 739
       Height = 60
       Top = 2
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
     object AddArrayToolBtn: TToolButton
-      Left = 733
+      Left = 747
       Top = 2
       Caption = 'AddArrayToolBtn'
       ImageIndex = 6
     end
     object AddDateToolBtn: TToolButton
-      Left = 794
+      Left = 808
       Top = 2
       Caption = 'AddDateToolBtn'
       ImageIndex = 7
     end
     object AddDictToolBtn: TToolButton
-      Left = 855
+      Left = 869
       Top = 2
       Caption = 'AddDictToolBtn'
       ImageIndex = 8
     end
     object AddItToolBtn: TToolButton
-      Left = 916
+      Left = 930
       Top = 2
       Caption = 'AddItToolBtn'
       ImageIndex = 9
     end
     object AddRealToolBtn: TToolButton
-      Left = 977
+      Left = 991
       Top = 2
       Caption = 'AddRealToolBtn'
       ImageIndex = 10
     end
     object AddStringToolBtn: TToolButton
-      Left = 1038
+      Left = 1052
       Top = 2
       Caption = 'AddStringToolBtn'
       ImageIndex = 11
@@ -144,22 +149,22 @@ object MainForm: TMainForm
     Height = 668
     Top = 65
     Width = 1115
-    ActivePage = TabSheetSynEdit
+    ActivePage = TabSheetTreeView
     Align = alClient
     Font.Height = -17
     Font.Name = 'Courier New'
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
       Caption = 'TabSheetTreeView'
-      ClientHeight = 640
+      ClientHeight = 635
       ClientWidth = 1107
       ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 640
+        Height = 635
         Top = 0
         Width = 1107
         Align = alClient
