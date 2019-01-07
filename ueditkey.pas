@@ -70,7 +70,7 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= false;
     end;
-    2: begin // 2 - Режим добавления параметра boolean, 5 - Режим редактирования параметра key boolean
+    2: begin // 2 - Режим добавления параметра key boolean,
       KeyEdit.Text:= '';
       KeyBooleanCheckBox.Checked:= false;
       KeyBooleanCheckBox.Visible:= true;
@@ -105,16 +105,17 @@ begin
       LabelType.Visible:=  false;
       TypeCombobox.Visible:= true;
     end;
-    5: begin // 5 - Режим редактирования параметра key date
-      KeyEdit.Visible:= false;
+    5: begin // 5 - Режим редактирования параметра key boolean
+      //KeyEdit.Text:= '';
+      //KeyBooleanCheckBox.Checked:= false;
+      KeyBooleanCheckBox.Visible:= true;
       ValueEdit.Visible:= false;
-      KeyBooleanCheckBox.Visible:= false;
-      DateTimePicker.Visible:= true;
-      DateTimePicker.DateTime:=Now;
-      EditLabel.Caption:= 'Дата';
+      DateTimePicker.Visible:= false;
+      EditLabel.Caption:= 'Вкл/Выкл';
       EditLabel.Visible:= true;
+      KeyEdit.SetFocus;
       LabelType.Visible:=  false;
-      TypeCombobox.Visible:= false;
+      TypeCombobox.Visible:= true;
     end;
     6: begin // 6 - Режим редактирования string, integer, real
       //KeyEdit.Text:= '';

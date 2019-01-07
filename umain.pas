@@ -1226,14 +1226,20 @@ begin
          EditKeyForm.AddNeededParamInTypeCombobox(2);
        end;
      end;
-
-
-     else begin
-      result := -1; // в PlistParam неверный type_parm
-      exit;
+     bool: begin
+       EditKeyForm.TypeCombobox.Text := '<key> <boolean>';
+       b_isEditMode := 5;
+       EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
+       if CurPlistParam.value = 'true' then EditKeyForm.KeyBooleanCheckBox.Checked := true
+       else EditKeyForm.KeyBooleanCheckBox.Checked := false;
+       EditKeyForm.AddNeededParamInTypeCombobox(2);
      end;
-  end;
 
+    else begin
+     result := -1; // в PlistParam неверный type_parm
+     exit;
+    end;
+  end;
 
   // отображаем форму EditKeyForm
   TempPlistParametr := PlistParametr(TreeView.Selected.Data^);
@@ -1245,18 +1251,23 @@ begin
       case EditKeyForm.TypeComboBox.Text of
          '<array>': type_parm := aray;
          '<dict>': type_parm := dict;
-         '<key> <array>', '<key> <dict>', '<key> <boolean>': type_parm := key;
+         '<key> <array>', '<key> <dict>': type_parm := key;
          '<string>', '<key> <string>': type_parm := str;
          '<integer>', '<key> <integer>': type_parm := int;
          '<key> <real>', '<real>': type_parm := real_;
          '<key> <date>', '<date>' : type_parm := date;
+         '<key> <boolean>' : type_parm := bool;
          else begin
           result := -2;  // в EditKeyForm.TypeComboBox не правильный type_parm
           exit;
          end;
       end;
+
       // !!!! нужно для разных типов сохранять value по разному !!! пока оставляю так
-      if (CurPlistParam.type_parm <> aray) or (CurPlistParam.type_parm <> dict) then value := EditKeyForm.ValueEdit.Text;
+      if (type_parm <> aray) or (type_parm <> dict) then value := EditKeyForm.ValueEdit.Text;
+      if type_parm = bool then begin
+         if EditKeyForm.KeyBooleanCheckBox.Checked then  value := 'true' else value := 'false';
+      end;
     end;
     // Проверяем что данные изменились
     if (CurPlistParam.Name <> TempPlistParametr.Name)
