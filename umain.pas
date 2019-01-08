@@ -1144,6 +1144,7 @@ function TMainForm.EditParametrInTreeView: integer;
 var i, CurParamInArray, EndArrayorDict:integer;
     select_param: tParam;
     CurPlistParam, TempPlistParametr: PlistParametr;
+    TempStr: string;
 begin
   result := 0;
   i:= 0;
@@ -1234,7 +1235,14 @@ begin
        else EditKeyForm.KeyBooleanCheckBox.Checked := false;
        EditKeyForm.AddNeededParamInTypeCombobox(2);
      end;
-
+     date: begin
+       EditKeyForm.TypeCombobox.Text := '<key> <date>';
+       b_isEditMode := 4;
+       EditKeyForm.KeyEdit.Text := CurPlistParam.Name;
+       TempStr := Copy(CurPlistParam.value, 9,2) +'.' + Copy(CurPlistParam.value, 6,2) + '.' + Copy(CurPlistParam.value, 0,4) + ' ' + Copy(CurPlistParam.value, 12, 8);
+       EditKeyForm.DateTimePicker.DateTime := StrToDateTime(TempStr);
+       EditKeyForm.AddNeededParamInTypeCombobox(2);
+     end;
     else begin
      result := -1; // в PlistParam неверный type_parm
      exit;
@@ -1268,6 +1276,7 @@ begin
       if type_parm = bool then begin
          if EditKeyForm.KeyBooleanCheckBox.Checked then  value := 'true' else value := 'false';
       end;
+      if type_parm = date then value := FormatdateTime('yyyy-mm-dd"T"hh:mm:ss"Z"', EditKeyForm.DateTimePicker.DateTime);
     end;
     // Проверяем что данные изменились
     if (CurPlistParam.Name <> TempPlistParametr.Name)

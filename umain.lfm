@@ -28,7 +28,7 @@ object MainForm: TMainForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Side = asrCenter
       AnchorSideBottom.Side = asrCenter
-      Left = 11
+      Left = 9
       Height = 28
       Top = 2
       Width = 369
@@ -37,20 +37,20 @@ object MainForm: TMainForm
       TabOrder = 0
     end
     object SearchToolButton: TToolButton
-      Left = 380
+      Left = 378
       Top = 2
       Caption = 'Search'
       ImageIndex = 12
       OnClick = SearchToolButtonClick
     end
     object KeyArrayToolBtn: TToolButton
-      Left = 466
+      Left = 462
       Top = 2
       Caption = 'KeyArrayToolBtn'
       ImageIndex = 0
     end
     object ToolButton2: TToolButton
-      Left = 456
+      Left = 454
       Height = 75
       Top = 2
       Caption = 'ToolButton2'
@@ -64,74 +64,74 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object KeyDateToolBtn: TToolButton
-      Left = 542
+      Left = 538
       Top = 2
       Caption = 'KeyDateToolBtn'
       ImageIndex = 1
     end
     object KeyDictToolBtn: TToolButton
-      Left = 618
+      Left = 614
       Top = 2
       Caption = 'KeyDictToolBtn'
       ImageIndex = 2
     end
     object KeyIntToolBtn: TToolButton
-      Left = 694
+      Left = 690
       Top = 2
       Caption = 'KeyIntToolBtn'
       ImageIndex = 3
     end
     object KeyRealToolBtn: TToolButton
-      Left = 770
+      Left = 766
       Top = 2
       Caption = 'KeyRealToolBtn'
       ImageIndex = 4
     end
     object KeyStrToolBtn: TToolButton
-      Left = 846
+      Left = 842
       Top = 2
       Caption = 'KeyStrToolBtn'
       ImageIndex = 5
     end
     object ToolButton1: TToolButton
-      Left = 922
+      Left = 918
       Height = 75
       Top = 2
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
     object AddArrayToolBtn: TToolButton
-      Left = 932
+      Left = 926
       Top = 2
       Caption = 'AddArrayToolBtn'
       ImageIndex = 6
     end
     object AddDateToolBtn: TToolButton
-      Left = 1008
+      Left = 1002
       Top = 2
       Caption = 'AddDateToolBtn'
       ImageIndex = 7
     end
     object AddDictToolBtn: TToolButton
-      Left = 1084
+      Left = 1078
       Top = 2
       Caption = 'AddDictToolBtn'
       ImageIndex = 8
     end
     object AddItToolBtn: TToolButton
-      Left = 1160
+      Left = 1154
       Top = 2
       Caption = 'AddItToolBtn'
       ImageIndex = 9
     end
     object AddRealToolBtn: TToolButton
-      Left = 1236
+      Left = 1230
       Top = 2
       Caption = 'AddRealToolBtn'
       ImageIndex = 10
     end
     object AddStringToolBtn: TToolButton
-      Left = 1312
+      Left = 1306
       Top = 2
       Caption = 'AddStringToolBtn'
       ImageIndex = 11

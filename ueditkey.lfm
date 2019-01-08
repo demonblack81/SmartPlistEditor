@@ -44,7 +44,7 @@ object EditKeyForm: TEditKeyForm
     Left = 19
     Height = 28
     Top = 138
-    Width = 169
+    Width = 165
     CenturyFrom = 1941
     MaxDate = 2958465
     MinDate = -53780

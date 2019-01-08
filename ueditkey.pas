@@ -98,7 +98,7 @@ begin
       ValueEdit.Visible:= false;
       KeyBooleanCheckBox.Visible:= false;
       DateTimePicker.Visible:= true;
-      DateTimePicker.DateTime:=Now;
+      //DateTimePicker.DateTime:=Now;
       EditLabel.Caption:= 'Дата';
       EditLabel.Visible:= true;
       KeyEdit.SetFocus;
