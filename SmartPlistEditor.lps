@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="SmartPlistEditor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -19,9 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uMain"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="1137"/>
-        <CursorPos X="25" Y="1143"/>
+        <TopLine Value="1132"/>
+        <CursorPos X="26" Y="1143"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,7 +32,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uEditKey"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="91"/>
         <CursorPos X="32" Y="101"/>
         <UsageCount Value="235"/>
@@ -51,7 +50,7 @@
       <Unit4>
         <Filename Value="uplistread.pas"/>
         <UnitName Value="uPlistRead"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="383"/>
         <CursorPos X="51" Y="415"/>
         <UsageCount Value="103"/>
@@ -64,6 +63,14 @@
         <CursorPos Y="5066"/>
         <UsageCount Value="10"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="ueditkey.lfm"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit6>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>

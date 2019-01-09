@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 413
-  Height = 970
-  Top = 115
-  Width = 1394
+  Left = 516
+  Height = 971
+  Top = 25
+  Width = 1395
   Caption = 'Smart Plist Editor'
-  ClientHeight = 945
-  ClientWidth = 1394
+  ClientHeight = 946
+  ClientWidth = 1395
   DesignTimePPI = 120
   Menu = MainMenu
   OnClose = FormClose
@@ -16,7 +16,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 81
     Top = 0
-    Width = 1394
+    Width = 1395
     ButtonHeight = 75
     ButtonWidth = 76
     Caption = 'ToolBar'
@@ -38,6 +38,7 @@ object MainForm: TMainForm
     end
     object SearchToolButton: TToolButton
       Left = 378
+      Hint = 'Search'
       Top = 2
       Caption = 'Search'
       ImageIndex = 12
@@ -140,34 +141,34 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 29
-    Top = 916
-    Width = 1394
+    Top = 917
+    Width = 1395
     Panels = <>
     ParentFont = False
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 835
+    Height = 836
     Top = 81
-    Width = 1394
-    ActivePage = TabSheetTreeView
+    Width = 1395
+    ActivePage = TabSheetSynEdit
     Align = alClient
-    Font.Height = -21
+    Font.Height = -20
     Font.Name = 'Courier New'
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
-      Caption = 'TabSheetTreeView'
-      ClientHeight = 799
-      ClientWidth = 1386
+      Caption = 'Дерево'
+      ClientHeight = 801
+      ClientWidth = 1387
       ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 799
+        Height = 801
         Top = 0
-        Width = 1386
+        Width = 1387
         Align = alClient
         Font.Height = -21
         Font.Name = 'Courier New'
@@ -179,24 +180,24 @@ object MainForm: TMainForm
       end
     end
     object TabSheetSynEdit: TTabSheet
-      Caption = 'TabSheetSynEdit'
-      ClientHeight = 635
-      ClientWidth = 1107
+      Caption = 'Редактор'
+      ClientHeight = 801
+      ClientWidth = 1387
       ParentFont = False
       inline SynEdit: TSynEdit
         Left = 0
-        Height = 635
+        Height = 801
         Top = 0
-        Width = 1107
+        Width = 1387
         Align = alClient
-        Font.Height = -23
+        Font.Height = -22
         Font.Name = 'Courier New'
         Font.Pitch = fpFixed
         Font.Quality = fqNonAntialiased
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 80
+        Gutter.Width = 78
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -654,7 +655,7 @@ object MainForm: TMainForm
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 29
+            Width = 27
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
