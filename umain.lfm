@@ -1,17 +1,16 @@
 object MainForm: TMainForm
-  Left = 516
+  Left = 439
   Height = 971
-  Top = 25
+  Top = 28
   Width = 1395
   Caption = 'Smart Plist Editor'
-  ClientHeight = 946
+  ClientHeight = 951
   ClientWidth = 1395
-  DesignTimePPI = 120
   Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.0.0.2'
+  LCLVersion = '1.8.0.6'
   object ToolBar: TToolBar
     Left = 0
     Height = 81
@@ -29,7 +28,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrCenter
       AnchorSideBottom.Side = asrCenter
       Left = 9
-      Height = 28
+      Height = 23
       Top = 2
       Width = 369
       BorderSpacing.Bottom = 5
@@ -49,6 +48,7 @@ object MainForm: TMainForm
       Top = 2
       Caption = 'KeyArrayToolBtn'
       ImageIndex = 0
+      OnClick = KeyArrayToolBtnClick
     end
     object ToolButton2: TToolButton
       Left = 454
@@ -69,6 +69,7 @@ object MainForm: TMainForm
       Top = 2
       Caption = 'KeyDateToolBtn'
       ImageIndex = 1
+      OnClick = KeyDateToolBtnClick
     end
     object KeyDictToolBtn: TToolButton
       Left = 614
@@ -140,33 +141,33 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Height = 29
-    Top = 917
+    Height = 23
+    Top = 928
     Width = 1395
     Panels = <>
     ParentFont = False
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 836
+    Height = 847
     Top = 81
     Width = 1395
-    ActivePage = TabSheetSynEdit
+    ActivePage = TabSheetTreeView
     Align = alClient
     Font.Height = -20
     Font.Name = 'Courier New'
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
       Caption = 'Дерево'
-      ClientHeight = 801
+      ClientHeight = 812
       ClientWidth = 1387
       ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 801
+        Height = 812
         Top = 0
         Width = 1387
         Align = alClient
@@ -181,12 +182,12 @@ object MainForm: TMainForm
     end
     object TabSheetSynEdit: TTabSheet
       Caption = 'Редактор'
-      ClientHeight = 801
+      ClientHeight = 812
       ClientWidth = 1387
       ParentFont = False
       inline SynEdit: TSynEdit
         Left = 0
-        Height = 801
+        Height = 812
         Top = 0
         Width = 1387
         Align = alClient
@@ -197,7 +198,7 @@ object MainForm: TMainForm
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 78
+        Gutter.Width = 61
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -651,11 +652,11 @@ object MainForm: TMainForm
         OnChange = SynEditChange
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
-            Width = 30
+            Width = 24
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 27
+            Width = 21
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -665,19 +666,18 @@ object MainForm: TMainForm
             LeadingZeros = False
           end
           object SynGutterChanges1: TSynGutterChanges
-            Width = 5
+            Width = 4
             MouseActions = <>
             ModifiedColor = 59900
             SavedColor = clGreen
           end
           object SynGutterSeparator1: TSynGutterSeparator
-            Width = 3
+            Width = 2
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
-            Width = 13
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray

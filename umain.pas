@@ -88,6 +88,8 @@ type
     procedure CloseMenuItemClick(Sender: TObject); // нажатие в меню на Close (Завершение программы)
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction); // Процедура закрытия формы
     procedure FormCreate(Sender: TObject); // Процедура создания формы
+    procedure KeyArrayToolBtnClick(Sender: TObject); //Нажати на кнопку key array в toolbar
+    procedure KeyDateToolBtnClick(Sender: TObject); //Нажатие на кнопку key в toolbar
     procedure MenuItemNewPlistClick(Sender: TObject); // нажатие в меню на New Plist (Новый плист)
     procedure MakeNewFile; // Процедура создания нового файла
     procedure OpenPlistMenuItemClick(Sender: TObject); // нажатие в меню на Открыть plist
@@ -323,7 +325,7 @@ begin
     ParentNode := TreeView.Items.AddChildObjectFirst(TreeView.Selected, s_KeyName, p_PlistParam);
 
     if b_isKeyDict then AddDictOrArrayInTreeView(ParentNode, true, true)
-    else AddDictOrArrayInTreeView(ParentNode, false, true);
+    else AddDictOrArrayInTreeView(ParentNode, true, false);
 
     b_FirstParametr := false;
   end else begin
@@ -1867,6 +1869,18 @@ begin
   b_isChengedInSynEdit := false;
   //выделяем память под массив пораметров
   SetLength(a_PlistParametr, 0);
+end;
+
+procedure TMainForm.KeyArrayToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку key array в toolbar
+  AddKeyArrayMenuItemClick(self);
+end;
+
+procedure TMainForm.KeyDateToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку key в toolbar
+  AddKeyDateMenuItemClick(self);
 end;
 
 procedure TMainForm.AddIntKeyMenuItemClick(Sender: TObject);
