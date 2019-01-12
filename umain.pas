@@ -73,10 +73,14 @@ type
     AddStringToolBtn: TToolButton;
     TreeView: TTreeView;
     procedure AddArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Array
+    procedure AddArrayToolBtnClick(Sender: TObject); // Нажатие на кнопку добавление array в toolbar
     procedure AddDateMenuItemClick(Sender: TObject);  // нажатие в меню на Add Date
+    procedure AddDateToolBtnClick(Sender: TObject); // Нажатие на кнопку добавления date в toolbar
     procedure AddDictMenuItemClick(Sender: TObject);  // нажатие в меню на Add Dict
+    procedure AddDictToolBtnClick(Sender: TObject);  // Нажатие на кнопку добавление dict в toolbar
     procedure AddIntegerMenuItemClick(Sender: TObject); // нажатие в меню на Add Integer
     procedure AddIntKeyMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Integer
+    procedure AddItToolBtnClick(Sender: TObject); // Нажатие на кнопку добавление integer в toolbar
     procedure AddKeyArrayMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Array
     procedure AddKeyBoolMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Bool
     procedure AddKeyDateMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Date
@@ -84,12 +88,18 @@ type
     procedure AddKeyRealMenuItemClick(Sender: TObject); // нажатие в меню на Add Key Real
     procedure AddKeyStringMenuItemClick(Sender: TObject); // нажатие в меню на Add Key String
     procedure AddRealMenuItemClick(Sender: TObject); //  нажатие в меню на Add Real
+    procedure AddRealToolBtnClick(Sender: TObject); // Нажатие на кнопку добавления real в toolbar
     procedure AddStringMenuItemClick(Sender: TObject); // нажатие в меню на Add String
+    procedure AddStringToolBtnClick(Sender: TObject); // Нажатие на кнопку добавления string в toolbar
     procedure CloseMenuItemClick(Sender: TObject); // нажатие в меню на Close (Завершение программы)
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction); // Процедура закрытия формы
     procedure FormCreate(Sender: TObject); // Процедура создания формы
     procedure KeyArrayToolBtnClick(Sender: TObject); //Нажати на кнопку key array в toolbar
     procedure KeyDateToolBtnClick(Sender: TObject); //Нажатие на кнопку key в toolbar
+    procedure KeyDictToolBtnClick(Sender: TObject); //Нажатие на кнопку key dict в toolbar
+    procedure KeyIntToolBtnClick(Sender: TObject); //Нажатие на кнопку key integer в toolbar
+    procedure KeyRealToolBtnClick(Sender: TObject); //Нажатие на кнопку key real в toolbar
+    procedure KeyStrToolBtnClick(Sender: TObject); //Нажатие на кнопку key string в toolbar
     procedure MenuItemNewPlistClick(Sender: TObject); // нажатие в меню на New Plist (Новый плист)
     procedure MakeNewFile; // Процедура создания нового файла
     procedure OpenPlistMenuItemClick(Sender: TObject); // нажатие в меню на Открыть plist
@@ -1879,8 +1889,32 @@ end;
 
 procedure TMainForm.KeyDateToolBtnClick(Sender: TObject);
 begin
-  //Нажатие на кнопку key в toolbar
+  //Нажатие на кнопку key date в toolbar
   AddKeyDateMenuItemClick(self);
+end;
+
+procedure TMainForm.KeyDictToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку key dict в toolbar
+  AddKeyDictMenuItemClick(self);
+end;
+
+procedure TMainForm.KeyIntToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку key integer в toolbar
+  AddIntKeyMenuItemClick(self);
+end;
+
+procedure TMainForm.KeyRealToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку key real в toolbar
+  AddKeyRealMenuItemClick(self);
+end;
+
+procedure TMainForm.KeyStrToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку key string в toolbar
+  AddKeyStringMenuItemClick(self);
 end;
 
 procedure TMainForm.AddIntKeyMenuItemClick(Sender: TObject);
@@ -1909,6 +1943,12 @@ begin
        exit;
      end;
   end;
+end;
+
+procedure TMainForm.AddItToolBtnClick(Sender: TObject);
+begin
+  // Нажатие на кнопку добавление integer в toolbar
+  AddIntKeyMenuItemClick(self);
 end;
 
 procedure TMainForm.AddKeyArrayMenuItemClick(Sender: TObject);
@@ -1961,6 +2001,12 @@ begin
        exit;
      end;
   end;
+end;
+
+procedure TMainForm.AddDictToolBtnClick(Sender: TObject);
+begin
+  // Нажатие на кнопку добавление dict в toolbar
+  AddDictMenuItemClick(self);
 end;
 
 procedure TMainForm.AddIntegerMenuItemClick(Sender: TObject);
@@ -2016,6 +2062,12 @@ begin
   end;
 end;
 
+procedure TMainForm.AddArrayToolBtnClick(Sender: TObject);
+begin
+  // Нажатие на кнопку добавление array в toolbar
+  AddArrayMenuItemClick(self);
+end;
+
 procedure TMainForm.AddDateMenuItemClick(Sender: TObject);
 begin
   LogString.Add(DateTimeToStr(Now) +': AddDateMenuItemClick. Нажатие на кнопку AddStringKey в меню.');
@@ -2040,6 +2092,12 @@ begin
         exit;
       end;
    end;
+end;
+
+procedure TMainForm.AddDateToolBtnClick(Sender: TObject);
+begin
+  //Нажатие на кнопку добавления date в toolbar
+  AddDateMenuItemClick(self);
 end;
 
 procedure TMainForm.AddKeyBoolMenuItemClick(Sender: TObject);
@@ -2202,6 +2260,12 @@ begin
    end;
 end;
 
+procedure TMainForm.AddRealToolBtnClick(Sender: TObject);
+begin
+  // Нажатие на кнопку добавления real в toolbar
+  AddRealMenuItemClick(self);
+end;
+
 procedure TMainForm.AddStringMenuItemClick(Sender: TObject);
 begin
   LogString.Add(DateTimeToStr(Now) +': AddStringMenuItemClick. Нажатие на кнопку AddString в меню.');
@@ -2228,6 +2292,12 @@ begin
         exit;
       end;
    end;
+end;
+
+procedure TMainForm.AddStringToolBtnClick(Sender: TObject);
+begin
+  // Нажатие на кнопку добавления string в toolbar
+  AddStringMenuItemClick(self);
 end;
 
 procedure TMainForm.CloseMenuItemClick(Sender: TObject);

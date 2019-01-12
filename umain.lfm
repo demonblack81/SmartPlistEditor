@@ -76,24 +76,28 @@ object MainForm: TMainForm
       Top = 2
       Caption = 'KeyDictToolBtn'
       ImageIndex = 2
+      OnClick = KeyDictToolBtnClick
     end
     object KeyIntToolBtn: TToolButton
       Left = 690
       Top = 2
       Caption = 'KeyIntToolBtn'
       ImageIndex = 3
+      OnClick = KeyIntToolBtnClick
     end
     object KeyRealToolBtn: TToolButton
       Left = 766
       Top = 2
       Caption = 'KeyRealToolBtn'
       ImageIndex = 4
+      OnClick = KeyRealToolBtnClick
     end
     object KeyStrToolBtn: TToolButton
       Left = 842
       Top = 2
       Caption = 'KeyStrToolBtn'
       ImageIndex = 5
+      OnClick = KeyStrToolBtnClick
     end
     object ToolButton1: TToolButton
       Left = 918
@@ -107,36 +111,42 @@ object MainForm: TMainForm
       Top = 2
       Caption = 'AddArrayToolBtn'
       ImageIndex = 6
+      OnClick = AddArrayToolBtnClick
     end
     object AddDateToolBtn: TToolButton
       Left = 1002
       Top = 2
       Caption = 'AddDateToolBtn'
       ImageIndex = 7
+      OnClick = AddDateToolBtnClick
     end
     object AddDictToolBtn: TToolButton
       Left = 1078
       Top = 2
       Caption = 'AddDictToolBtn'
       ImageIndex = 8
+      OnClick = AddDictToolBtnClick
     end
     object AddItToolBtn: TToolButton
       Left = 1154
       Top = 2
       Caption = 'AddItToolBtn'
       ImageIndex = 9
+      OnClick = AddItToolBtnClick
     end
     object AddRealToolBtn: TToolButton
       Left = 1230
       Top = 2
       Caption = 'AddRealToolBtn'
       ImageIndex = 10
+      OnClick = AddRealToolBtnClick
     end
     object AddStringToolBtn: TToolButton
       Left = 1306
       Top = 2
       Caption = 'AddStringToolBtn'
       ImageIndex = 11
+      OnClick = AddStringToolBtnClick
     end
   end
   object StatusBar: TStatusBar
@@ -198,7 +208,7 @@ object MainForm: TMainForm
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 61
+        Gutter.Width = 67
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -656,7 +666,7 @@ object MainForm: TMainForm
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 21
+            Width = 27
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
