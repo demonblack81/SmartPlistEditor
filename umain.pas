@@ -17,6 +17,7 @@ type
 
   TMainForm = class(TForm)
     MenuItem2: TMenuItem;
+    SynCompletion: TSynCompletion;
     ToolbarImageList: TImageList;
     SearchEdit: TEdit;
     EventLog: TEventLog;
