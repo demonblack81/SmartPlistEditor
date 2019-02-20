@@ -1,24 +1,23 @@
 object MainForm: TMainForm
-  Left = 166
-  Height = 1055
-  Top = 11
-  Width = 1744
+  Left = 340
+  Height = 782
+  Top = 132
+  Width = 1155
   Caption = 'Smart Plist Editor'
-  ClientHeight = 1030
-  ClientWidth = 1744
-  DesignTimePPI = 120
+  ClientHeight = 762
+  ClientWidth = 1155
   Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.0.0.2'
+  LCLVersion = '1.8.0.6'
   object ToolBar: TToolBar
     Left = 0
-    Height = 101
+    Height = 48
     Top = 0
-    Width = 1744
-    ButtonHeight = 94
-    ButtonWidth = 95
+    Width = 1155
+    ButtonHeight = 50
+    ButtonWidth = 50
     Caption = 'ToolBar'
     Images = ToolbarImageList
     ParentFont = False
@@ -28,8 +27,8 @@ object MainForm: TMainForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Side = asrCenter
       AnchorSideBottom.Side = asrCenter
-      Left = 11
-      Height = 28
+      Left = 9
+      Height = 23
       Top = 2
       Width = 461
       BorderSpacing.Bottom = 6
@@ -37,7 +36,7 @@ object MainForm: TMainForm
       TabOrder = 0
     end
     object SearchToolButton: TToolButton
-      Left = 472
+      Left = 470
       Hint = 'Search'
       Top = 2
       Caption = 'Search'
@@ -45,105 +44,105 @@ object MainForm: TMainForm
       OnClick = SearchToolButtonClick
     end
     object KeyArrayToolBtn: TToolButton
-      Left = 577
+      Left = 528
       Top = 2
       Caption = 'KeyArrayToolBtn'
       ImageIndex = 0
       OnClick = KeyArrayToolBtnClick
     end
     object ToolButton2: TToolButton
-      Left = 567
-      Height = 94
+      Left = 520
+      Height = 50
       Top = 2
       Caption = 'ToolButton2'
       Style = tbsSeparator
     end
     object ToolButton3: TToolButton
       Left = 1
-      Height = 94
+      Height = 50
       Top = 2
       Caption = 'ToolButton3'
       Style = tbsSeparator
     end
     object KeyDateToolBtn: TToolButton
-      Left = 672
+      Left = 578
       Top = 2
       Caption = 'KeyDateToolBtn'
       ImageIndex = 1
       OnClick = KeyDateToolBtnClick
     end
     object KeyDictToolBtn: TToolButton
-      Left = 767
+      Left = 628
       Top = 2
       Caption = 'KeyDictToolBtn'
       ImageIndex = 2
       OnClick = KeyDictToolBtnClick
     end
     object KeyIntToolBtn: TToolButton
-      Left = 862
+      Left = 678
       Top = 2
       Caption = 'KeyIntToolBtn'
       ImageIndex = 3
       OnClick = KeyIntToolBtnClick
     end
     object KeyRealToolBtn: TToolButton
-      Left = 957
+      Left = 728
       Top = 2
       Caption = 'KeyRealToolBtn'
       ImageIndex = 4
       OnClick = KeyRealToolBtnClick
     end
     object KeyStrToolBtn: TToolButton
-      Left = 1052
+      Left = 778
       Top = 2
       Caption = 'KeyStrToolBtn'
       ImageIndex = 5
       OnClick = KeyStrToolBtnClick
     end
     object ToolButton1: TToolButton
-      Left = 1147
-      Height = 94
+      Left = 828
+      Height = 50
       Top = 2
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
     object AddArrayToolBtn: TToolButton
-      Left = 1157
+      Left = 836
       Top = 2
       Caption = 'AddArrayToolBtn'
       ImageIndex = 6
       OnClick = AddArrayToolBtnClick
     end
     object AddDateToolBtn: TToolButton
-      Left = 1252
+      Left = 886
       Top = 2
       Caption = 'AddDateToolBtn'
       ImageIndex = 7
       OnClick = AddDateToolBtnClick
     end
     object AddDictToolBtn: TToolButton
-      Left = 1347
+      Left = 936
       Top = 2
       Caption = 'AddDictToolBtn'
       ImageIndex = 8
       OnClick = AddDictToolBtnClick
     end
     object AddItToolBtn: TToolButton
-      Left = 1442
+      Left = 986
       Top = 2
       Caption = 'AddItToolBtn'
       ImageIndex = 9
       OnClick = AddItToolBtnClick
     end
     object AddRealToolBtn: TToolButton
-      Left = 1537
+      Left = 1086
       Top = 2
       Caption = 'AddRealToolBtn'
       ImageIndex = 10
       OnClick = AddRealToolBtnClick
     end
     object AddStringToolBtn: TToolButton
-      Left = 1632
+      Left = 1036
       Top = 2
       Caption = 'AddStringToolBtn'
       ImageIndex = 11
@@ -152,20 +151,20 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Height = 29
-    Top = 1001
-    Width = 1744
+    Height = 23
+    Top = 739
+    Width = 1155
     Panels = <>
     ParentFont = False
   end
   object PageControl: TPageControl
     Left = 0
-    Height = 900
-    Top = 101
-    Width = 1744
+    Height = 691
+    Top = 48
+    Width = 1155
     ActivePage = TabSheetSynEdit
     Align = alClient
-    Font.Height = -25
+    Font.Height = -22
     Font.Name = 'Courier New'
     ParentFont = False
     TabIndex = 1
@@ -173,16 +172,16 @@ object MainForm: TMainForm
     OnChange = PageControlChange
     object TabSheetTreeView: TTabSheet
       Caption = 'Дерево'
-      ClientHeight = 858
-      ClientWidth = 1736
+      ClientHeight = 654
+      ClientWidth = 1147
       ParentFont = False
       object TreeView: TTreeView
         Left = 0
-        Height = 858
+        Height = 654
         Top = 0
-        Width = 1736
+        Width = 1147
         Align = alClient
-        Font.Height = -26
+        Font.Height = -22
         Font.Name = 'Courier New'
         ParentFont = False
         ReadOnly = True
@@ -193,23 +192,23 @@ object MainForm: TMainForm
     end
     object TabSheetSynEdit: TTabSheet
       Caption = 'Редактор'
-      ClientHeight = 858
-      ClientWidth = 1736
+      ClientHeight = 654
+      ClientWidth = 1147
       ParentFont = False
       inline SynEdit: TSynEdit
         Left = 0
-        Height = 858
+        Height = 654
         Top = 0
-        Width = 1736
+        Width = 1147
         Align = alClient
-        Font.Height = -28
+        Font.Height = -20
         Font.Name = 'Courier New'
         Font.Pitch = fpFixed
         Font.Quality = fqNonAntialiased
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 86
+        Gutter.Width = 65
         Gutter.MouseActions = <>
         RightGutter.Width = 0
         RightGutter.MouseActions = <>
@@ -663,11 +662,11 @@ object MainForm: TMainForm
         OnChange = SynEditChange
         inline SynLeftGutterPartList1: TSynGutterPartList
           object SynGutterMarks1: TSynGutterMarks
-            Width = 30
+            Width = 24
             MouseActions = <>
           end
           object SynGutterLineNumber1: TSynGutterLineNumber
-            Width = 35
+            Width = 25
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -677,19 +676,18 @@ object MainForm: TMainForm
             LeadingZeros = False
           end
           object SynGutterChanges1: TSynGutterChanges
-            Width = 5
+            Width = 4
             MouseActions = <>
             ModifiedColor = 59900
             SavedColor = clGreen
           end
           object SynGutterSeparator1: TSynGutterSeparator
-            Width = 3
+            Width = 2
             MouseActions = <>
             MarkupInfo.Background = clWhite
             MarkupInfo.Foreground = clGray
           end
           object SynGutterCodeFolding1: TSynGutterCodeFolding
-            Width = 13
             MouseActions = <>
             MarkupInfo.Background = clNone
             MarkupInfo.Foreground = clGray
@@ -849,13 +847,12 @@ object MainForm: TMainForm
   end
   object SynAutoComplete: TSynAutoComplete
     AutoCompleteList.Strings = (
+      '<k'
+      '='
       '<key> </key>'
-      '<dict> </dict>'
-      '<array> </array>'
-      '<true/>'
-      '<false/>'
+      ''
     )
-    EndOfTokenChr = '()[].'
+    EndOfTokenChr = '<'
     ShortCut = 8224
     ExecCommandID = ecSynAutoCompletionExecute
     Editor = SynEdit
@@ -2538,7 +2535,12 @@ object MainForm: TMainForm
   object SynCompletion: TSynCompletion
     ItemList.Strings = (
       '<key> </key>'
+      '<array> </array>'
+      '<date> </date>'
       '<dict> </dict>'
+      '<integer> </integer>'
+      '<string> </string>'
+      '<real> </real>'
       '<true/>'
       '<false/>'
     )
@@ -2549,11 +2551,11 @@ object MainForm: TMainForm
     Width = 262
     AutoUseSingleIdent = True
     ShortCut = 16416
-    EndOfTokenChr = '()[].'
+    EndOfTokenChr = '<'
     ExecCommandID = ecSynCompletionExecute
     Editor = SynEdit
     ToggleReplaceWhole = False
-    left = 40
-    top = 192
+    left = 360
+    top = 40
   end
 end
